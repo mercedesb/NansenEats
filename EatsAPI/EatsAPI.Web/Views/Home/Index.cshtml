@@ -1,0 +1,17 @@
+﻿@model IQueryable<Restaurant>
+
+@{
+	ViewBag.Title = "Home Page";
+}
+
+
+
+<div class="row">
+	<ul>
+		@foreach (var r in Model)
+		{
+			<li>@r.Name</li>
+		}
+	</ul>
+	
+</div>
