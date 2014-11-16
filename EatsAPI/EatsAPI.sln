@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatsAPI", "EatsAPI\EatsAPI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatsAPI.Models", "EatsAPI.Models\EatsAPI.Models.csproj", "{19F4BB20-ECDD-466A-8238-2032561C665B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EatsAPI.Web", "EatsAPI.Web\EatsAPI.Web.csproj", "{3F2F7953-E81E-4885-BC61-00B63471AF12}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{19F4BB20-ECDD-466A-8238-2032561C665B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F4BB20-ECDD-466A-8238-2032561C665B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F4BB20-ECDD-466A-8238-2032561C665B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F2F7953-E81E-4885-BC61-00B63471AF12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F2F7953-E81E-4885-BC61-00B63471AF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F2F7953-E81E-4885-BC61-00B63471AF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F2F7953-E81E-4885-BC61-00B63471AF12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -13,44 +13,44 @@ using EatsAPI.Models.DBModels;
 
 namespace EatsAPI.Controllers
 {
-	public class RestaurantsController : ApiController
+    public class ReviewsController : ApiController
     {
         private EatsContext db = new EatsContext();
 
-        // GET: api/Restaurants
-		public IQueryable<Restaurant> GetRestaurants()
+        // GET: api/Reviews
+        public IQueryable<Review> GetReviews()
         {
-            return db.Restaurants;
+            return db.Reviews;
         }
 
-        // GET: api/Restaurants/5
-        [ResponseType(typeof(Restaurant))]
-		public IHttpActionResult GetRestaurant(int id)
+        // GET: api/Reviews/5
+        [ResponseType(typeof(Review))]
+        public IHttpActionResult GetReview(int id)
         {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return NotFound();
             }
 
-            return Ok(restaurant);
+            return Ok(review);
         }
 
-        // PUT: api/Restaurants/5
+        // PUT: api/Reviews/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
+        public IHttpActionResult PutReview(int id, Review review)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != restaurant.RestaurantId)
+            if (id != review.ReviewId)
             {
                 return BadRequest();
             }
 
-            db.Entry(restaurant).State = EntityState.Modified;
+            db.Entry(review).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace EatsAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RestaurantExists(id))
+                if (!ReviewExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace EatsAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Restaurants
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult PostRestaurant(Restaurant restaurant)
+        // POST: api/Reviews
+        [ResponseType(typeof(Review))]
+        public IHttpActionResult PostReview(Review review)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Restaurants.Add(restaurant);
+            db.Reviews.Add(review);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.RestaurantId }, restaurant);
+            return CreatedAtRoute("DefaultApi", new { id = review.ReviewId }, review);
         }
 
-        // DELETE: api/Restaurants/5
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult DeleteRestaurant(int id)
+        // DELETE: api/Reviews/5
+        [ResponseType(typeof(Review))]
+        public IHttpActionResult DeleteReview(int id)
         {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
+            Review review = db.Reviews.Find(id);
+            if (review == null)
             {
                 return NotFound();
             }
 
-            db.Restaurants.Remove(restaurant);
+            db.Reviews.Remove(review);
             db.SaveChanges();
 
-            return Ok(restaurant);
+            return Ok(review);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace EatsAPI.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RestaurantExists(int id)
+        private bool ReviewExists(int id)
         {
-            return db.Restaurants.Count(e => e.RestaurantId == id) > 0;
+            return db.Reviews.Count(e => e.ReviewId == id) > 0;
         }
     }
 }
