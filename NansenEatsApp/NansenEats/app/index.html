@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+	<title>Nansen Eats</title>
+	<link rel="stylesheet" href="css/app.css" />
+</head>
+<body ng-controller="RestaurantsController">
+
+	<ul>
+		<li ng-repeat="restaurant in vm.restaurants">
+			<span>{{restaurant.Name}}</span>
+			<p>{{restaurant.DistanceFromOffice}}</p>
+		</li>
+	</ul>
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.js"></script>
+	<script src="js/MyBundle.js"></script>
+</body>
+</html>
