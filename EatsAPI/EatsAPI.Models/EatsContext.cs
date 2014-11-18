@@ -21,6 +21,10 @@ namespace EatsAPI.Models
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 		public DbSet<Review> Reviews { get; set; }
-		public DbSet<Category> Categories { get; set; } 
+		public DbSet<Category> Categories { get; set; }
+
+		public System.Data.Entity.DbSet<EatsAPI.Models.DBModels.Comment> Comments { get; set; }
+
+		public System.Data.Entity.DbSet<EatsAPI.Models.DBModels.Rating> Ratings { get; set; } 
 	}
 }

@@ -80,6 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBModels\Category.cs" />
+    <Compile Include="DBModels\Comment.cs" />
+    <Compile Include="DBModels\Rating.cs" />
     <Compile Include="DBModels\Restaurant.cs" />
     <Compile Include="DBModels\Review.cs" />
     <Compile Include="EatsContext.cs" />

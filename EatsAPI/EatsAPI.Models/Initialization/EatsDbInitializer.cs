@@ -22,7 +22,15 @@ namespace EatsAPI.Models.Initialization
 
 			IList<Restaurant> defaultRestaurants = new List<Restaurant>();
 
-			defaultRestaurants.Add(new Restaurant() { RestaurantId = 1, Name = "Bari", DistanceFromOffice = "5 min walk" });
+			defaultRestaurants.Add(new Restaurant() { 
+				RestaurantId = 1, 
+				Name = "Bari", 
+				Address= "1120 W Grand Ave", 
+				City = "Chicago", 
+				Zip = "60642", 
+				CreatedDate = DateTime.Now, 
+				PriceRangeMin = 5, 
+				PriceRangeMax = 10 });
 
 			foreach (Restaurant restaurant in defaultRestaurants)
 				context.Restaurants.Add(restaurant);

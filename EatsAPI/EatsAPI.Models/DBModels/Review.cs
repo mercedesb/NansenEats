@@ -10,12 +10,15 @@ namespace EatsAPI.Models.DBModels
 	{
 		[Key]
 		public int ReviewId { get; set; }
-		public int Rating { get; set; }
-		public string Comment { get; set; }
+
+		public int RatingId { get; set; }
+		public virtual Rating Rating { get; set; }
+		public int CommentId { get; set; }
+		public virtual Comment Comment { get; set; }
 
 		public int RestaurantId { get; set; }
 		public virtual Restaurant Restaurant { get; set; }
 
-		public IEnumerable<Category> Categories { get; set; }
+		public IEnumerable<Category> Tags { get; set; }
 	}
 }
