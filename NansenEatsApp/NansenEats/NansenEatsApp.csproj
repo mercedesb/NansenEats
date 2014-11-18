@@ -44,22 +44,55 @@
   <ItemGroup>
     <Content Include="app\css\app.css" />
     <Content Include="app\index.html" />
+    <Content Include="app\js\AppBundle.js">
+      <DependentUpon>AppBundle.js.bundle</DependentUpon>
+    </Content>
+    <Content Include="app\js\AppBundle.min.js">
+      <DependentUpon>AppBundle.js</DependentUpon>
+    </Content>
     <Content Include="app\js\dataservice.js" />
     <Content Include="app\js\exception.js" />
+    <Content Include="app\js\km-listview.js" />
     <Content Include="app\js\logger.js" />
-    <Content Include="app\js\MyBundle.js">
-      <DependentUpon>MyBundle.js.bundle</DependentUpon>
-    </Content>
-    <Content Include="app\js\MyBundle.min.js">
-      <DependentUpon>MyBundle.js</DependentUpon>
-    </Content>
     <Content Include="app\js\restaurantController.js" />
+    <Content Include="app\templates\restaurantlist.html" />
+    <Content Include="Content\Default\editor.png" />
+    <Content Include="Content\Default\imagebrowser.png" />
+    <Content Include="Content\Default\indeterminate.gif" />
+    <Content Include="Content\Default\loading-image.gif" />
+    <Content Include="Content\Default\loading.gif" />
+    <Content Include="Content\Default\loading_2x.gif" />
+    <Content Include="Content\Default\slider-h.gif" />
+    <Content Include="Content\Default\slider-v.gif" />
+    <Content Include="Content\Default\sprite.png" />
+    <Content Include="Content\Default\sprite_2x.png" />
+    <Content Include="Content\Default\sprite_kpi.png" />
+    <Content Include="Content\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\kendo.common.core.css" />
+    <Content Include="Content\kendo.common.core.min.css" />
+    <Content Include="Content\kendo.default.css" />
+    <Content Include="Content\kendo.default.min.css" />
+    <Content Include="Content\kendo.default.mobile.css" />
+    <Content Include="Content\kendo.default.mobile.min.css" />
+    <Content Include="Content\kendo.mobile.all.css" />
+    <Content Include="Content\kendo.mobile.all.min.css" />
+    <Content Include="Content\kendo.uniform.css" />
+    <Content Include="Content\kendo.uniform.min.css" />
+    <Content Include="Content\kendo.uniform.mobile.css" />
+    <Content Include="Content\kendo.uniform.mobile.min.css" />
+    <Content Include="Content\StyleBundle.css">
+      <DependentUpon>StyleBundle.css.bundle</DependentUpon>
+    </Content>
+    <Content Include="Content\StyleBundle.min.css">
+      <DependentUpon>StyleBundle.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Site.css" />
-    <Content Include="app\js\MyBundle.js.bundle" />
-    <Content Include="app\js\MyBundle.min.js.map">
-      <DependentUpon>MyBundle.min.js</DependentUpon>
+    <Content Include="Content\StyleBundle.css.bundle" />
+    <Content Include="app\js\AppBundle.js.bundle" />
+    <Content Include="app\js\AppBundle.min.js.map">
+      <DependentUpon>AppBundle.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="app\js\app.js" />

@@ -34,7 +34,7 @@
         	return $http.get('http://eatsapi.local/api/restaurants')
 					.then(getRestaurantsComplete)
 					.catch(function (message) {
-						exception.catcher('XHR Failed for getAvengers')(message);
+						exception.catcher('XHR Failed for getRestaurants')(message);
 						$location.url('/');
 					});
 
@@ -43,6 +43,29 @@
         	}
         }
     }
+})();
+///#source 1 1 /app/js/exception.js
+(function () {
+	'use strict';
+
+	angular
+        .module('app')
+        .factory('exception', exception);
+
+	exception.$inject = ['logger'];
+
+	function exception(logger) {
+		var service = {
+			catcher: catcher
+		};
+		return service;
+
+		function catcher(message) {
+			return function (reason) {
+				logger.error(message, reason);
+			};
+		}
+	}
 })();
 ///#source 1 1 /app/js/logger.js
 (function () {
@@ -85,29 +108,6 @@
 		}
 	}
 }());
-///#source 1 1 /app/js/exception.js
-(function () {
-	'use strict';
-
-	angular
-        .module('app')
-        .factory('exception', exception);
-
-	exception.$inject = ['logger'];
-
-	function exception(logger) {
-		var service = {
-			catcher: catcher
-		};
-		return service;
-
-		function catcher(message) {
-			return function (reason) {
-				logger.error(message, reason);
-			};
-		}
-	}
-})();
 ///#source 1 1 /app/js/restaurantController.js
 (function () {
     'use strict';

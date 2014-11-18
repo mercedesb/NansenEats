@@ -18,7 +18,7 @@
         	return $http.get('http://eatsapi.local/api/restaurants')
 					.then(getRestaurantsComplete)
 					.catch(function (message) {
-						exception.catcher('XHR Failed for getAvengers')(message);
+						exception.catcher('XHR Failed for getRestaurants')(message);
 						$location.url('/');
 					});
 
