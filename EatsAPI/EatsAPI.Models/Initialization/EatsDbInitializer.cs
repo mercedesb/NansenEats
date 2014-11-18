@@ -32,6 +32,54 @@ namespace EatsAPI.Models.Initialization
 				PriceRangeMin = 5, 
 				PriceRangeMax = 10 });
 
+			defaultRestaurants.Add(new Restaurant()
+			{
+				RestaurantId = 2,
+				Name = "Au Cheval",
+				Address = "800 W Randolph St",
+				City = "Chicago",
+				Zip = "60607",
+				CreatedDate = DateTime.Now,
+				PriceRangeMin = 10,
+				PriceRangeMax = 20
+			});
+
+			defaultRestaurants.Add(new Restaurant()
+			{
+				RestaurantId = 3,
+				Name = "Haymarket",
+				Address = "737 W Randolph St",
+				City = "Chicago",
+				Zip = "60661",
+				CreatedDate = DateTime.Now,
+				PriceRangeMin = 10,
+				PriceRangeMax = 20
+			});
+
+			defaultRestaurants.Add(new Restaurant()
+			{
+				RestaurantId = 4,
+				Name = " D’amato’s Bakery",
+				Address = "1124 W Grand Ave",
+				City = "Chicago",
+				Zip = "60642",
+				CreatedDate = DateTime.Now,
+				PriceRangeMin = 5,
+				PriceRangeMax = 10
+			});
+
+			defaultRestaurants.Add(new Restaurant()
+			{
+				RestaurantId = 5,
+				Name = "Pizzeria Del Mercato",
+				Address = "1154 W Fulton Market",
+				City = "Chicago",
+				Zip = "60607",
+				CreatedDate = DateTime.Now,
+				PriceRangeMin = 10,
+				PriceRangeMax = 15
+			});
+
 			foreach (Restaurant restaurant in defaultRestaurants)
 				context.Restaurants.Add(restaurant);
 
