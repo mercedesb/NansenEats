@@ -5,9 +5,9 @@
         .module('app')
         .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['$location', 'dataservice', 'logger'];
+    RestaurantsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
 
-    function RestaurantsController($location, dataservice, logger) {
+    function RestaurantsController($location, dataservice, logger, $routeParams) {
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'RestaurantsController';

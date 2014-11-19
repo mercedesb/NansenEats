@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('app', [
+    var app = angular.module('app', [
         // Angular modules 
         'ngAnimate',
         'ngRoute',
@@ -12,6 +12,19 @@
         // 3rd Party Modules
         
     ]);
+
+    app.config(function ($routeProvider) {
+    	$routeProvider
+			.when("/", {
+				templateUrl: "app/templates/restaurantlist.html",
+				controller: "RestaurantsController as vm"
+			})
+			.when("/restaurant/:restaurantid", {
+				templateUrl: "app/templates/restaurantdetails.html",
+				controller: "RestaurantDetailsController as vm"
+			})
+    		.otherwise({ redirectTo: "/" });
+    });
 })();
 ///#source 1 1 /app/js/dataservice.js
 (function () {
@@ -25,7 +38,8 @@
 
     function dataservice($http, $location, exception) {
         var service = {
-        	getRestaurants: getRestaurants
+        	getRestaurants: getRestaurants,
+			getRestaurant: getRestaurant
         };
 
         return service;
@@ -39,6 +53,19 @@
 					});
 
         	function getRestaurantsComplete(data, status, headers, config) {
+        		return data.data;
+        	}
+        }
+
+        function getRestaurant(id) {
+        	return $http.get('http://eatsapi.local/api/restaurants/' + id)
+			.then(getRestaurantComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for getRestaurant')(message);
+						$location.url('/');
+					});
+
+        	function getRestaurantComplete(data, status, headers, config) {
         		return data.data;
         	}
         }
@@ -116,9 +143,9 @@
         .module('app')
         .controller('RestaurantsController', RestaurantsController);
 
-    RestaurantsController.$inject = ['$location', 'dataservice', 'logger'];
+    RestaurantsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
 
-    function RestaurantsController($location, dataservice, logger) {
+    function RestaurantsController($location, dataservice, logger, $routeParams) {
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'RestaurantsController';
@@ -142,5 +169,42 @@
         	});
         }
     }
+})();
+
+///#source 1 1 /app/js/restaurantDetailsController.js
+(function () {
+	'use strict';
+
+	angular
+        .module('app')
+        .controller('RestaurantDetailsController', RestaurantDetailsController);
+
+	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+
+	function RestaurantDetailsController($location, dataservice, logger, $routeParams) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'RestaurantDetailsController';
+		vm.restaurant = {};
+
+		activate();
+
+		function activate() {
+			//            Using a resolver on all routes or dataservice.ready in every controller
+			//            var promises = [getAvengers()];
+			//            return dataservice.ready(promises).then(function(){
+			return getRestaurant().then(function () {
+				logger.info('Activated Restaurant Details View');
+			});
+		}
+
+		function getRestaurant() {
+			vm.restaurantId = $routeParams.restaurantid;
+			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
+				vm.restaurant = data;
+				return vm.restaurant;
+			});
+		}
+	}
 })();
 
