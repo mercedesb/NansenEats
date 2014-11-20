@@ -19,6 +19,6 @@ namespace EatsAPI.Models.DBModels
 		public int RestaurantId { get; set; }
 		public virtual Restaurant Restaurant { get; set; }
 
-		public IEnumerable<Category> Tags { get; set; }
+		public ICollection<Category> Tags { get; set; }
 	}
 }

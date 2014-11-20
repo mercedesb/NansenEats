@@ -31,6 +31,6 @@ namespace EatsAPI.Models.DBModels
 
 		public double DistanceFromOffice { get; set; }
 
-		public virtual IEnumerable<Review> RestaurantReviews { get; set; }
+		public virtual ICollection<Review> RestaurantReviews { get; set; }
 	}
 }
