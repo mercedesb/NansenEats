@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.Initialization;
 
@@ -12,19 +8,17 @@ namespace EatsAPI.Models
 	{
 		public EatsContext()
 			: base("NansenEats")
-        {
-            if (Properties.Settings.Default.SeedDatabase)
+		  {
+				if (Properties.Settings.Default.SeedDatabase)
 				Database.SetInitializer<EatsContext>(new EatsDbInitializer());
 			else
 				Database.SetInitializer<EatsContext>(null);
-        }
+		  }
 
 		public DbSet<Restaurant> Restaurants { get; set; }
 		public DbSet<Review> Reviews { get; set; }
 		public DbSet<Category> Categories { get; set; }
-
-		public System.Data.Entity.DbSet<EatsAPI.Models.DBModels.Comment> Comments { get; set; }
-
-		public System.Data.Entity.DbSet<EatsAPI.Models.DBModels.Rating> Ratings { get; set; } 
+		public DbSet<Comment> Comments { get; set; }
+		public DbSet<Rating> Ratings { get; set; } 
 	}
 }
