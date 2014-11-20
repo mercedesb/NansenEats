@@ -1,19 +1,19 @@
 ﻿(function () {
-    'use strict';
+	'use strict';
 
-    var app = angular.module('app', [
-        // Angular modules 
-        'ngAnimate',
-        'ngRoute',
+	var app = angular.module('app', [
+		 // Angular modules 
+		 'ngAnimate',
+		 'ngRoute',
 
-        // Custom modules 
+		 // Custom modules 
 
-        // 3rd Party Modules
-        
-    ]);
+		 // 3rd Party Modules
 
-    app.config(function ($routeProvider) {
-    	$routeProvider
+	]);
+
+	app.config(function ($routeProvider) {
+		$routeProvider
 			.when("/", {
 				templateUrl: "app/templates/restaurantlist.html",
 				controller: "RestaurantsController as vm"
@@ -22,6 +22,6 @@
 				templateUrl: "app/templates/restaurantdetails.html",
 				controller: "RestaurantDetailsController as vm"
 			})
-    		.otherwise({ redirectTo: "/" });
-    });
+			.otherwise({ redirectTo: "/" });
+	});
 })();

@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-        .module('app')
-        .factory('exception', exception);
+		  .module('app')
+		  .factory('exception', exception);
 
 	exception.$inject = ['logger'];
 

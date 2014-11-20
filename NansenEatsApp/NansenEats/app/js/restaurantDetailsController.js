@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-        .module('app')
-        .controller('RestaurantDetailsController', RestaurantDetailsController);
+		.module('app')
+		.controller('RestaurantDetailsController', RestaurantDetailsController);
 
 	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
 

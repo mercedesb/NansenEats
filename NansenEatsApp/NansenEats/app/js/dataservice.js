@@ -1,44 +1,44 @@
 ﻿(function () {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('app')
-        .factory('dataservice', dataservice);
+	angular
+		 .module('app')
+		 .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http', '$location', 'exception'];
+	dataservice.$inject = ['$http', '$location', 'exception'];
 
-    function dataservice($http, $location, exception) {
-        var service = {
-        	getRestaurants: getRestaurants,
+	function dataservice($http, $location, exception) {
+		var service = {
+			getRestaurants: getRestaurants,
 			getRestaurant: getRestaurant
-        };
+		};
 
-        return service;
+		return service;
 
-        function getRestaurants() {
-        	return $http.get('http://eatsapi.local/api/restaurants')
+		function getRestaurants() {
+			return $http.get('http://eatsapi.local/api/restaurants')
 					.then(getRestaurantsComplete)
 					.catch(function (message) {
 						exception.catcher('XHR Failed for getRestaurants')(message);
 						$location.url('/');
 					});
 
-        	function getRestaurantsComplete(data, status, headers, config) {
-        		return data.data;
-        	}
-        }
+			function getRestaurantsComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
 
-        function getRestaurant(id) {
-        	return $http.get('http://eatsapi.local/api/restaurants/' + id)
+		function getRestaurant(id) {
+			return $http.get('http://eatsapi.local/api/restaurants/' + id)
 			.then(getRestaurantComplete)
 					.catch(function (message) {
 						exception.catcher('XHR Failed for getRestaurant')(message);
 						$location.url('/');
 					});
 
-        	function getRestaurantComplete(data, status, headers, config) {
-        		return data.data;
-        	}
-        }
-    }
+			function getRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+	}
 })();
