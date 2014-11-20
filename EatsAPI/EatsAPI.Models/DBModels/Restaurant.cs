@@ -8,8 +8,7 @@ namespace EatsAPI.Models.DBModels
 {
 	public class Restaurant
 	{
-		[Key]
-		public int RestaurantId { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		[MaxLength(40)]
@@ -31,6 +30,9 @@ namespace EatsAPI.Models.DBModels
 
 		public double DistanceFromOffice { get; set; }
 
-		public virtual ICollection<Review> RestaurantReviews { get; set; }
+		#region Navigational Properties
+		public virtual ICollection<Rating> Ratings { get; set; }
+		public virtual ICollection<Comment> Comments { get; set; }
+		#endregion
 	}
 }

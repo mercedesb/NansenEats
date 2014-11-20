@@ -14,5 +14,9 @@ namespace EatsAPI.Models.DBModels
 		[MaxLength(250)]
 		public string Value { get; set; }
 		public DateTime CreatedDate { get; set; }
+
+		#region Navigational properties
+		public virtual Restaurant Restaurant { get; set; }
+		#endregion
 	}
 }

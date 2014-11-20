@@ -49,7 +49,7 @@ namespace EatsAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != restaurant.RestaurantId)
+            if (id != restaurant.Id)
             {
                 return BadRequest();
             }
@@ -87,7 +87,7 @@ namespace EatsAPI.Controllers
             db.Restaurants.Add(restaurant);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.RestaurantId }, restaurant);
+            return CreatedAtRoute("DefaultApi", new { id = restaurant.Id }, restaurant);
         }
 
         // DELETE: api/Restaurants/5
@@ -117,7 +117,7 @@ namespace EatsAPI.Controllers
 
         private bool RestaurantExists(int id)
         {
-            return db.Restaurants.Count(e => e.RestaurantId == id) > 0;
+            return db.Restaurants.Count(e => e.Id == id) > 0;
         }
     }
 }

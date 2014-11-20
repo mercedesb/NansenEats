@@ -12,7 +12,6 @@ namespace EatsAPI.App_Start
 	{
         public static void Register()
 		{
-			Mapper.CreateMap<Review, RestaurantReviewDto>();
 			Mapper.CreateMap<Restaurant, RestaurantDto>();
 				//.ForMember(dest => dest.RestaurantReviews, src;
 		}

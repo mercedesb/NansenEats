@@ -14,5 +14,10 @@ namespace EatsAPI.Models.DBModels
 		[Required]
 		public int Value { get; set; }
 		public DateTime CreatedDate { get; set; }
+
+		#region Navigational properties 
+		public virtual Restaurant Restaurant { get; set; }
+		public virtual ICollection<Category> Tags { get; set; }
+		#endregion
 	}
 }

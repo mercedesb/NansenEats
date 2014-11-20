@@ -13,7 +13,7 @@ namespace EatsAPI
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
-			AutoMapperConfig.Register();
+			//AutoMapperConfig.Register();
         }
     }
 }
