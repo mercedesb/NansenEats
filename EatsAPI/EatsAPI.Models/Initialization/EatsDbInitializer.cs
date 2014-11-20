@@ -30,13 +30,13 @@ namespace EatsAPI.Models.Initialization
 
 			context.SaveChanges();
 
-			for (int i = 0; i < _defaultReviews.Count; i++)
-			{
-				var restaurantIndex = i % 5;
-				_defaultRestaurants.ElementAt(restaurantIndex).RestaurantReviews.Add(_defaultReviews.ElementAt(i));
-			}
+			//for (int i = 0; i < _defaultReviews.Count; i++)
+			//{
+			//	var restaurantIndex = i % 5;
+			//	_defaultRestaurants.ElementAt(restaurantIndex).RestaurantReviews.Add(_defaultReviews.ElementAt(i));
+			//}
 
-			context.SaveChanges();
+			//context.SaveChanges();
 
 			base.Seed(context);
 		}
@@ -122,37 +122,44 @@ namespace EatsAPI.Models.Initialization
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "So good! And cheap!", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 10, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 10, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(0)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "Blech, don't waste your time", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 2, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 2, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(1)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "Better than Jimmy John's and they deliver", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 7, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 7, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(2)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "Super fast, great when you need a quick bite", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 7, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 7, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(3)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "So so", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 5, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 5, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(4)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "I've had worse", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 6, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 6, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(0)
 			});
 			_defaultReviews.Add(new Review
 			{
 				Comment = new Comment { Value = "This place is Amazeballs!!!", CreatedDate = DateTime.Now },
-				Rating = new Rating { Value = 10, CreatedDate = DateTime.Now }
+				Rating = new Rating { Value = 10, CreatedDate = DateTime.Now },
+				Restaurant = _defaultRestaurants.ElementAt(1)
 			});
 		}
 	}
