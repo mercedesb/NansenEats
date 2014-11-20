@@ -84,6 +84,7 @@
     <Compile Include="DBModels\Rating.cs" />
     <Compile Include="DBModels\Restaurant.cs" />
     <Compile Include="DBModels\Review.cs" />
+    <Compile Include="DtoModels\RestaurantDto.cs" />
     <Compile Include="EatsContext.cs" />
     <Compile Include="Initialization\EatsDbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

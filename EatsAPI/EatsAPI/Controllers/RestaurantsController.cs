@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EatsAPI.Models;
 using EatsAPI.Models.DBModels;
+using EatsAPI.Models.DtoModels;
+using AutoMapper;
 
 namespace EatsAPI.Controllers
 {
@@ -19,11 +21,13 @@ namespace EatsAPI.Controllers
 
         // GET: api/Restaurants
 		public IQueryable<Restaurant> GetRestaurants()
-        {
-            return db.Restaurants;
-        }
+		{
+			var tempRestaurants = db.Restaurants;
+			//TODO: mapper.map to dto object
+			// GET: api/Restaurants/5
+			return tempRestaurants;
+		}
 
-        // GET: api/Restaurants/5
         [ResponseType(typeof(Restaurant))]
 		public IHttpActionResult GetRestaurant(int id)
         {
