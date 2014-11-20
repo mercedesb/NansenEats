@@ -1,14 +1,12 @@
 ﻿using EatsAPI.Models.DBModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace EatsAPI.Models.DtoModels
 {
 	public class RestaurantDto
 	{
-		public int RestaurantId { get; set; }
+		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Address { get; set; }
 		public string Zip { get; set; }
@@ -19,14 +17,22 @@ namespace EatsAPI.Models.DtoModels
 		public int PriceRangeMax { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public double DistanceFromOffice { get; set; }
-		public ICollection<RestaurantReviewDto> RestaurantReviews { get; set; }
+		public List<RatingDto> Ratings { get; set; }
+		public List<CommentDto> Comments { get; set; }
 	}
 
-	public class RestaurantReviewDto
+	public class RatingDto
 	{
-		public int ReviewId { get; set; }
-		public Rating Rating { get; set; }
-		public Comment Comment { get; set; }
-		public ICollection<Category> Tags { get; set; }
+		public int Id { get; set; }
+		public int Value { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public List<Category> Tags { get; set; }
+	}
+
+	public class CommentDto
+	{
+		public int Id { get; set; }
+		public string Value { get; set; }
+		public DateTime CreatedDate { get; set; }
 	}
 }

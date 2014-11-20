@@ -16,108 +16,108 @@ using AutoMapper;
 namespace EatsAPI.Controllers
 {
 	public class RestaurantsController : ApiController
-    {
-        private EatsContext db = new EatsContext();
+	{
+		private EatsContext db = new EatsContext();
 
-        // GET: api/Restaurants
-		public IQueryable<Restaurant> GetRestaurants()
+		// GET: api/Restaurants
+		public IHttpActionResult GetRestaurants()
 		{
-			var tempRestaurants = db.Restaurants;
+			var tempRestaurants = db.Restaurants.ToList();
 			//TODO: mapper.map to dto object
 			// GET: api/Restaurants/5
-			return tempRestaurants;
+			return Ok(Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants));
 		}
 
-        [ResponseType(typeof(Restaurant))]
+		[ResponseType(typeof(RestaurantDto))]
 		public IHttpActionResult GetRestaurant(int id)
-        {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
+		{
+			Restaurant restaurant = db.Restaurants.Find(id);
+			if (restaurant == null)
+			{
+				return NotFound();
+			}
 
-            return Ok(restaurant);
-        }
+			return Ok(Mapper.Map<Restaurant, RestaurantDto>(restaurant));
+		}
 
-        // PUT: api/Restaurants/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// PUT: api/Restaurants/5
+		[ResponseType(typeof(void))]
+		public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            if (id != restaurant.Id)
-            {
-                return BadRequest();
-            }
+			if (id != restaurant.Id)
+			{
+				return BadRequest();
+			}
 
-            db.Entry(restaurant).State = EntityState.Modified;
+			db.Entry(restaurant).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RestaurantExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!RestaurantExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+			return StatusCode(HttpStatusCode.NoContent);
+		}
 
-        // POST: api/Restaurants
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult PostRestaurant(Restaurant restaurant)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// POST: api/Restaurants
+		[ResponseType(typeof(Restaurant))]
+		public IHttpActionResult PostRestaurant(Restaurant restaurant)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            db.Restaurants.Add(restaurant);
-            db.SaveChanges();
+			db.Restaurants.Add(restaurant);
+			db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = restaurant.Id }, restaurant);
-        }
+			return CreatedAtRoute("DefaultApi", new { id = restaurant.Id }, restaurant);
+		}
 
-        // DELETE: api/Restaurants/5
-        [ResponseType(typeof(Restaurant))]
-        public IHttpActionResult DeleteRestaurant(int id)
-        {
-            Restaurant restaurant = db.Restaurants.Find(id);
-            if (restaurant == null)
-            {
-                return NotFound();
-            }
+		// DELETE: api/Restaurants/5
+		[ResponseType(typeof(Restaurant))]
+		public IHttpActionResult DeleteRestaurant(int id)
+		{
+			Restaurant restaurant = db.Restaurants.Find(id);
+			if (restaurant == null)
+			{
+				return NotFound();
+			}
 
-            db.Restaurants.Remove(restaurant);
-            db.SaveChanges();
+			db.Restaurants.Remove(restaurant);
+			db.SaveChanges();
 
-            return Ok(restaurant);
-        }
+			return Ok(restaurant);
+		}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				db.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        private bool RestaurantExists(int id)
-        {
-            return db.Restaurants.Count(e => e.Id == id) > 0;
-        }
-    }
+		private bool RestaurantExists(int id)
+		{
+			return db.Restaurants.Count(e => e.Id == id) > 0;
+		}
+	}
 }

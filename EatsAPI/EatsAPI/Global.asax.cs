@@ -14,6 +14,10 @@ namespace EatsAPI
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 			//AutoMapperConfig.Register();
+
+				//Automapper
+				AutoMapperConfig.Register();
+				AutoMapper.Mapper.AssertConfigurationIsValid();
         }
     }
 }
