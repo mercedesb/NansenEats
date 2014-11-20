@@ -9,7 +9,7 @@ namespace EatsAPI.Models.DBModels
 	public class Rating
 	{
 		[Key]
-		public int RatingId { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		public int Value { get; set; }
