@@ -22,8 +22,7 @@ namespace EatsAPI.Models.Initialization
 			foreach (Category category in _defaultCategories)
 				context.Categories.Add(category);
 
-			foreach (Review review in _defaultReviews)
-				context.Reviews.Add(review);
+			context.SaveChanges();
 
 			foreach (Restaurant restaurant in _defaultRestaurants)
 				context.Restaurants.Add(restaurant);
@@ -33,8 +32,11 @@ namespace EatsAPI.Models.Initialization
 			for (int i = 0; i < _defaultReviews.Count; i++)
 			{
 				var restaurantIndex = i % 5;
-				_defaultRestaurants.ElementAt(restaurantIndex).RestaurantReviews.Add(_defaultReviews.ElementAt(i));
+				_defaultReviews[i].Restaurant = _defaultRestaurants.FirstOrDefault(r => r.RestaurantId == (restaurantIndex + 1));
 			}
+
+			foreach (Review review in _defaultReviews)
+				context.Reviews.Add(review);
 
 			context.SaveChanges();
 
@@ -45,9 +47,9 @@ namespace EatsAPI.Models.Initialization
 		{
 			_defaultCategories = new List<Category>();
 
-			_defaultCategories.Add(new Category() { CategoryId = 1, Name = "Close", Description = "Close to the office, good for quick eats" });
-			_defaultCategories.Add(new Category() { CategoryId = 2, Name = "Healthy", Description = "Good healthy eats options" });
-			_defaultCategories.Add(new Category() { CategoryId = 3, Name = "Cheap", Description = "Great inexpensive food options" });
+			_defaultCategories.Add(new Category { CategoryId = 1, Name = "Close", Description = "Close to the office, good for quick eats" });
+			_defaultCategories.Add(new Category { CategoryId = 2, Name = "Healthy", Description = "Good healthy eats options" });
+			_defaultCategories.Add(new Category { CategoryId = 3, Name = "Cheap", Description = "Great inexpensive food options" });
 		}
 
 		private void SeedRestaurants()
@@ -114,7 +116,7 @@ namespace EatsAPI.Models.Initialization
 				PriceRangeMax = 15
 			});
 		}
-	
+
 		private void SeedReviews()
 		{
 			_defaultReviews = new List<Review>();
