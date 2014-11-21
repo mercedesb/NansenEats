@@ -10,6 +10,7 @@ namespace EatsAPI.App_Start
 		{
 			Mapper.CreateMap<Restaurant, RestaurantDto>();
 			Mapper.CreateMap<Rating, RatingDto>();
+			//Mapper.CreateMap<RatingDto, Rating>();
 			Mapper.CreateMap<Comment, CommentDto>();
 		}
 	}

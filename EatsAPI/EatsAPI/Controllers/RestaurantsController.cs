@@ -23,7 +23,6 @@ namespace EatsAPI.Controllers
 		public IHttpActionResult GetRestaurants()
 		{
 			var tempRestaurants = db.Restaurants.ToList();
-			//TODO: mapper.map to dto object
 			// GET: api/Restaurants/5
 			return Ok(Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants));
 		}

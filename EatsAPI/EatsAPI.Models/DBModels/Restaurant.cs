@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace EatsAPI.Models.DBModels
 {
@@ -27,7 +28,12 @@ namespace EatsAPI.Models.DBModels
 		public int PriceRangeMax { get; set; }
 		public DateTime CreatedDate { get; set; }
 
+		#region CalculatedProperties
+
 		public double DistanceFromOffice { get; set; }
+
+
+		#endregion
 
 		#region Navigational Properties
 		public virtual ICollection<Rating> Ratings { get; set; }
