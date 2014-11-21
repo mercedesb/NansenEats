@@ -10,11 +10,12 @@
 	</settings>
 	<!--The order of the <file> elements determines the order of the files in the bundle.-->
 	<files>
-		<file>/app/js/app.js</file>
-		<file>/app/js/dataservice.js</file>
-		<file>/app/js/exception.js</file>
-		<file>/app/js/logger.js</file>
-		<file>/app/js/restaurantController.js</file>
-		<file>/app/js/restaurantDetailsController.js</file>
+		<file>/app/js/core/app.js</file>
+		<file>/app/js/services/dataservice.js</file>
+		<file>/app/js/core/exception.js</file>
+		<file>/app/js/core/logger.js</file>
+		<file>/app/js/restaurants/restaurantController.js</file>
+		<file>/app/js/restaurants/restaurantDetailsController.js</file>
+		<file>/app/js/reviews/addreview.js</file>
 	</files>
 </bundle>

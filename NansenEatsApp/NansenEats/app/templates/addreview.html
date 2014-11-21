@@ -1,0 +1,13 @@
+﻿<div class="row">
+	<form ng-submit="vm.addReview()">
+		<label>Rating</label>
+		<input type="number" max="10" min="1" required="required" ng-model="vm.rating.value" />
+
+		<hr />
+		<p>Optional</p>
+		<label>Comment</label>
+		<textarea ng-model="vm.comment.value"></textarea>
+		<input type="submit" value="Submit" />
+	</form>
+</div>
+

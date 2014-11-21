@@ -49,12 +49,13 @@
     <Content Include="app\js\AppBundle.min.js">
       <DependentUpon>AppBundle.js</DependentUpon>
     </Content>
-    <Content Include="app\js\dataservice.js" />
-    <Content Include="app\js\exception.js" />
+    <Content Include="app\js\core\app.js" />
+    <Content Include="app\js\core\logger.js" />
+    <Content Include="app\js\core\exception.js" />
     <Content Include="app\js\km-listview.js" />
-    <Content Include="app\js\logger.js" />
-    <Content Include="app\js\restaurantController.js" />
-    <Content Include="app\js\restaurantDetailsController.js" />
+    <Content Include="app\js\restaurants\restaurantController.js" />
+    <Content Include="app\js\restaurants\restaurantDetailsController.js" />
+    <Content Include="app\js\services\dataservice.js" />
     <Content Include="app\templates\restaurantdetails.html" />
     <Content Include="app\templates\restaurantlist.html" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -94,7 +95,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\StyleBundle.css.bundle" />
+    <Content Include="Content\StyleBundle.css.bundle">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="app\js\AppBundle.js.bundle" />
     <Content Include="app\js\AppBundle.min.js.map">
       <DependentUpon>AppBundle.min.js</DependentUpon>
@@ -103,7 +106,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="app\js\app.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -1,12 +1,13 @@
-﻿<div>
-	<div class="row">
-		<ul class="km-list">
-			<li class="col-md-3" ng-repeat="restaurant in vm.restaurants">
+﻿<div class="row">
+	<ul class="restaurants">
+		<li class="col-md-2 col-sm-2 col-lg-2" ng-repeat="restaurant in vm.restaurants">
+			<div>
 				<h4>{{restaurant.Name}}</h4>
 				<p>{{restaurant.Address}}</p>
-				<p>{{restaurant.City}}</p>
-				<a href="#/restaurant/{{restaurant.RestaurantId}}" ng-click>See Reviews</a>
-			</li>
-		</ul>
-	</div>
+				<progress max="10" value="{{restaurant.AverageRating}}"></progress>
+				<a class="pull-right" href="#/restaurant/{{restaurant.Id}}" ng-click>See Reviews</a>
+				<div class="clearfix"></div>
+			</div>
+		</li>
+	</ul>
 </div>

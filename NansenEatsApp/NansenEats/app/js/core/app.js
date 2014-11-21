@@ -22,6 +22,10 @@
 				templateUrl: "app/templates/restaurantdetails.html",
 				controller: "RestaurantDetailsController as vm"
 			})
+			.when("/restaurant/:restaurantid/new-review", {
+				templateUrl: "app/templates/addreview.html",
+				controller: "AddReviewController as vm"
+			})
 			.otherwise({ redirectTo: "/" });
 	});
 })();

@@ -1,2 +1,111 @@
-﻿body {
+﻿p {
+	color: #333;
+	font-family: Arial, Verdana, sans-serif;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #4d4d4d;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+h1 {
+	font-size: 36px;
+	color: #F57D0A;
+}
+
+h2 {
+	font-size: 32px;
+}
+
+h3 {
+	font-size: 28px;
+}
+
+h4 {
+	font-size: 24px;
+}
+
+h5 {
+	font-size: 20px;
+}
+
+h6 {
+	font-size: 18px;
+}
+
+ul {
+	list-style: none;
+	padding:0
+}
+
+.highlight {
+	color: white;
+	background-color: #F57D0A;
+	padding:5px 20px;
+}
+
+	.highlight * {
+		color: white;
+	}
+
+ul.restaurants li {
+	text-overflow: ellipsis;
+	border: 1px solid #F57D0A;
+	border-radius: 25px;
+	margin: 10px;
+}
+
+	ul.restaurants li h4 {
+		min-height: 90px;
+		text-align: center;
+		margin: 0 0 15px 0;
+		padding: 30px 0 0 0;
+	}
+
+	ul.restaurants li h4, ul.restaurants li p {
+		text-overflow: ellipsis;
+	}
+
+progress:not([value]) {
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	/* Get rid of default border in Firefox. */
+	border: none;
+	width: 90%;
+	height: 20px;
+	/* For IE10 */
+	color: #4d4d4d;
+	background: #4d4d4d;
+}
+
+	progress:not([value])::-webkit-progress-bar {
+		background-color: #4d4d4d;
+	}
+
+progress[value] {
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	/* Get rid of default border in Firefox. */
+	border: none;
+	width: 90%;
+	height: 20px;
+	/* For IE10 */
+	color: #F57D0A;
+	background: #4d4d4d;
+}
+
+	progress[value]::-webkit-progress-bar {
+		background-color: #F57D0A;
+	}
+
+.ratings {
+	background-color:#eee;
+	margin:10px 0px;
+	padding:10px;
 }

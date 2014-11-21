@@ -1,1 +1,35 @@
-﻿<p>Here are the reviews! Yay your routing worked!</p>
+﻿<div class="col-md-12 highlight">
+	<h4>{{vm.restaurant.Name}}</h4>
+	<p>{{vm.restaurant.Address}}</p>
+	<a href="#/restaurant/{{vm.restaurant.Id}}/new-review">Add Review</a>
+</div>
+
+	<div class="row">
+		<div class="col-md-push-8 col-md-3">
+			<ul class="ratings">
+				<li ng-repeat="rating in vm.restaurant.Ratings">
+					<div>
+						<h6 class="pull-left">User Name</h6>
+						<h6 class="pull-right">{{rating.Value}}/10</h6>
+						<div class="clearfix"></div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-6 col-md-pull-3">
+			<ul class="comments">
+				<li ng-repeat="comment in vm.restaurant.Comments">
+					<div>
+						<h6>User Name</h6>
+						<p>{{comment.Value}}</p>
+						<p class="pull-left">comma-separated,tags,here,with,icon,styling</p>
+						<p class="pull-right">{{comment.CreatedDate | date:'yyyy-MMM-dd'}}</p>
+						<div class="clearfix"></div>
+					</div>
+				</li>
+			</ul>
+			
+		</div>
+		
+	</div>
+
