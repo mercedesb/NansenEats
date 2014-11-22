@@ -79,7 +79,7 @@ progress:not([value]) {
 	height: 20px;
 	/* For IE10 */
 	color: #4d4d4d;
-	background: #4d4d4d;
+	background-color: #4d4d4d;
 }
 
 	progress:not([value])::-webkit-progress-bar {

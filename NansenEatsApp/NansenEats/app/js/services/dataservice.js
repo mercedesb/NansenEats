@@ -44,12 +44,12 @@
 			}
 		}
 
-		function addRating(rating, restaurantId) {
-			return $http.post(baseUrl + '/api/rating', rating, restaurantId)
+		function addRating(rating) {
+			return $http.post(baseUrl + 'api/rating', rating)
 			.then(addRatingComplete)
 				.catch(function (message) {
 					exception.catcher('XHR Failed for addRating')(message);
-					$location.url('/#/restaurant/' + restaurantId + '/new-review');
+					//$location.url('/#/restaurant/' + rating.RestaurantId + '/new-review');
 				});
 
 			function addRatingComplete(data, status, headers, config) {
