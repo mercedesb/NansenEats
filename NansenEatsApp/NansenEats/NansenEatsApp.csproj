@@ -86,6 +86,7 @@
     <Content Include="Content\kendo.uniform.min.css" />
     <Content Include="Content\kendo.uniform.mobile.css" />
     <Content Include="Content\kendo.uniform.mobile.min.css" />
+    <Content Include="Content\offcanvas.css" />
     <Content Include="Content\StyleBundle.css">
       <DependentUpon>StyleBundle.css.bundle</DependentUpon>
     </Content>
@@ -182,6 +183,7 @@
     <Content Include="Scripts\kendo-ui\kendo.view.min.js" />
     <Content Include="Scripts\kendo-ui\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\offcanvas.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />

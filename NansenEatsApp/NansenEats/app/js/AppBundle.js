@@ -170,8 +170,19 @@
 		var vm = this;
 		vm.title = 'RestaurantsController';
 		vm.restaurants = [];
-
+		vm.sort = 'AverageRating';
+		vm.reverse;
 		activate();
+
+		//vm.changeSort = function (value) {
+		//	if (vm.sort == value) {
+		//		vm.reverse = !vm.reverse;
+		//		return;
+		//	}
+
+		//	vm.sort = value;
+		//	vm.reverse = false;
+		//};
 
 		function activate() {
 			//            Using a resolver on all routes or dataservice.ready in every controller
