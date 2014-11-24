@@ -15,112 +15,120 @@ using EatsAPI.Models.DBModels;
 
 namespace EatsAPI.Controllers
 {
-    public class RatingController : ApiController
-    {
-        private EatsContext db = new EatsContext();
+	public class RatingController : ApiController
+	{
+		private EatsContext db = new EatsContext();
 
-        // GET: api/Rating
+		// GET: api/Rating
 		public IHttpActionResult GetRatings()
-        {
+		{
 			var tempRatings = db.Ratings.ToList();
 			// GET: api/Restaurants/5
 			return Ok(Mapper.Map<List<Rating>, List<RatingDto>>(tempRatings));
-        }
+		}
 
-        // GET: api/Rating/5
-        [ResponseType(typeof(RatingDto))]
-        public IHttpActionResult GetRatingDto(int id)
-        {
-            Rating rating = db.Ratings.Find(id);
+		// GET: api/Rating/5
+		[ResponseType(typeof(RatingDto))]
+		public IHttpActionResult GetRatingDto(int id)
+		{
+			Rating rating = db.Ratings.Find(id);
 			if (rating == null)
-            {
-                return NotFound();
-            }
+			{
+				return NotFound();
+			}
 
-            return Ok(Mapper.Map<Rating, RatingDto>(rating));
-        }
+			return Ok(Mapper.Map<Rating, RatingDto>(rating));
+		}
 
-        // PUT: api/Rating/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutRatingDto(int id, RatingDto ratingDto)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// PUT: api/Rating/5
+		[ResponseType(typeof(void))]
+		public IHttpActionResult PutRatingDto(int id, RatingDto ratingDto)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
-            if (id != ratingDto.Id)
-            {
-                return BadRequest();
-            }
+			if (id != ratingDto.Id)
+			{
+				return BadRequest();
+			}
 
-            db.Entry(ratingDto).State = EntityState.Modified;
+			db.Entry(ratingDto).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RatingDtoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+			try
+			{
+				db.SaveChanges();
+			}
+			catch (DbUpdateConcurrencyException)
+			{
+				if (!RatingDtoExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+			return StatusCode(HttpStatusCode.NoContent);
+		}
 
-        // POST: api/Rating
-        [ResponseType(typeof(RatingDto))]
-        public IHttpActionResult PostRatingDto(RatingDto ratingDto, int restaurantId)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+		// POST: api/Rating
+		[ResponseType(typeof(RatingDto))]
+		public IHttpActionResult PostRating(RatingDto ratingDto)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
 
 			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
-			rating.Restaurant = db.Restaurants.Single(r => r.Id == restaurantId);
+			rating.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == ratingDto.RestaurantId);
 
-			db.Ratings.Add(rating);
-            db.SaveChanges();
+			if (rating.Restaurant != null)
+			{
 
-            return CreatedAtRoute("DefaultApi", new { id = rating.Id }, ratingDto);
-        }
+				db.Ratings.Add(rating);
+				db.SaveChanges();
 
-        // DELETE: api/Rating/5
-        [ResponseType(typeof(RatingDto))]
-        public IHttpActionResult DeleteRatingDto(int id)
-        {
-            Rating rating = db.Ratings.Find(id);
+				return CreatedAtRoute("DefaultApi", new { id = rating.Id }, ratingDto);
+			}
+			else
+			{
+				return NotFound();
+			}
+		}
+
+		// DELETE: api/Rating/5
+		[ResponseType(typeof(RatingDto))]
+		public IHttpActionResult DeleteRatingDto(int id)
+		{
+			Rating rating = db.Ratings.Find(id);
 			if (rating == null)
-            {
-                return NotFound();
-            }
+			{
+				return NotFound();
+			}
 
 			db.Ratings.Remove(rating);
-            db.SaveChanges();
+			db.SaveChanges();
 
-            return Ok(Mapper.Map<Rating, RatingDto>(rating));
-        }
+			return Ok(Mapper.Map<Rating, RatingDto>(rating));
+		}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				db.Dispose();
+			}
+			base.Dispose(disposing);
+		}
 
-        private bool RatingDtoExists(int id)
-        {
-            return db.Ratings.Count(e => e.Id == id) > 0;
-        }
-    }
+		private bool RatingDtoExists(int id)
+		{
+			return db.Ratings.Count(e => e.Id == id) > 0;
+		}
+	}
 }

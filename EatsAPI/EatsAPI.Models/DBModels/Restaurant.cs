@@ -27,6 +27,11 @@ namespace EatsAPI.Models.DBModels
 		public int PriceRangeMax { get; set; }
 		public DateTime CreatedDate { get; set; }
 
+		public Restaurant()
+		{
+			CreatedDate = DateTime.Now;
+		}
+
 		#region CalculatedProperties
 
 		public double DistanceFromOffice { get; set; }

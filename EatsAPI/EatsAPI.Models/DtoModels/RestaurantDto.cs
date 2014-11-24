@@ -39,7 +39,13 @@ namespace EatsAPI.Models.DtoModels
 		public int Id { get; set; }
 		public int Value { get; set; }
 		public DateTime CreatedDate { get; set; }
+		public int RestaurantId { get; set; }
 		public List<Category> Tags { get; set; }
+
+		public RatingDto()
+		{
+			CreatedDate = DateTime.Now;
+		}
 	}
 
 	public class CommentDto

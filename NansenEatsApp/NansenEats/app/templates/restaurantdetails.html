@@ -22,8 +22,8 @@
 				<li ng-repeat="comment in vm.restaurant.Comments">
 					<div>
 						<h6>User Name</h6>
-						<p>{{comment.Value}}</p>
-						<p class="pull-left">comma-separated,tags,here,with,icon,styling</p>
+						<p><span class="icon-bubble"></span> {{comment.Value}}</p>
+						<p class="pull-left"><span class="icon-tags"></span> comma-separated,tags,here,with,icon,styling</p>
 						<p class="pull-right">{{comment.CreatedDate | date:'yyyy-MMM-dd'}}</p>
 						<div class="clearfix"></div>
 					</div>

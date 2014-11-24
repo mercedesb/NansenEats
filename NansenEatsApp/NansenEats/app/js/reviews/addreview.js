@@ -25,14 +25,14 @@
 		}
 
 		function setupNewReview() {
-			vm.restaurantId = $routeParams.restaurantid;
+			vm.rating.RestaurantId = $routeParams.restaurantid;
 		}
 
 		function addReview() {
 			if (!vm.rating) {
 				return;
 			}
-			return dataservice.addRating(vm.rating, vm.restaurantId).then(function (data) {
+			return dataservice.addRating(vm.rating).then(function (data) {
 				vm.rating = data;
 				return dataservice.addComment(vm.restaurantId, vm.comment).then(function (data) {
 					vm.comment = data;

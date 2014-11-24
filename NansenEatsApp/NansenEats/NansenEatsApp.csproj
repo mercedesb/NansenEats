@@ -55,7 +55,9 @@
     <Content Include="app\js\km-listview.js" />
     <Content Include="app\js\restaurants\restaurantController.js" />
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
+    <Content Include="app\js\reviews\addreview.js" />
     <Content Include="app\js\services\dataservice.js" />
+    <Content Include="app\templates\addreview.html" />
     <Content Include="app\templates\restaurantdetails.html" />
     <Content Include="app\templates\restaurantlist.html" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -110,8 +112,13 @@
     <Content Include="fonts\icomoon\fonts\icomoon.eot" />
     <Content Include="fonts\icomoon\fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon\fonts\icomoon.woff" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

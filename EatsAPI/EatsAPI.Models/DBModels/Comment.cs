@@ -13,6 +13,11 @@ namespace EatsAPI.Models.DBModels
 		public string Value { get; set; }
 		public DateTime CreatedDate { get; set; }
 
+		public Comment()
+		{
+			CreatedDate = DateTime.Now;
+		}
+
 		#region Navigational properties
 		public virtual Restaurant Restaurant { get; set; }
 		#endregion

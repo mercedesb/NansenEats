@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 36px;
-	color: #F57D0A;
+	color: #EB592F;
 }
 
 h2 {
@@ -37,22 +37,26 @@ h6 {
 
 ul {
 	list-style: none;
-	padding:0
+	padding: 0;
+}
+
+.text-light {
+	color: #ccc;
 }
 
 .highlight {
 	color: white;
-	background-color: #F57D0A;
-	padding:5px 20px;
+	background-color: #EB592F;
+	padding: 5px 20px;
 }
 
 	.highlight * {
 		color: white;
 	}
 
-ul.restaurants li>div {
+ul.restaurants li > div {
 	text-overflow: ellipsis;
-	border: 1px solid #F57D0A;
+	border: 1px solid #EB592F;
 	border-radius: 10px;
 	padding: 10px;
 	margin-bottom: 20px;
@@ -69,53 +73,25 @@ ul.restaurants li>div {
 		text-overflow: ellipsis;
 	}
 
-progress:not([value]) {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	/* Get rid of default border in Firefox. */
-	border: none;
-	width: 90%;
-	height: 20px;
-	/* For IE10 */
-	color: #4d4d4d;
-	background: #4d4d4d;
-}
-
-	progress:not([value])::-webkit-progress-bar {
-		background-color: #4d4d4d;
-	}
-
-progress[value] {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	/* Get rid of default border in Firefox. */
-	border: none;
-	width: 90%;
-	height: 20px;
-	/* For IE10 */
-	color: #F57D0A;
-	background: #4d4d4d;
-}
-
-	progress[value]::-webkit-progress-bar {
-		background-color: #F57D0A;
-	}
-
 .ratings {
-	background-color:#eee;
-	margin:10px 0px;
-	padding:10px;
+	background-color: #eee;
+	margin: 10px 0;
+	padding: 10px;
 }
 
 
-.navbar-brand>img {
+.navbar-brand > img {
 	display: inline;
 	margin-top: -9px;
 	margin-right: 5px;
+}
+
+.progress-bar-nansen {
+	background-image: -webkit-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -o-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#eb592f));
+	background-image: linear-gradient(to bottom,#ec8245 0,#eb592f 100%);
+	background-color: #eb592f;
 }
 
 .list-group-item.active,
@@ -123,22 +99,22 @@ progress[value] {
 .list-group-item.active:focus {
 	z-index: 2;
 	color: #fff;
-	background-color: #f0ab4a;
-	border-color: #f0ab4a;
+	background-color: #ec8245;
+	border-color: #ec8245;
 	font-weight: bold;
 }
 
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
-	text-shadow: 0 -1px 0 #c9811b;
-	background-image: -webkit-linear-gradient(top, #f0ab4a 0%, #c9811b 100%);
-	background-image:      -o-linear-gradient(top, #f0ab4a 0%, #c9811b 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#f0ab4a), to(#c9811b));
-	background-image:         linear-gradient(to bottom, #f0ab4a 0%, #c9811b 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0ab4a', endColorstr='#ffc9811b', GradientType=0);
+	text-shadow: 0 -1px 0 #eb592f;
+	background-image: -webkit-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image:      -o-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ec8245), to(#eb592f));
+	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
 	background-repeat: repeat-x;
-	border-color: #c9811b;
+	border-color: #eb592f;
 }
 
 .list-group-item-heading {
