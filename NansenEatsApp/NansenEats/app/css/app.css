@@ -50,11 +50,12 @@ ul {
 		color: white;
 	}
 
-ul.restaurants li {
+ul.restaurants li>div {
 	text-overflow: ellipsis;
 	border: 1px solid #F57D0A;
-	border-radius: 25px;
-	margin: 10px;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 20px;
 }
 
 	ul.restaurants li h4 {
@@ -108,4 +109,11 @@ progress[value] {
 	background-color:#eee;
 	margin:10px 0px;
 	padding:10px;
+}
+
+
+.navbar-brand>img {
+	display: inline;
+	margin-top: -9px;
+	margin-right: 5px;
 }

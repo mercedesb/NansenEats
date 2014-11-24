@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EatsAPI.Models;
@@ -20,11 +17,11 @@ namespace EatsAPI.Controllers
 		private EatsContext db = new EatsContext();
 
 		// GET: api/Restaurants
-		public IHttpActionResult GetRestaurants()
+		public IQueryable<RestaurantDto> GetRestaurants()
 		{
 			var tempRestaurants = db.Restaurants.ToList();
 			// GET: api/Restaurants/5
-			return Ok(Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants));
+			return Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants).AsQueryable();
 		}
 
 		[ResponseType(typeof(RestaurantDto))]
