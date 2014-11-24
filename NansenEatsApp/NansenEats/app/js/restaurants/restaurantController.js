@@ -12,8 +12,29 @@
 		var vm = this;
 		vm.title = 'RestaurantsController';
 		vm.restaurants = [];
-		vm.sort = 'AverageRating';
-		vm.reverse;
+		vm.sort = '-AverageRating';
+		vm.reverse = true;
+		vm.offcanvas = true;
+		vm.sortGroup = [
+			{
+				Sort: 'AverageRating',
+				Name: 'Rating'
+			},
+			{
+				Sort: 'DistanceFromOffice',
+				Name: 'Distance'
+			},
+			{
+				Sort: 'Name',
+				Name: 'Name'
+			},
+			{
+				Sort: 'PriceRangeMin',
+				Name: 'Price'
+			}
+		];
+
+
 		activate();
 
 		//vm.changeSort = function (value) {

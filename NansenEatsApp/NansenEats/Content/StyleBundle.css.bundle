@@ -20,7 +20,7 @@
 		<file>/Content/kendo.mobile.all.min.css</file>
 		<file>/Content/kendo.uniform.min.css</file>
 		<file>/Content/kendo.uniform.mobile.min.css</file>
-		<!--<file>/Content/Site.css</file>-->
 		<file>/Content/offcanvas.css</file>
+		<file>/fonts/icomoon/style.css</file>
 	</files>
 </bundle>

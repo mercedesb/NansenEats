@@ -95,7 +95,6 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\Site.css" />
     <Content Include="Content\StyleBundle.css.bundle">
       <SubType>Designer</SubType>
     </Content>
@@ -103,9 +102,14 @@
     <Content Include="app\js\AppBundle.min.js.map">
       <DependentUpon>AppBundle.min.js</DependentUpon>
     </Content>
+    <Content Include="fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="fonts\icomoon\style.css" />
     <Content Include="packages.config" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon\fonts\icomoon.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\bootstrap.js" />

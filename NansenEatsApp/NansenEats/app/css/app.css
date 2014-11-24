@@ -117,3 +117,32 @@ progress[value] {
 	margin-top: -9px;
 	margin-right: 5px;
 }
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+	z-index: 2;
+	color: #fff;
+	background-color: #f0ab4a;
+	border-color: #f0ab4a;
+	font-weight: bold;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+	text-shadow: 0 -1px 0 #c9811b;
+	background-image: -webkit-linear-gradient(top, #f0ab4a 0%, #c9811b 100%);
+	background-image:      -o-linear-gradient(top, #f0ab4a 0%, #c9811b 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f0ab4a), to(#c9811b));
+	background-image:         linear-gradient(to bottom, #f0ab4a 0%, #c9811b 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff0ab4a', endColorstr='#ffc9811b', GradientType=0);
+	background-repeat: repeat-x;
+	border-color: #c9811b;
+}
+
+.list-group-item-heading {
+	background-color: #eee;
+	font-weight: bold;
+	color: #666;
+}

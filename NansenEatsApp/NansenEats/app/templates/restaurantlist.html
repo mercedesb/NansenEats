@@ -2,7 +2,7 @@
 	<div class="col-xs-12 col-sm-9">
 		<div class="row">
 			<ul class="restaurants">
-				<li class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:sort:reverse">
+				<li class="col-xs-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:sort:reverse">
 					<div>
 						<h4>{{restaurant.Name}}</h4>
 						<p>{{restaurant.Address}}</p>
@@ -23,10 +23,10 @@
 	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
 		<div class="list-group">
 			<div class="list-group-item list-group-item-heading">Sort Order</div>
-			<a href="" class="list-group-item" ng-class="{'active':sort == 'AverageRating'}" ng-click="reverse = sort == 'AverageRating' && !reverse; sort = 'AverageRating'">Rating</a>
-			<a href="" class="list-group-item" ng-class="{'active':sort == 'DistanceFromOffice'}" ng-click="reverse = sort == 'DistanceFromOffice' && !reverse; sort = 'DistanceFromOffice'">Distance</a>
-			<a href="" class="list-group-item" ng-class="{'active':sort == 'Name'}" ng-click="reverse = sort == 'Name' && !reverse; sort = 'Name'">Name</a>
-			<a href="" class="list-group-item" ng-class="{'active':sort == 'PriceRangeMin'}" ng-click="reverse = sort == 'PriceRangeMin' && !reverse; sort = 'PriceRangeMin'">Price</a>
+			<a href="" class="list-group-item" ng-class="{'active':$parent.sort == sortItem.Sort}" ng-click="$parent.reverse = $parent.sort == sortItem.Sort && !reverse; $parent.sort = sortItem.Sort" ng-repeat="sortItem in vm.sortGroup">{{sortItem.Name}}<span class="pull-right" ng-show="$parent.sort == sortItem.Sort" ng-class="{'icon-arrow-up': !$parent.reverse, 'icon-arrow-down': $parent.reverse}"></span></a>
+			<!--<a href="" class="list-group-item" ng-class="{'active':sort == 'DistanceFromOffice'}" ng-click="reverse = sort == 'DistanceFromOffice' && !reverse; sort = 'DistanceFromOffice'">Distance<span class="pull-right" ng-show="{sort == 'DistanceFromOffice'}" ng-class="{'icon-arrow-up': !reverse, 'icon-arrow-down': reverse;}"></span></a>
+			<a href="" class="list-group-item" ng-class="{'active':sort == 'Name'}" ng-click="reverse = sort == 'Name' && !reverse; sort = 'Name'">Name<span class="pull-right" ng-show="{sort == 'Name'}" ng-class="{'icon-arrow-up': !reverse, 'icon-arrow-down': reverse;}"></span></a>
+			<a href="" class="list-group-item" ng-class="{'active':sort == 'PriceRangeMin'}" ng-click="reverse = sort == 'PriceRangeMin' && !reverse; sort = 'PriceRangeMin'">Price<span class="pull-right" ng-show="{sort == 'PriceRangeMin'}" ng-class="{'icon-arrow-up': !reverse, 'icon-arrow-down': reverse;}"></span></a>-->
 		</div>
 		<div class="list-group" ng-show="{{vm.tags.length}}">
 			<div class="list-group-item list-group-item-heading">Filter By</div>
