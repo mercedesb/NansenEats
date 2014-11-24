@@ -1,9 +1,9 @@
 ﻿body {
-    padding-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 [role=main] > .row:first-child {
-    padding-top: 50px;
+	padding-top: 50px;
 }
 
 [role=main] > .row {

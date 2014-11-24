@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 36px;
-	color: #F57D0A;
+	color: #EB592F;
 }
 
 h2 {
@@ -37,83 +37,55 @@ h6 {
 
 ul {
 	list-style: none;
-	padding:0
+	padding: 0;
 }
 
 .highlight {
 	color: white;
-	background-color: #F57D0A;
-	padding:5px 20px;
+	background-color: #EB592F;
+	padding: 5px 20px;
 }
 
 	.highlight * {
 		color: white;
 	}
 
-ul.restaurants li>div {
+ul.restaurants li > div {
 	text-overflow: ellipsis;
-	border: 1px solid #F57D0A;
+	border: 1px solid #EB592F;
 	border-radius: 10px;
 	padding: 10px;
 	margin-bottom: 20px;
 }
 
-	ul.restaurants li h4 {
-		min-height: 90px;
-		text-align: center;
-		margin: 0 0 15px 0;
-		padding: 30px 0 0 0;
-	}
-
-	ul.restaurants li h4, ul.restaurants li p {
-		text-overflow: ellipsis;
-	}
-
-progress:not([value]) {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	/* Get rid of default border in Firefox. */
-	border: none;
-	width: 90%;
-	height: 20px;
-	/* For IE10 */
-	color: #4d4d4d;
-	background-color: #4d4d4d;
+ul.restaurants li h4 {
+	min-height: 90px;
+	text-align: center;
+	margin: 0 0 15px 0;
+	padding: 30px 0 0 0;
 }
 
-	progress:not([value])::-webkit-progress-bar {
-		background-color: #4d4d4d;
-	}
-
-progress[value] {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-	/* Get rid of default border in Firefox. */
-	border: none;
-	width: 90%;
-	height: 20px;
-	/* For IE10 */
-	color: #F57D0A;
-	background: #4d4d4d;
+ul.restaurants li h4, ul.restaurants li p {
+	text-overflow: ellipsis;
 }
-
-	progress[value]::-webkit-progress-bar {
-		background-color: #F57D0A;
-	}
 
 .ratings {
-	background-color:#eee;
-	margin:10px 0px;
-	padding:10px;
+	background-color: #eee;
+	margin: 10px 0px;
+	padding: 10px;
 }
 
 
-.navbar-brand>img {
+.navbar-brand > img {
 	display: inline;
 	margin-top: -9px;
 	margin-right: 5px;
+}
+
+.progress-bar-nansen {
+	background-image: -webkit-linear-gradient(top,#ec8245 0,#EB592F 100%);
+	background-image: -o-linear-gradient(top,#ec8245 0,#EB592F 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#EB592F));
+	background-image: linear-gradient(to bottom,#ec8245 0,#EB592F 100%);
+	background-color: #EB592F;
 }
