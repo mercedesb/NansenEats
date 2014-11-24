@@ -89,7 +89,7 @@ namespace EatsAPI.Models.Initialization
 			_defaultRestaurants.Add(new Restaurant()
 			{
 				Id = 4,
-				Name = " D’amato’s Bakery",
+				Name = "D’amato’s Bakery",
 				Address = "1124 W Grand Ave",
 				City = "Chicago",
 				Zip = "60642",

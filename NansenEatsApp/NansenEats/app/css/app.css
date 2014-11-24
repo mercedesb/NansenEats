@@ -100,13 +100,8 @@ ul.restaurants li > div {
 	z-index: 2;
 	color: #fff;
 	background-color: #ec8245;
-	border-color: #ec8245;
 	font-weight: bold;
-}
-
-.list-group-item.active,
-.list-group-item.active:hover,
-.list-group-item.active:focus {
+	border-color: #eb592f;
 	text-shadow: 0 -1px 0 #eb592f;
 	background-image: -webkit-linear-gradient(top, #ec8245 0%, #eb592f 100%);
 	background-image:      -o-linear-gradient(top, #ec8245 0%, #eb592f 100%);
@@ -114,7 +109,6 @@ ul.restaurants li > div {
 	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
 	background-repeat: repeat-x;
-	border-color: #eb592f;
 }
 
 .list-group-item-heading {
