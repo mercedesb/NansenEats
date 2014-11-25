@@ -14,8 +14,10 @@
 		<file>/app/js/services/dataservice.js</file>
 		<file>/app/js/core/exception.js</file>
 		<file>/app/js/core/logger.js</file>
+		<file>/app/js/core/loader.js</file>
 		<file>/app/js/restaurants/restaurantController.js</file>
 		<file>/app/js/restaurants/restaurantDetailsController.js</file>
 		<file>/app/js/reviews/addreview.js</file>
+		
 	</files>
 </bundle>

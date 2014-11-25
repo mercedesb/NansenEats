@@ -1,22 +1,23 @@
 ﻿<div class="row row-offcanvas row-offcanvas-left">
 	<div class="col-xs-12 col-sm-9">
-<div class="row">
-	<ul class="restaurants">
+		<div class="row">
+			<loader loadedproperty="vm.restaurants.length"></loader>
+			<ul class="restaurants">
 				<li class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:sort:reverse">
-			<div>
-				<h4>{{restaurant.Name}}</h4>
-				<p>{{restaurant.Address}}</p>
+					<div>
+						<h4>{{restaurant.Name}}</h4>
+						<p>{{restaurant.Address}}</p>
 						<!--<progress max="10" value="{{restaurant.AverageRating}}"></progress>-->
 						<div class="progress">
 							<div class="progress-bar progress-bar-nansen" role="progressbar" aria-valuenow="{{restaurant.AverageRating}}" aria-valuemin="0" aria-valuemax="10" style="width: {{(restaurant.AverageRating*10)}}%">
 								<span class="sr-only">{{restaurant.AverageRating}} out of 10</span>
 							</div>
 						</div>
-				<a class="pull-right" href="#/restaurant/{{restaurant.Id}}" ng-click>See Reviews</a>
-				<div class="clearfix"></div>
-			</div>
-		</li>
-	</ul>
+						<a class="pull-right" href="#/restaurant/{{restaurant.Id}}" ng-click>See Reviews</a>
+						<div class="clearfix"></div>
+					</div>
+				</li>
+			</ul>
 		</div><!--/row-->
 	</div><!--/.col-xs-12.col-sm-9-->
 
@@ -31,6 +32,6 @@
 		<div class="list-group" ng-show="{{vm.tags.length}}">
 			<div class="list-group-item list-group-item-heading">Filter By</div>
 			<a href="" class="list-group-item" ng-repeat="tag in vm.tags" ng-click="filter = '{{tag.Name}}'">{{tag.Name}}</a>
-</div>
+		</div>
 	</div><!--/.sidebar-offcanvas-->
 </div><!--/row-->

@@ -50,6 +50,7 @@
       <DependentUpon>AppBundle.js</DependentUpon>
     </Content>
     <Content Include="app\js\core\app.js" />
+    <Content Include="app\js\core\loader.js" />
     <Content Include="app\js\core\logger.js" />
     <Content Include="app\js\core\exception.js" />
     <Content Include="app\js\km-listview.js" />
@@ -76,6 +77,7 @@
     <Content Include="Content\Default\sprite_2x.png" />
     <Content Include="Content\Default\sprite_kpi.png" />
     <Content Include="Content\Default\sprite_kpi_2x.png" />
+    <Content Include="Content\images\loading.GIF" />
     <Content Include="Content\kendo.common.core.css" />
     <Content Include="Content\kendo.common.core.min.css" />
     <Content Include="Content\kendo.default.css" />
