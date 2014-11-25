@@ -40,6 +40,10 @@ ul {
 	padding: 0;
 }
 
+.text-light {
+	color: #ccc;
+}
+
 .highlight {
 	color: white;
 	background-color: #EB592F;
@@ -71,7 +75,7 @@ ul.restaurants li h4, ul.restaurants li p {
 
 .ratings {
 	background-color: #eee;
-	margin: 10px 0px;
+	margin: 10px 0;
 	padding: 10px;
 }
 
@@ -83,11 +87,34 @@ ul.restaurants li h4, ul.restaurants li p {
 }
 
 .progress-bar-nansen {
-	background-image: -webkit-linear-gradient(top,#ec8245 0,#EB592F 100%);
-	background-image: -o-linear-gradient(top,#ec8245 0,#EB592F 100%);
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#EB592F));
-	background-image: linear-gradient(to bottom,#ec8245 0,#EB592F 100%);
-	background-color: #EB592F;
+	background-image: -webkit-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -o-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#eb592f));
+	background-image: linear-gradient(to bottom,#ec8245 0,#eb592f 100%);
+	background-color: #eb592f;
+}
+
+.list-group-item.active,
+.list-group-item.active:hover,
+.list-group-item.active:focus {
+	z-index: 2;
+	color: #fff;
+	background-color: #ec8245;
+	font-weight: bold;
+	border-color: #eb592f;
+	text-shadow: 0 -1px 0 #eb592f;
+	background-image: -webkit-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image:      -o-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ec8245), to(#eb592f));
+	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
+	background-repeat: repeat-x;
+}
+
+.list-group-item-heading {
+	background-color: #eee;
+	font-weight: bold;
+	color: #666;
 }
 
 .loading {
