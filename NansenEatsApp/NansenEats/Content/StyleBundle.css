@@ -172,11 +172,11 @@ footer {
 
 @font-face {
 	font-family: 'icomoon';
-	src:url(../fonts/icomoon/fonts/icomoon.eot?4u2kq0);
-	src:url(../fonts/icomoon/fonts/icomoon.eot?#iefix4u2kq0) format('embedded-opentype'),
-		url(../fonts/icomoon/fonts/icomoon.woff?4u2kq0) format('woff'),
-		url(../fonts/icomoon/fonts/icomoon.ttf?4u2kq0) format('truetype'),
-		url(../fonts/icomoon/fonts/icomoon.svg?4u2kq0#icomoon) format('svg');
+	src:url(../fonts/icomoon/fonts/icomoon.eot?navar8);
+	src:url(../fonts/icomoon/fonts/icomoon.eot?#iefixnavar8) format('embedded-opentype'),
+		url(../fonts/icomoon/fonts/icomoon.woff?navar8) format('woff'),
+		url(../fonts/icomoon/fonts/icomoon.ttf?navar8) format('truetype'),
+		url(../fonts/icomoon/fonts/icomoon.svg?navar8#icomoon) format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -188,7 +188,7 @@ footer {
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: none;
-	line-height: 1;
+	line-height: inherit;
 
 	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
@@ -200,6 +200,9 @@ footer {
 }
 .icon-pencil:before {
 	content: "\e601";
+}
+.icon-tag:before {
+	content: "\e61e";
 }
 .icon-tags:before {
 	content: "\e602";
@@ -213,11 +216,26 @@ footer {
 .icon-location:before {
 	content: "\e605";
 }
-.icon-bubble:before {
+.icon-clock:before {
 	content: "\e606";
+}
+.icon-clock2:before {
+	content: "\e61f";
+}
+.icon-calendar:before {
+	content: "\e61a";
+}
+.icon-bubble:before {
+	content: "\e61d";
+}
+.icon-bubbles:before {
+	content: "\e61b";
 }
 .icon-user:before {
 	content: "\e607";
+}
+.icon-quotes-left:before {
+	content: "\e61c";
 }
 .icon-lock:before {
 	content: "\e608";
@@ -228,8 +246,14 @@ footer {
 .icon-glass:before {
 	content: "\e612";
 }
+.icon-mug:before {
+	content: "\e620";
+}
 .icon-food:before {
 	content: "\e613";
+}
+.icon-fire:before {
+	content: "\e621";
 }
 .icon-remove:before {
 	content: "\e60a";
@@ -269,6 +293,9 @@ footer {
 }
 .icon-filter:before {
 	content: "\e610";
+}
+.icon-twitter:before {
+	content: "\e622";
 }
 .icon-github:before {
 	content: "\e611";

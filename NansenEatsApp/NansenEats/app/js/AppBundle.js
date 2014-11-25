@@ -170,8 +170,11 @@
 		var vm = this;
 		vm.title = 'RestaurantsController';
 		vm.restaurants = [];
-		vm.sort = '-AverageRating';
-		vm.reverse = true;
+
+		activate();
+
+		vm.sort = 'AverageRating';
+		vm.reverse = false;
 		vm.offcanvas = true;
 		vm.sortGroup = [
 			{
@@ -193,17 +196,17 @@
 		];
 
 
-		activate();
+		vm.changeSort = changeSort;
 
-		//vm.changeSort = function (value) {
-		//	if (vm.sort == value) {
-		//		vm.reverse = !vm.reverse;
-		//		return;
-		//	}
+		function changeSort(value) {
+			if (vm.sort == value) {
+				vm.reverse = !vm.reverse;
+				return;
+			}
 
-		//	vm.sort = value;
-		//	vm.reverse = false;
-		//};
+			vm.sort = value;
+			vm.reverse = false;
+		};
 
 		function activate() {
 			//            Using a resolver on all routes or dataservice.ready in every controller
@@ -211,6 +214,7 @@
 			//            return dataservice.ready(promises).then(function(){
 			return getRestaurants().then(function () {
 				logger.info('Activated Restaurants View');
+				vm.changeSort('AverageRating');
 			});
 		}
 
