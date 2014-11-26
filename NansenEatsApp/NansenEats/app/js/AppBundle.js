@@ -41,7 +41,7 @@
 	dataservice.$inject = ['$http', '$location', 'exception'];
 
 	function dataservice($http, $location, exception) {
-		var baseUrl = "http://eatsapi.local/";
+		var baseUrl = "http://eatsapi.local";
 
 		var service = {
 			getRestaurants: getRestaurants,
@@ -78,7 +78,7 @@
 		}
 
 		function addRating(rating) {
-			return $http.post(baseUrl + 'api/rating', rating)
+			return $http.post(baseUrl + '/api/rating', rating)
 			.then(addRatingComplete)
 				.catch(function (message) {
 					exception.catcher('XHR Failed for addRating')(message);
