@@ -13,6 +13,8 @@ namespace EatsAPI.App_Start
 			Mapper.CreateMap<RatingDto, Rating>()
 				.ForMember(dest => dest.Restaurant, opt => opt.Ignore());
 			Mapper.CreateMap<Comment, CommentDto>();
+			Mapper.CreateMap<CommentDto, Comment>()
+				.ForMember(dest => dest.Restaurant, opt => opt.Ignore());
 		}
 	}
 }

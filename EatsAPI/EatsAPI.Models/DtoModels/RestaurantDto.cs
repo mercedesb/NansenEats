@@ -53,5 +53,11 @@ namespace EatsAPI.Models.DtoModels
 		public int Id { get; set; }
 		public string Value { get; set; }
 		public DateTime CreatedDate { get; set; }
+		public int RestaurantId { get; set; }
+
+		public CommentDto()
+		{
+			CreatedDate = DateTime.Now;
+		}
 	}
 }

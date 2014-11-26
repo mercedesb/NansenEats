@@ -46,7 +46,8 @@
 		var service = {
 			getRestaurants: getRestaurants,
 			getRestaurant: getRestaurant,
-			addRating: addRating
+			addRating: addRating,
+			addComment: addComment
 		};
 
 		return service;
@@ -86,6 +87,18 @@
 				});
 
 			function addRatingComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addComment(comment) {
+			return $http.post(baseUrl + '/api/comment', comment)
+				.then(addCommentComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for addComment')(message);
+					});
+
+			function addCommentComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}
@@ -318,18 +331,32 @@
 		}
 
 		function setupNewReview() {
-			vm.rating.RestaurantId = $routeParams.restaurantid;
+			vm.rating.RestaurantId = $routeParams.restaurantid
+			vm.comment.RestaurantId = $routeParams.restaurantid;
 		}
 
 		function addReview() {
 			if (!vm.rating) {
 				return;
 			}
-			return dataservice.addRating(vm.rating).then(function (data) {
-				vm.rating = data;
-				return dataservice.addComment(vm.restaurantId, vm.comment).then(function (data) {
-					vm.comment = data;
-				});
+			dataservice.addRating(vm.rating).then(function (data) {
+				if (data && vm.comment.value) {
+					dataservice.addComment(vm.comment).then(function (data) {
+						if (data) {
+							$location.url('/restaurant/' + $routeParams.restaurantid);
+						}
+					});
+				}
+				else {
+					if (data) {
+						$location.url('/restaurant/' + $routeParams.restaurantid);
+					}
+					else {
+						vm.rating.RestaurantId = $routeParams.restaurantid
+						vm.comment.RestaurantId = $routeParams.restaurantid;
+						//handle exception (show error or something)
+					}
+				}
 			});
 		}
 	}

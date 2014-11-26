@@ -13,7 +13,8 @@
 		var service = {
 			getRestaurants: getRestaurants,
 			getRestaurant: getRestaurant,
-			addRating: addRating
+			addRating: addRating,
+			addComment: addComment
 		};
 
 		return service;
@@ -53,6 +54,18 @@
 				});
 
 			function addRatingComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addComment(comment) {
+			return $http.post(baseUrl + '/api/comment', comment)
+				.then(addCommentComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for addComment')(message);
+					});
+
+			function addCommentComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}

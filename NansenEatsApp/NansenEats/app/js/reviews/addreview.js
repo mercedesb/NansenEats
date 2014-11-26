@@ -25,18 +25,32 @@
 		}
 
 		function setupNewReview() {
-			vm.rating.RestaurantId = $routeParams.restaurantid;
+			vm.rating.RestaurantId = $routeParams.restaurantid
+			vm.comment.RestaurantId = $routeParams.restaurantid;
 		}
 
 		function addReview() {
 			if (!vm.rating) {
 				return;
 			}
-			return dataservice.addRating(vm.rating).then(function (data) {
-				vm.rating = data;
-				return dataservice.addComment(vm.restaurantId, vm.comment).then(function (data) {
-					vm.comment = data;
-				});
+			dataservice.addRating(vm.rating).then(function (data) {
+				if (data && vm.comment.value) {
+					dataservice.addComment(vm.comment).then(function (data) {
+						if (data) {
+							$location.url('/restaurant/' + $routeParams.restaurantid);
+						}
+					});
+				}
+				else {
+					if (data) {
+						$location.url('/restaurant/' + $routeParams.restaurantid);
+					}
+					else {
+						vm.rating.RestaurantId = $routeParams.restaurantid
+						vm.comment.RestaurantId = $routeParams.restaurantid;
+						//handle exception (show error or something)
+					}
+				}
 			});
 		}
 	}

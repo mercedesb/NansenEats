@@ -29,7 +29,7 @@ namespace EatsAPI.Controllers
 
 		// GET: api/Rating/5
 		[ResponseType(typeof(RatingDto))]
-		public IHttpActionResult GetRatingDto(int id)
+		public IHttpActionResult GetRating(int id)
 		{
 			Rating rating = db.Ratings.Find(id);
 			if (rating == null)
@@ -62,7 +62,7 @@ namespace EatsAPI.Controllers
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!RatingDtoExists(id))
+				if (!RatingExists(id))
 				{
 					return NotFound();
 				}
@@ -126,7 +126,7 @@ namespace EatsAPI.Controllers
 			base.Dispose(disposing);
 		}
 
-		private bool RatingDtoExists(int id)
+		private bool RatingExists(int id)
 		{
 			return db.Ratings.Count(e => e.Id == id) > 0;
 		}
