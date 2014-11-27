@@ -25,7 +25,7 @@
 		}
 
 		function setupNewReview() {
-			vm.rating.RestaurantId = $routeParams.restaurantid
+			vm.rating.RestaurantId = $routeParams.restaurantid;
 			vm.comment.RestaurantId = $routeParams.restaurantid;
 		}
 
@@ -40,13 +40,11 @@
 							$location.url('/restaurant/' + $routeParams.restaurantid);
 						}
 					});
-				}
-				else {
+				} else {
 					if (data) {
 						$location.url('/restaurant/' + $routeParams.restaurantid);
-					}
-					else {
-						vm.rating.RestaurantId = $routeParams.restaurantid
+					} else {
+						vm.rating.RestaurantId = $routeParams.restaurantid;
 						vm.comment.RestaurantId = $routeParams.restaurantid;
 						//handle exception (show error or something)
 					}

@@ -28,7 +28,7 @@
 				controller: "RestaurantDetailsController as vm"
 			})
 			.when("/restaurant/:restaurantid/edit", {
-				tempalteUrl: "app/templates/restaurantform.html",
+				templateUrl: "app/templates/restaurantform.html",
 				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
@@ -421,8 +421,7 @@
 			dataservice.editRestaurant(vm.restaurantId, vm.restaurant).then(function (data) {
 				if (data) {
 					$location.url('/restaurant/' + data.Id);
-				}
-				else {
+				} else {
 					vm.restaurant = {};
 					//handle exception (show error or something)
 				}
@@ -459,7 +458,7 @@
 		}
 
 		function setupNewReview() {
-			vm.rating.RestaurantId = $routeParams.restaurantid
+			vm.rating.RestaurantId = $routeParams.restaurantid;
 			vm.comment.RestaurantId = $routeParams.restaurantid;
 		}
 
@@ -474,13 +473,11 @@
 							$location.url('/restaurant/' + $routeParams.restaurantid);
 						}
 					});
-				}
-				else {
+				} else {
 					if (data) {
 						$location.url('/restaurant/' + $routeParams.restaurantid);
-					}
-					else {
-						vm.rating.RestaurantId = $routeParams.restaurantid
+					} else {
+						vm.rating.RestaurantId = $routeParams.restaurantid;
 						vm.comment.RestaurantId = $routeParams.restaurantid;
 						//handle exception (show error or something)
 					}
