@@ -35,7 +35,6 @@
 				if (data) {
 					$location.url('/restaurant/' + data.Id);
 				} else {
-					vm.restaurant = {};
 					//handle exception (show error or something)
 				}
 			});

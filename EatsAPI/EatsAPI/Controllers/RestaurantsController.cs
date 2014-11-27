@@ -68,7 +68,7 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return StatusCode(HttpStatusCode.NoContent);
+			return Ok(restaurant);
 		}
 
 		// POST: api/Restaurants

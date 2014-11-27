@@ -60,7 +60,11 @@
 		}
 
 		function editRestaurant(id, restaurant) {
-			return $http.put(baseUrl, '/api/restaurants/' + id, restaurant)
+			var data = {
+				id: id,
+				restaurant: restaurant
+			}
+			return $http.put(baseUrl + '/api/restaurants/' + id, restaurant)
 			.then(editRestaurantComplete)
 				.catch(function (message) {
 					exception.catcher('XHR Failed for editRestaurant')(message);
