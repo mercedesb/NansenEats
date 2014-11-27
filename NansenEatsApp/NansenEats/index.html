@@ -6,24 +6,13 @@
 	<link rel="stylesheet" href="app/css/app.css" />
 </head>
 <body>
+	<div ng-include="'/app/templates/nav.html'"></div>
 	
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container">
-				<button type="button" class="btn btn-default navbar-btn navbar-left pull-left visible-xs" data-toggle="offcanvas"><span class="icon-filter"></span></button>
-				<a class="navbar-brand" href="/#/">
-					<img alt="Brand" src="http://nansen.com/Global/Css/images/logoNansen.png" /> NansenEats
-				</a>
-			<button type="button" class="btn btn-default navbar-btn navbar-right pull-right"><span class="icon-lock"></span><span> Log in</span></button>
-		</div>
-	</nav>
 	<div class="container">
 		<div role="main" ng-view></div>
 
-		<footer>
-			<p>© By Mercedes Bernard &amp; Stellan Danald 2014</p>
-		</footer>
+		<div ng-include="'/app/templates/footer.html'"></div>
 	</div>
-	
 	<script src="Scripts/jquery-1.10.2.min.js"></script>
 
 	<script src="Scripts/angular.min.js"></script>
@@ -40,6 +29,5 @@
 
 	<script src="app/js/AppBundle.js"></script>
 	<script src="Scripts/offcanvas.js"></script>
-
 </body>
 </html>

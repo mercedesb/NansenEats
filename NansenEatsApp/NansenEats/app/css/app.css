@@ -1,4 +1,6 @@
-﻿p {
+﻿/* Basic Elements */
+
+p {
 	color: #333;
 	font-family: Arial, Verdana, sans-serif;
 	font-weight: normal;
@@ -40,6 +42,8 @@ ul {
 	padding: 0;
 }
 
+/* Text styling */
+
 .text-light {
 	color: #ccc;
 }
@@ -53,6 +57,8 @@ ul {
 	.highlight * {
 		color: white;
 	}
+
+/* List styling */
 
 ul.restaurants li > div {
 	text-overflow: ellipsis;
@@ -72,28 +78,6 @@ ul.restaurants li h4 {
 ul.restaurants li h4, ul.restaurants li p {
 	text-overflow: ellipsis;
 }
-
-.ratings {
-	background-color: #eee;
-	margin: 10px 0;
-	padding: 10px;
-}
-
-
-.navbar-brand > img {
-	display: inline;
-	margin-top: -9px;
-	margin-right: 5px;
-}
-
-.progress-bar-nansen {
-	background-image: -webkit-linear-gradient(top,#ec8245 0,#eb592f 100%);
-	background-image: -o-linear-gradient(top,#ec8245 0,#eb592f 100%);
-	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#eb592f));
-	background-image: linear-gradient(to bottom,#ec8245 0,#eb592f 100%);
-	background-color: #eb592f;
-}
-
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
@@ -115,6 +99,51 @@ ul.restaurants li h4, ul.restaurants li p {
 	background-color: #eee;
 	font-weight: bold;
 	color: #666;
+}
+
+
+
+.ratings {
+	background-color: #eee;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+/* navigation */
+
+.navbar-brand > img {
+	display: inline;
+	margin-top: -9px;
+	margin-right: 5px;
+}
+
+.circle-nav {
+	width: 100px;
+	height: 100px;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	color: #fff;
+	background-color: #ec8245;
+	font-weight: bold;
+	border-color: #eb592f;
+	text-shadow: 0 -1px 0 #eb592f;
+	background-image: -webkit-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image:      -o-linear-gradient(top, #ec8245 0%, #eb592f 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ec8245), to(#eb592f));
+	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
+	background-repeat: repeat-x;
+}
+
+/* custom elements */
+
+.progress-bar-nansen {
+	background-image: -webkit-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -o-linear-gradient(top,#ec8245 0,#eb592f 100%);
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#ec8245),to(#eb592f));
+	background-image: linear-gradient(to bottom,#ec8245 0,#eb592f 100%);
+	background-color: #eb592f;
 }
 
 .loading {
