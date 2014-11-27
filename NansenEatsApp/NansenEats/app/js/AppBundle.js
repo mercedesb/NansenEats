@@ -17,11 +17,19 @@
 		$routeProvider
 			.when("/", {
 				templateUrl: "app/templates/restaurantlist.html",
-				controller: "RestaurantsController as vm"
+				controller: "RestaurantListController as vm"
+			})
+			.when("/restaurant/new-restaurant", {
+				templateUrl: "app/templates/restaurantform.html",
+				controller: "AddRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid", {
 				templateUrl: "app/templates/restaurantdetails.html",
 				controller: "RestaurantDetailsController as vm"
+			})
+			.when("/restaurant/:restaurantid/edit", {
+				tempalteUrl: "app/templates/restaurantform.html",
+				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
 				templateUrl: "app/templates/addreview.html",
@@ -29,80 +37,6 @@
 			})
 			.otherwise({ redirectTo: "/" });
 	});
-})();
-///#source 1 1 /app/js/services/dataservice.js
-(function () {
-	'use strict';
-
-	angular
-		 .module('app')
-		 .factory('dataservice', dataservice);
-
-	dataservice.$inject = ['$http', '$location', 'exception'];
-
-	function dataservice($http, $location, exception) {
-		var baseUrl = "http://eatsapi.local";
-
-		var service = {
-			getRestaurants: getRestaurants,
-			getRestaurant: getRestaurant,
-			addRating: addRating,
-			addComment: addComment
-		};
-
-		return service;
-
-		function getRestaurants() {
-			return $http.get(baseUrl + '/api/restaurants')
-					.then(getRestaurantsComplete)
-					.catch(function (message) {
-						exception.catcher('XHR Failed for getRestaurants')(message);
-						$location.url('/');
-					});
-
-			function getRestaurantsComplete(data, status, headers, config) {
-				return data.data;
-			}
-		}
-
-		function getRestaurant(id) {
-			return $http.get(baseUrl + '/api/restaurants/' + id)
-			.then(getRestaurantComplete)
-					.catch(function (message) {
-						exception.catcher('XHR Failed for getRestaurant')(message);
-						$location.url('/');
-					});
-
-			function getRestaurantComplete(data, status, headers, config) {
-				return data.data;
-			}
-		}
-
-		function addRating(rating) {
-			return $http.post(baseUrl + '/api/rating', rating)
-			.then(addRatingComplete)
-				.catch(function (message) {
-					exception.catcher('XHR Failed for addRating')(message);
-					//$location.url('/#/restaurant/' + rating.RestaurantId + '/new-review');
-				});
-
-			function addRatingComplete(data, status, headers, config) {
-				return data.data;
-			}
-		}
-
-		function addComment(comment) {
-			return $http.post(baseUrl + '/api/comment', comment)
-				.then(addCommentComplete)
-					.catch(function (message) {
-						exception.catcher('XHR Failed for addComment')(message);
-					});
-
-			function addCommentComplete(data, status, headers, config) {
-				return data.data;
-			}
-		}
-	}
 })();
 ///#source 1 1 /app/js/core/exception.js
 (function () {
@@ -194,20 +128,120 @@
 	}
 
 })();
-///#source 1 1 /app/js/restaurants/restaurantController.js
+///#source 1 1 /app/js/services/dataservice.js
 (function () {
 	'use strict';
 
 	angular
 		 .module('app')
-		 .controller('RestaurantsController', RestaurantsController);
+		 .factory('dataservice', dataservice);
 
-	RestaurantsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	dataservice.$inject = ['$http', '$location', 'exception'];
 
-	function RestaurantsController($location, dataservice, logger, $routeParams) {
+	function dataservice($http, $location, exception) {
+		var baseUrl = "http://eatsapi.local";
+
+		var service = {
+			getRestaurants: getRestaurants,
+			getRestaurant: getRestaurant,
+			addRestaurant: addRestaurant,
+			editRestaurant: editRestaurant,
+			addRating: addRating,
+			addComment: addComment
+		};
+
+		return service;
+
+		function getRestaurants() {
+			return $http.get(baseUrl + '/api/restaurants')
+					.then(getRestaurantsComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for getRestaurants')(message);
+						$location.url('/');
+					});
+
+			function getRestaurantsComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function getRestaurant(id) {
+			return $http.get(baseUrl + '/api/restaurants/' + id)
+			.then(getRestaurantComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for getRestaurant')(message);
+						$location.url('/');
+					});
+
+			function getRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addRestaurant(restaurant) {
+			return $http.post(baseUrl + '/api/restaurants', restaurant)
+			.then(addRestaurantComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for addRestaurant')(message);
+				});
+
+			function addRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function editRestaurant(id, restaurant) {
+			return $http.put(baseUrl, '/api/restaurants/' + id, restaurant)
+			.then(editRestaurantComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for editRestaurant')(message);
+				});
+
+			function editRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addRating(rating) {
+			return $http.post(baseUrl + '/api/rating', rating)
+			.then(addRatingComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for addRating')(message);
+					//$location.url('/#/restaurant/' + rating.RestaurantId + '/new-review');
+				});
+
+			function addRatingComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addComment(comment) {
+			return $http.post(baseUrl + '/api/comment', comment)
+				.then(addCommentComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for addComment')(message);
+					});
+
+			function addCommentComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+	}
+})();
+///#source 1 1 /app/js/restaurants/restaurantListController.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .controller('RestaurantListController', RestaurantListController);
+
+	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+
+	function RestaurantListController($location, dataservice, logger, $routeParams) {
 		/* jshint validthis:true */
 		var vm = this;
-		vm.title = 'RestaurantsController';
+		vm.title = 'RestaurantListController';
 		vm.restaurants = [];
 
 		activate();
@@ -303,7 +337,101 @@
 	}
 })();
 
-///#source 1 1 /app/js/reviews/addreview.js
+///#source 1 1 /app/js/restaurants/addRestaurantController.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .controller('AddRestaurantController', AddRestaurantController);
+
+	AddRestaurantController.$inject = ['$location', 'dataservice', 'logger'];
+
+	function AddRestaurantController($location, dataservice, logger) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'AddRestaurantController';
+		vm.restaurant = {};
+		vm.handleRestaurant = addRestaurant;
+
+		activate();
+
+		function activate() {
+			//            Using a resolver on all routes or dataservice.ready in every controller
+			//            var promises = [getAvengers()];
+			//            return dataservice.ready(promises).then(function(){
+			setupNewRestaurant();
+		}
+
+		function setupNewRestaurant() {
+			vm.restaurant.city = 'Chicago';
+		}
+
+		function addRestaurant() {
+			if (!vm.restaurant) {
+				return;
+			}
+			dataservice.addRestaurant(vm.restaurant).then(function (data) {
+				if (data) {
+					$location.url('/restaurant/' + data.Id);
+				}
+				else {
+					vm.restaurant = {};
+					//handle exception (show error or something)
+				}
+			});
+		}
+	}
+})();
+
+///#source 1 1 /app/js/restaurants/editRestaurantController.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .controller('EditRestaurantController', EditRestaurantController);
+
+	EditRestaurantController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+
+	function EditRestaurantController($location, dataservice, logger, $routeParams) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'EditRestaurantController';
+		vm.restaurant = {};
+		vm.handleRestaurant = editRestaurant;
+
+		activate();
+
+		function activate() {
+			//            Using a resolver on all routes or dataservice.ready in every controller
+			//            var promises = [getAvengers()];
+			//            return dataservice.ready(promises).then(function(){
+			vm.restaurantId = $routeParams.restaurantid;
+			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
+				vm.restaurant = data;
+				return vm.restaurant;
+			});
+		}
+
+		function editRestaurant() {
+			if (!vm.restaurant) {
+				return;
+			}
+			dataservice.editRestaurant(vm.restaurantId, vm.restaurant).then(function (data) {
+				if (data) {
+					$location.url('/restaurant/' + data.Id);
+				}
+				else {
+					vm.restaurant = {};
+					//handle exception (show error or something)
+				}
+			});
+		}
+	}
+})();
+
+///#source 1 1 /app/js/reviews/addReviewController.js
 (function () {
 	'use strict';
 

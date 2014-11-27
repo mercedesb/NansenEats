@@ -13,6 +13,8 @@
 		var service = {
 			getRestaurants: getRestaurants,
 			getRestaurant: getRestaurant,
+			addRestaurant: addRestaurant,
+			editRestaurant: editRestaurant,
 			addRating: addRating,
 			addComment: addComment
 		};
@@ -41,6 +43,30 @@
 					});
 
 			function getRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function addRestaurant(restaurant) {
+			return $http.post(baseUrl + '/api/restaurants', restaurant)
+			.then(addRestaurantComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for addRestaurant')(message);
+				});
+
+			function addRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function editRestaurant(id, restaurant) {
+			return $http.put(baseUrl, '/api/restaurants/' + id, restaurant)
+			.then(editRestaurantComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for editRestaurant')(message);
+				});
+
+			function editRestaurantComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}

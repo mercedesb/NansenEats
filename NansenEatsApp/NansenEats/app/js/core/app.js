@@ -16,11 +16,19 @@
 		$routeProvider
 			.when("/", {
 				templateUrl: "app/templates/restaurantlist.html",
-				controller: "RestaurantsController as vm"
+				controller: "RestaurantListController as vm"
+			})
+			.when("/restaurant/new-restaurant", {
+				templateUrl: "app/templates/restaurantform.html",
+				controller: "AddRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid", {
 				templateUrl: "app/templates/restaurantdetails.html",
 				controller: "RestaurantDetailsController as vm"
+			})
+			.when("/restaurant/:restaurantid/edit", {
+				tempalteUrl: "app/templates/restaurantform.html",
+				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
 				templateUrl: "app/templates/addreview.html",

@@ -54,10 +54,13 @@
     <Content Include="app\js\core\logger.js" />
     <Content Include="app\js\core\exception.js" />
     <Content Include="app\js\km-listview.js" />
-    <Content Include="app\js\restaurants\restaurantController.js" />
+    <Content Include="app\js\restaurants\addRestaurantController.js" />
+    <Content Include="app\js\restaurants\editRestaurantController.js" />
+    <Content Include="app\js\restaurants\restaurantListController.js" />
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
-    <Content Include="app\js\reviews\addreview.js" />
+    <Content Include="app\js\reviews\addReviewController.js" />
     <Content Include="app\js\services\dataservice.js" />
+    <Content Include="app\templates\restaurantform.html" />
     <Content Include="app\templates\addreview.html" />
     <Content Include="app\templates\restaurantdetails.html" />
     <Content Include="app\templates\restaurantlist.html" />

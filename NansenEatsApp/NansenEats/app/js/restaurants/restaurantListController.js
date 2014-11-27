@@ -3,14 +3,14 @@
 
 	angular
 		 .module('app')
-		 .controller('RestaurantsController', RestaurantsController);
+		 .controller('RestaurantListController', RestaurantListController);
 
-	RestaurantsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
 
-	function RestaurantsController($location, dataservice, logger, $routeParams) {
+	function RestaurantListController($location, dataservice, logger, $routeParams) {
 		/* jshint validthis:true */
 		var vm = this;
-		vm.title = 'RestaurantsController';
+		vm.title = 'RestaurantListController';
 		vm.restaurants = [];
 
 		activate();
