@@ -14,6 +14,7 @@
 		vm.rating = {};
 		vm.comment = {};
 		vm.addReview = addReview;
+		vm.availableTags = [];
 
 		activate();
 
@@ -27,6 +28,14 @@
 		function setupNewReview() {
 			vm.rating.RestaurantId = $routeParams.restaurantid;
 			vm.comment.RestaurantId = $routeParams.restaurantid;
+			dataservice.getTags().then(function (data) {
+				if (data) {
+					vm.availableTags = data.map(function (item) {
+						return item.Name;
+					});
+				}
+				
+			});
 		}
 
 		function addReview() {

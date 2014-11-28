@@ -42,6 +42,14 @@ ul {
 	padding: 0;
 }
 
+a:hover {
+	text-decoration: none;
+}
+
+a:hover * {
+	color: #222;
+}
+
 /* Text styling */
 
 .text-light {
@@ -117,7 +125,8 @@ ul.restaurants li h4, ul.restaurants li p {
 	margin-right: 5px;
 }
 
-.circle-nav {
+/*.circle-nav {
+	display:inline-block;
 	width: 100px;
 	height: 100px;
 	-moz-border-radius: 50px;
@@ -134,7 +143,7 @@ ul.restaurants li h4, ul.restaurants li p {
 	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
 	background-repeat: repeat-x;
-}
+}*/
 
 /* custom elements */
 

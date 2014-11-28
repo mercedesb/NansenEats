@@ -146,6 +146,7 @@
 			getRestaurant: getRestaurant,
 			addRestaurant: addRestaurant,
 			editRestaurant: editRestaurant,
+			getTags: getTags,
 			addRating: addRating,
 			addComment: addComment
 		};
@@ -202,6 +203,19 @@
 				});
 
 			function editRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function getTags() {
+			return $http.get(baseUrl + '/api/categories')
+					.then(getTagsComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for getTags')(message);
+						$location.url('/');
+					});
+
+			function getTagsComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}
@@ -450,6 +464,7 @@
 		vm.rating = {};
 		vm.comment = {};
 		vm.addReview = addReview;
+		vm.availableTags = [];
 
 		activate();
 
@@ -463,6 +478,14 @@
 		function setupNewReview() {
 			vm.rating.RestaurantId = $routeParams.restaurantid;
 			vm.comment.RestaurantId = $routeParams.restaurantid;
+			dataservice.getTags().then(function (data) {
+				if (data) {
+					vm.availableTags = data.map(function (item) {
+						return item.Name;
+					});
+				}
+				
+			});
 		}
 
 		function addReview() {
