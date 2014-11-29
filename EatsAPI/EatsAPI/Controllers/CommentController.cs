@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EatsAPI.Models;
@@ -100,15 +97,17 @@ namespace EatsAPI.Controllers
 
 		// DELETE: api/Comment/5
 		[ResponseType(typeof(CommentDto))]
-		public IHttpActionResult DeleteCommentDto(int id)
+		public IHttpActionResult DeleteComment(int id)
 		{
-			CommentDto commentDto = db.CommentDtoes.Find(id);
-			if (commentDto == null)
+			Comment comment = db.Comments.Find(id);
+			if (comment == null)
 			{
 				return NotFound();
 			}
 
-			db.CommentDtoes.Remove(commentDto);
+			CommentDto commentDto = Mapper.Map<Comment, CommentDto>(comment);
+
+			db.Comments.Remove(comment);
 			db.SaveChanges();
 
 			return Ok(commentDto);
