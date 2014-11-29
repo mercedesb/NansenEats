@@ -20,6 +20,7 @@ namespace EatsAPI.Models.DBModels
 
 		#region Navigational properties
 		public virtual Restaurant Restaurant { get; set; }
+		//public virtual UserProfile CreatedBy { get; set; }
 		#endregion
 	}
 }

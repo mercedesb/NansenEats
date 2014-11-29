@@ -9,6 +9,7 @@ using EatsAPI.Models;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.DtoModels;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace EatsAPI.Controllers
 {
@@ -37,6 +38,7 @@ namespace EatsAPI.Controllers
 		}
 
 		// PUT: api/Restaurants/5
+		[Authorize]
 		[ResponseType(typeof(void))]
 		public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
 		{
@@ -72,6 +74,7 @@ namespace EatsAPI.Controllers
 		}
 
 		// POST: api/Restaurants
+		[Authorize]
 		[ResponseType(typeof(Restaurant))]
 		public IHttpActionResult PostRestaurant(Restaurant restaurant)
 		{
@@ -80,6 +83,11 @@ namespace EatsAPI.Controllers
 				return BadRequest(ModelState);
 			}
 
+			//var currentUserId = User.Identity.GetUserId();
+			//var user = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+
+			//if (user != null) restaurant.CreatedBy = user;
+
 			db.Restaurants.Add(restaurant);
 			db.SaveChanges();
 
@@ -87,6 +95,7 @@ namespace EatsAPI.Controllers
 		}
 
 		// DELETE: api/Restaurants/5
+		[Authorize]
 		[ResponseType(typeof(Restaurant))]
 		public IHttpActionResult DeleteRestaurant(int id)
 		{

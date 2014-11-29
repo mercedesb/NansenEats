@@ -42,6 +42,7 @@ namespace EatsAPI.Models.DBModels
 		#region Navigational Properties
 		public virtual ICollection<Rating> Ratings { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
+		public virtual UserProfile CreatedBy { get; set; }
 		#endregion
 	}
 }

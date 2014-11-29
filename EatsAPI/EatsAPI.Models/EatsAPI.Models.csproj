@@ -44,6 +44,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.1.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -83,6 +89,8 @@
     <Compile Include="DBModels\Comment.cs" />
     <Compile Include="DBModels\Rating.cs" />
     <Compile Include="DBModels\Restaurant.cs" />
+    <Compile Include="DBModels\UserProfile.cs" />
+    <Compile Include="DtoModels\UserModel.cs" />
     <Compile Include="DtoModels\RestaurantDto.cs" />
     <Compile Include="EatsContext.cs" />
     <Compile Include="Initialization\EatsDbInitializer.cs" />
@@ -92,6 +100,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\AuthRepository.cs" />
     <Compile Include="Repository\BaseEditableRepository.cs" />
     <Compile Include="Repository\BaseReadOnlyRepository.cs" />
     <Compile Include="Repository\IEditableRepository.cs" />
