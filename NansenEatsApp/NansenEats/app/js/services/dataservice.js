@@ -15,6 +15,7 @@
 			getRestaurant: getRestaurant,
 			addRestaurant: addRestaurant,
 			editRestaurant: editRestaurant,
+			getTags: getTags,
 			addRating: addRating,
 			addComment: addComment
 		};
@@ -60,13 +61,30 @@
 		}
 
 		function editRestaurant(id, restaurant) {
-			return $http.put(baseUrl, '/api/restaurants/' + id, restaurant)
+			var data = {
+				id: id,
+				restaurant: restaurant
+			}
+			return $http.put(baseUrl + '/api/restaurants/' + id, restaurant)
 			.then(editRestaurantComplete)
 				.catch(function (message) {
 					exception.catcher('XHR Failed for editRestaurant')(message);
 				});
 
 			function editRestaurantComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function getTags() {
+			return $http.get(baseUrl + '/api/categories')
+					.then(getTagsComplete)
+					.catch(function (message) {
+						exception.catcher('XHR Failed for getTags')(message);
+						$location.url('/');
+					});
+
+			function getTagsComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}

@@ -14,6 +14,7 @@
 		vm.rating = {};
 		vm.comment = {};
 		vm.addReview = addReview;
+		vm.availableTags = [];
 
 		activate();
 
@@ -25,8 +26,16 @@
 		}
 
 		function setupNewReview() {
-			vm.rating.RestaurantId = $routeParams.restaurantid
+			vm.rating.RestaurantId = $routeParams.restaurantid;
 			vm.comment.RestaurantId = $routeParams.restaurantid;
+			dataservice.getTags().then(function (data) {
+				if (data) {
+					vm.availableTags = data.map(function (item) {
+						return item.Name;
+					});
+				}
+				
+			});
 		}
 
 		function addReview() {
@@ -40,13 +49,11 @@
 							$location.url('/restaurant/' + $routeParams.restaurantid);
 						}
 					});
-				}
-				else {
+				} else {
 					if (data) {
 						$location.url('/restaurant/' + $routeParams.restaurantid);
-					}
-					else {
-						vm.rating.RestaurantId = $routeParams.restaurantid
+					} else {
+						vm.rating.RestaurantId = $routeParams.restaurantid;
 						vm.comment.RestaurantId = $routeParams.restaurantid;
 						//handle exception (show error or something)
 					}

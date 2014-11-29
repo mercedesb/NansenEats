@@ -1,5 +1,6 @@
 ﻿<div class="row">
-	<div class="col-md-12 highlight">
+	<loader loadedproperty="vm.restaurant.Name"></loader>
+	<div class="col-md-12 highlight" ng-show="vm.restaurant.Name">
 		<h4>{{vm.restaurant.Name}}</h4>
 		<p>{{vm.restaurant.Address}}</p>
 		<a href="#/restaurant/{{vm.restaurant.Id}}/new-review">Add Review</a> | 
@@ -7,7 +8,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-push-8 col-md-3">
+		<div class="col-md-push-8 col-md-3" ng-show="vm.restaurant.Ratings.length">
 			<ul class="ratings">
 				<li ng-repeat="rating in vm.restaurant.Ratings">
 					<div>
@@ -29,7 +30,6 @@
 					</div>
 				</li>
 			</ul>
-
 		</div>
 	</div>
 </div>

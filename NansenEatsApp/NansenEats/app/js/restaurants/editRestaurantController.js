@@ -34,9 +34,7 @@
 			dataservice.editRestaurant(vm.restaurantId, vm.restaurant).then(function (data) {
 				if (data) {
 					$location.url('/restaurant/' + data.Id);
-				}
-				else {
-					vm.restaurant = {};
+				} else {
 					//handle exception (show error or something)
 				}
 			});

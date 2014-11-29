@@ -27,7 +27,7 @@
 				controller: "RestaurantDetailsController as vm"
 			})
 			.when("/restaurant/:restaurantid/edit", {
-				tempalteUrl: "app/templates/restaurantform.html",
+				templateUrl: "app/templates/restaurantform.html",
 				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
