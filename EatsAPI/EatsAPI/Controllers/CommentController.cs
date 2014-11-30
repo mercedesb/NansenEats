@@ -38,7 +38,7 @@ namespace EatsAPI.Controllers
 
 		// PUT: api/Comment/5
 		[ResponseType(typeof(void))]
-		public IHttpActionResult PutCommentDto(int id, CommentDto commentDto)
+		public IHttpActionResult PutComment(int id, CommentDto commentDto)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -50,7 +50,9 @@ namespace EatsAPI.Controllers
 				return BadRequest();
 			}
 
-			db.Entry(commentDto).State = EntityState.Modified;
+			Comment comment = Mapper.Map<CommentDto, Comment>(commentDto);
+			comment.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == commentDto.RestaurantId);
+			db.Entry(comment).State = EntityState.Modified;
 
 			try
 			{
@@ -68,7 +70,7 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return StatusCode(HttpStatusCode.NoContent);
+			return Ok(Mapper.Map<Comment, CommentDto>(comment));
 		}
 
 		// POST: api/Comment

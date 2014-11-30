@@ -39,7 +39,7 @@ namespace EatsAPI.Controllers
 
 		// PUT: api/Rating/5
 		[ResponseType(typeof(void))]
-		public IHttpActionResult PutRatingDto(int id, RatingDto ratingDto)
+		public IHttpActionResult PutRating(int id, RatingDto ratingDto)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -50,8 +50,10 @@ namespace EatsAPI.Controllers
 			{
 				return BadRequest();
 			}
+			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
+			rating.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == ratingDto.RestaurantId);
 
-			db.Entry(ratingDto).State = EntityState.Modified;
+			db.Entry(rating).State = EntityState.Modified;
 
 			try
 			{
@@ -68,8 +70,7 @@ namespace EatsAPI.Controllers
 					throw;
 				}
 			}
-
-			return StatusCode(HttpStatusCode.NoContent);
+			return Ok(Mapper.Map<Rating, RatingDto>(rating));
 		}
 
 		// POST: api/Rating

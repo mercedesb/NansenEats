@@ -32,8 +32,16 @@
 				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
-				templateUrl: "app/templates/addreview.html",
+				templateUrl: "app/templates/reviewForm.html",
 				controller: "AddReviewController as vm"
+			})
+			.when("/rating/:ratingid/edit", {
+				templateUrl: "app/templates/reviewForm.html",
+				controller: "EditRatingController as vm"
+			})
+			.when("/comment/:commentid/edit", {
+				templateUrl: "app/templates/reviewForm.html",
+				controller: "EditCommentController as vm"
 			})
 			.otherwise({ redirectTo: "/" });
 	});
@@ -147,8 +155,12 @@
 			addRestaurant: addRestaurant,
 			editRestaurant: editRestaurant,
 			getTags: getTags,
+			getRating: getRating,
 			addRating: addRating,
-			addComment: addComment
+			editRating: editRating,
+			getComment: getComment,
+			addComment: addComment,
+			editComment: editComment
 		};
 
 		return service;
@@ -192,10 +204,6 @@
 		}
 
 		function editRestaurant(id, restaurant) {
-			var data = {
-				id: id,
-				restaurant: restaurant
-			}
 			return $http.put(baseUrl + '/api/restaurants/' + id, restaurant)
 			.then(editRestaurantComplete)
 				.catch(function (message) {
@@ -220,6 +228,19 @@
 			}
 		}
 
+		function getRating(id) {
+			return $http.get(baseUrl + '/api/rating/' + id)
+			.then(getRatingComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for getRating')(message);
+					$location.url('/');
+				});
+
+			function getRatingComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
 		function addRating(rating) {
 			return $http.post(baseUrl + '/api/rating', rating)
 			.then(addRatingComplete)
@@ -233,6 +254,31 @@
 			}
 		}
 
+		function editRating(id, rating) {
+			return $http.put(baseUrl + '/api/rating/' + id, rating)
+			.then(editRatingComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for editRating')(message);
+				});
+
+			function editRatingComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function getComment(id) {
+			return $http.get(baseUrl + '/api/comment/' + id)
+			.then(getCommentComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for getComment')(message);
+					$location.url('/');
+				});
+
+			function getCommentComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
 		function addComment(comment) {
 			return $http.post(baseUrl + '/api/comment', comment)
 				.then(addCommentComplete)
@@ -241,6 +287,18 @@
 					});
 
 			function addCommentComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function editComment(id, comment) {
+			return $http.put(baseUrl + '/api/comment/' + id, comment)
+			.then(editCommentComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for editComment')(message);
+				});
+
+			function editCommentComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}
@@ -463,7 +521,9 @@
 		vm.title = 'AddReviewController';
 		vm.rating = {};
 		vm.comment = {};
-		vm.addReview = addReview;
+		vm.handleReview = addReview;
+		vm.showComment = true;
+		vm.showRating = true;
 		vm.availableTags = [];
 
 		activate();
@@ -507,6 +567,100 @@
 						vm.comment.RestaurantId = $routeParams.restaurantid;
 						//handle exception (show error or something)
 					}
+				}
+			});
+		}
+	}
+})();
+
+///#source 1 1 /app/js/reviews/editRatingController.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .controller('EditRatingController', EditRatingController);
+
+	EditRatingController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+
+	function EditRatingController($location, dataservice, logger, $routeParams) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'EditRatingController';
+		vm.rating = {};
+		vm.handleReview = editRating;
+		vm.showComment = false;
+		vm.showRating = true;
+
+		activate();
+
+		function activate() {
+			//            Using a resolver on all routes or dataservice.ready in every controller
+			//            var promises = [getAvengers()];
+			//            return dataservice.ready(promises).then(function(){
+			vm.ratingId = $routeParams.ratingid;
+			return dataservice.getRating(vm.ratingId).then(function (data) {
+				vm.rating = data;
+				return vm.rating;
+			});
+		}
+
+		function editRating() {
+			if (!vm.rating) {
+				return;
+			}
+			dataservice.editRating(vm.ratingId, vm.rating).then(function (data) {
+				if (data) {
+					$location.url('/restaurant/' + data.RestaurantId);
+				} else {
+					//handle exception (show error or something)
+				}
+			});
+		}
+	}
+})();
+
+///#source 1 1 /app/js/reviews/editCommentController.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .controller('EditCommentController', EditCommentController);
+
+	EditCommentController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+
+	function EditCommentController($location, dataservice, logger, $routeParams) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'EditCommentController';
+		vm.rating = {};
+		vm.handleReview = editComment;
+		vm.showComment = true;
+		vm.showRating = false;
+
+		activate();
+
+		function activate() {
+			//            Using a resolver on all routes or dataservice.ready in every controller
+			//            var promises = [getAvengers()];
+			//            return dataservice.ready(promises).then(function(){
+			vm.commentId = $routeParams.commentid;
+			return dataservice.getComment(vm.commentId).then(function (data) {
+				vm.comment = data;
+				return vm.comment;
+			});
+		}
+
+		function editComment() {
+			if (!vm.comment) {
+				return;
+			}
+			dataservice.editComment(vm.commentId, vm.comment).then(function (data) {
+				if (data) {
+					$location.url('/restaurant/' + data.RestaurantId);
+				} else {
+					//handle exception (show error or something)
 				}
 			});
 		}

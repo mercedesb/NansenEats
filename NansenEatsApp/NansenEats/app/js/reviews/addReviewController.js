@@ -13,7 +13,9 @@
 		vm.title = 'AddReviewController';
 		vm.rating = {};
 		vm.comment = {};
-		vm.addReview = addReview;
+		vm.handleReview = addReview;
+		vm.showComment = true;
+		vm.showRating = true;
 		vm.availableTags = [];
 
 		activate();

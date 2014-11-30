@@ -50,6 +50,10 @@ a:hover * {
 	color: #222;
 }
 
+img {
+	max-width:100%;
+}
+
 /* Text styling */
 
 .text-light {
@@ -115,6 +119,14 @@ ul.restaurants li h4, ul.restaurants li p {
 	background-color: #eee;
 	margin: 10px 0;
 	padding: 10px;
+}
+
+.ratings .rating {
+	width:80%;
+}
+
+.comments li {
+	margin: 10px 0 0;
 }
 
 /* navigation */

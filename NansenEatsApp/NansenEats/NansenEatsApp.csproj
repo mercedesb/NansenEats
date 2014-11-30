@@ -59,11 +59,15 @@
     <Content Include="app\js\restaurants\restaurantListController.js" />
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
     <Content Include="app\js\reviews\addReviewController.js" />
+    <Content Include="app\js\reviews\editCommentController.js" />
+    <Content Include="app\js\reviews\editRatingController.js" />
     <Content Include="app\js\services\dataservice.js" />
+    <Content Include="app\templates\commentFormFields.html" />
     <Content Include="app\templates\footer.html" />
     <Content Include="app\templates\nav.html" />
+    <Content Include="app\templates\ratingFormFields.html" />
     <Content Include="app\templates\restaurantform.html" />
-    <Content Include="app\templates\addreview.html" />
+    <Content Include="app\templates\reviewForm.html" />
     <Content Include="app\templates\restaurantdetails.html" />
     <Content Include="app\templates\restaurantlist.html" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -83,6 +87,7 @@
     <Content Include="Content\Default\sprite_kpi.png" />
     <Content Include="Content\Default\sprite_kpi_2x.png" />
     <Content Include="Content\images\loading.GIF" />
+    <Content Include="Content\images\placeholder.jpg" />
     <Content Include="Content\kendo.common.core.css" />
     <Content Include="Content\kendo.common.core.min.css" />
     <Content Include="Content\kendo.default.css" />

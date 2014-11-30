@@ -31,8 +31,16 @@
 				controller: "EditRestaurantController as vm"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
-				templateUrl: "app/templates/addreview.html",
+				templateUrl: "app/templates/reviewForm.html",
 				controller: "AddReviewController as vm"
+			})
+			.when("/rating/:ratingid/edit", {
+				templateUrl: "app/templates/reviewForm.html",
+				controller: "EditRatingController as vm"
+			})
+			.when("/comment/:commentid/edit", {
+				templateUrl: "app/templates/reviewForm.html",
+				controller: "EditCommentController as vm"
 			})
 			.otherwise({ redirectTo: "/" });
 	});
