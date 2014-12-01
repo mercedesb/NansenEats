@@ -1,13 +1,29 @@
 ﻿<div class="row">
 	<loader loadedproperty="vm.restaurant.Name"></loader>
-	<div class="col-md-12 highlight" ng-show="vm.restaurant.Name">
-		<h4>{{vm.restaurant.Name}}</h4>
-		<p>{{vm.restaurant.Address}}</p>
-		<a href="#/restaurant/{{vm.restaurant.Id}}/new-review">Add Review</a> | 
-		<a href="#/restaurant/{{vm.restaurant.Id}}/edit">Edit Restaurant</a>
-	</div>
+	<div class="col-md-12" ng-show="vm.restaurant.Name" style="max-height:">
+		<div class="col-lg-8">
+			<img src="/Content/images/placeholder.jpg" />
+		</div>
+		<div class="col-lg-4">
+			<div class="col-lg-6">
+				<h4>{{vm.restaurant.Name}}</h4>
+			</div>
+			<div class="col-lg-6">
+				<h4>{{vm.restaurant.AverageRating}}/10</h4>
 
-	<div class="row">
+			</div>
+			<div class="col-lg-12">
+
+				<p>{{vm.restaurant.Address}}</p>
+				<a href="#/restaurant/{{vm.restaurant.Id}}/new-review">Add Review</a> |
+				<a href="#/restaurant/{{vm.restaurant.Id}}/edit">Edit Restaurant</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
 		<div class="col-md-push-8 col-md-3" ng-show="vm.restaurant.Ratings.length">
 			<ul class="ratings">
 				<li ng-repeat="rating in vm.restaurant.Ratings">
@@ -15,6 +31,8 @@
 						<h6 class="pull-left">User Name</h6>
 						<h6 class="pull-right">{{rating.Value}}/10</h6>
 						<div class="clearfix"></div>
+						<p ng-show="rating.TagNames" class="rating"><span class="icon-tags text-light"></span> {{rating.TagNames}}</p>
+						<a href="/#/rating/{{rating.Id}}/edit">Edit</a>
 					</div>
 				</li>
 			</ul>
@@ -23,9 +41,12 @@
 			<ul class="comments">
 				<li ng-repeat="comment in vm.restaurant.Comments">
 					<div>
-						<h6><span class="icon-bubble text-light"></span> {{comment.Value}}</h6>
-						<p class="pull-left"><span class="icon-tags text-light"></span> comma-separated,tags,here,with,icon,styling</p>
-						<p class="pull-right">User Name - {{comment.CreatedDate | date:'yyyy-MMM-dd'}}</p>
+						<p> <span class="icon-bubble text-light"></span> User Name says</p>
+						<h6>{{comment.Value}}</h6>
+						<p class="pull-right">
+							{{comment.CreatedDate | date:'yyyy-MMM-dd'}}
+							<a href="/#/comment/{{comment.Id}}/edit">Edit</a>
+						</p>
 						<div class="clearfix"></div>
 					</div>
 				</li>

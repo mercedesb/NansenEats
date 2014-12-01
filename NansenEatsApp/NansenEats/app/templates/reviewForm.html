@@ -1,0 +1,8 @@
+﻿<div class="row">
+	<form ng-submit="vm.handleReview()">
+		<div ng-include="'/app/templates/ratingFormFields.html'" ng-show="vm.showRating"></div>
+		<div ng-include="'/app/templates/commentFormFields.html'" ng-show="vm.showComment"></div>
+		<input type="submit" value="Submit" />
+	</form>
+</div>
+

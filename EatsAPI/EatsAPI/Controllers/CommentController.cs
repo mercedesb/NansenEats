@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using EatsAPI.Models;
+using EatsAPI.Models.DBModels;
+using EatsAPI.Models.DtoModels;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using EatsAPI.Models;
-using EatsAPI.Models.DtoModels;
-using AutoMapper;
-using EatsAPI.Models.DBModels;
 
 namespace EatsAPI.Controllers
 {
@@ -38,7 +37,7 @@ namespace EatsAPI.Controllers
 
 		// PUT: api/Comment/5
 		[ResponseType(typeof(void))]
-		public IHttpActionResult PutCommentDto(int id, CommentDto commentDto)
+		public IHttpActionResult PutComment(int id, CommentDto commentDto)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -50,7 +49,9 @@ namespace EatsAPI.Controllers
 				return BadRequest();
 			}
 
-			db.Entry(commentDto).State = EntityState.Modified;
+			Comment comment = Mapper.Map<CommentDto, Comment>(commentDto);
+			comment.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == commentDto.RestaurantId);
+			db.Entry(comment).State = EntityState.Modified;
 
 			try
 			{
@@ -68,7 +69,7 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return StatusCode(HttpStatusCode.NoContent);
+			return Ok(Mapper.Map<Comment, CommentDto>(comment));
 		}
 
 		// POST: api/Comment

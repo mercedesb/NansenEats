@@ -24,5 +24,8 @@
 		<file>/app/js/restaurants/addRestaurantController.js</file>
 		<file>/app/js/restaurants/editRestaurantController.js</file>
 		<file>/app/js/reviews/addReviewController.js</file>
+		<file>/app/js/reviews/editRatingController.js</file>
+		<file>/app/js/reviews/editCommentController.js</file>
+		
 	</files>
 </bundle>
