@@ -39,20 +39,20 @@ namespace EatsAPI
 			app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
 			//app.UseMicrosoftAccountAuthentication(
-			//    clientId: "",
-			//    clientSecret: "");
+			//    clientId: "000000004C12F7A1",
+			//    clientSecret: "0fEqAF3pqQTp6PM8DUOMJ0iuNw7GBaDC");
 
 			//app.UseTwitterAuthentication(
 			//   consumerKey: "",
 			//   consumerSecret: "");
 
 			//app.UseFacebookAuthentication(
-			//   appId: "",
-			//   appSecret: "");
+			//   appId: "399151880243548",
+			//   appSecret: "29daf2c4fc5c8c822d455b71ba8dd989");
 
-			app.UseGoogleAuthentication(
-				clientId: "845690146160-t1n5pde1l17tf1oriq153r7u5f2sqfgf.apps.googleusercontent.com",
-				clientSecret: "J64tsYKiWZZ9hX-PH0DP3q_s");
+			//app.UseGoogleAuthentication(
+			//	clientId: "845690146160-t1n5pde1l17tf1oriq153r7u5f2sqfgf.apps.googleusercontent.com",
+			//	clientSecret: "J64tsYKiWZZ9hX-PH0DP3q_s");
 
 		}
 	}
