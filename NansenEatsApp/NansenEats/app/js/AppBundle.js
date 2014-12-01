@@ -497,6 +497,8 @@
 
 		vm.registration = {
 			userName: "",
+			displayName: "",
+			email: "",
 			password: "",
 			confirmPassword: ""
 		};
