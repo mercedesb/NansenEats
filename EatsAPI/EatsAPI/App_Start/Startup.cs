@@ -38,6 +38,22 @@ namespace EatsAPI
 			app.UseOAuthAuthorizationServer(OAuthServerOptions);
 			app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
+			//app.UseMicrosoftAccountAuthentication(
+			//    clientId: "",
+			//    clientSecret: "");
+
+			//app.UseTwitterAuthentication(
+			//   consumerKey: "",
+			//   consumerSecret: "");
+
+			//app.UseFacebookAuthentication(
+			//   appId: "",
+			//   appSecret: "");
+
+			app.UseGoogleAuthentication(
+				clientId: "845690146160-t1n5pde1l17tf1oriq153r7u5f2sqfgf.apps.googleusercontent.com",
+				clientSecret: "J64tsYKiWZZ9hX-PH0DP3q_s");
+
 		}
 	}
 }

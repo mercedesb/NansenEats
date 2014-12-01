@@ -9,14 +9,22 @@
 		 // Custom modules 
 
 		 // 3rd Party Modules
-
+		'LocalStorageModule'
 	]);
 
-	app.config(function ($routeProvider) {
+	app.config(function($routeProvider) {
 		$routeProvider
 			.when("/", {
 				templateUrl: "app/templates/restaurantlist.html",
 				controller: "RestaurantListController as vm"
+			})
+			.when("/login", {
+				templateUrl: "app/templates/login.html",
+				controller: "LoginController as vm"
+			})
+			.when("/signup", {
+				templateUrl: "app/templates/signup.html",
+				controller: "SignupController as vm"
 			})
 			.when("/restaurant/new-restaurant", {
 				templateUrl: "app/templates/restaurantform.html",
@@ -36,4 +44,11 @@
 			})
 			.otherwise({ redirectTo: "/" });
 	});
+
+	app.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
+		localStorageServiceProvider.setPrefix('app');
+	}]);
+	//.config(function ($httpProvider) {
+	//	$httpProvider.interceptors.push('authInterceptorService');
+	//});
 })();

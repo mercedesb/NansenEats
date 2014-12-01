@@ -10,14 +10,22 @@
 		 // Custom modules 
 
 		 // 3rd Party Modules
-
+		'LocalStorageModule'
 	]);
 
-	app.config(function ($routeProvider) {
+	app.config(function($routeProvider) {
 		$routeProvider
 			.when("/", {
 				templateUrl: "app/templates/restaurantlist.html",
 				controller: "RestaurantListController as vm"
+			})
+			.when("/login", {
+				templateUrl: "app/templates/login.html",
+				controller: "LoginController as vm"
+			})
+			.when("/signup", {
+				templateUrl: "app/templates/signup.html",
+				controller: "SignupController as vm"
 			})
 			.when("/restaurant/new-restaurant", {
 				templateUrl: "app/templates/restaurantform.html",
@@ -37,6 +45,13 @@
 			})
 			.otherwise({ redirectTo: "/" });
 	});
+
+	app.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
+		localStorageServiceProvider.setPrefix('app');
+	}]);
+	//.config(function ($httpProvider) {
+	//	$httpProvider.interceptors.push('authInterceptorService');
+	//});
 })();
 ///#source 1 1 /app/js/core/exception.js
 (function () {
@@ -127,6 +142,133 @@
 		return directive;
 	}
 
+})();
+///#source 1 1 /app/js/services/authInterceptorService.js
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.factory('authInterceptorService', authInterceptorService);
+
+	authInterceptorService.$inject = ['$q', '$location', 'localStorageService'];
+
+	function authInterceptorService($q, $location, localStorageService) {
+
+		var authInterceptorServiceFactory = {};
+
+		var _request = function (config) {
+
+			config.headers = config.headers || {};
+
+			var authData = localStorageService.get('authorizationData');
+			if (authData) {
+				config.headers.Authorization = 'Bearer ' + authData.token;
+			}
+
+			return config;
+		}
+
+		var _responseError = function (rejection) {
+			if (rejection.status === 401) {
+				$location.path('/login');
+			}
+			return $q.reject(rejection);
+		}
+
+		authInterceptorServiceFactory.request = _request;
+		authInterceptorServiceFactory.responseError = _responseError;
+
+		return authInterceptorServiceFactory;
+	}
+})();
+///#source 1 1 /app/js/services/authService.js
+(function () {
+	'use strict';
+
+	angular
+		.module('app')
+		.factory('authService', authService);
+
+	authService.$inject = ['$http', '$q', 'localStorageService'];
+
+	function authService($http, $q, localStorageService) {
+
+		var serviceBase = 'http://eatsapi.local/';
+		var authServiceFactory = {};
+
+		var _authentication = {
+			isAuth: false,
+			userName: "",
+			userId: "",
+			userDisplayName: ""
+		};
+
+		var _saveRegistration = function (registration) {
+
+			_logOut();
+
+			return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
+				return response;
+			});
+
+		};
+
+		var _login = function (loginData) {
+
+			var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+
+			var deferred = $q.defer();
+
+			$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+
+				localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+
+				_authentication.isAuth = true;
+				_authentication.userName = loginData.userName;
+
+				deferred.resolve(response);
+
+			}).error(function (err, status) {
+				_logOut();
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+
+		};
+
+		var _logOut = function () {
+
+			localStorageService.remove('authorizationData');
+
+			_authentication.isAuth = false;
+			_authentication.userName = "";
+			_authentication.userId = "";
+			_authentication.userDisplayName = "";
+
+		};
+
+		var _fillAuthData = function () {
+
+			var authData = localStorageService.get('authorizationData');
+			if (authData) {
+				_authentication.isAuth = true;
+				_authentication.userName = authData.userName;
+				_authentication.userId = authData.userId;
+				_authentication.userDisplayName = authData.userDisplayName;
+			}
+
+		}
+
+		authServiceFactory.saveRegistration = _saveRegistration;
+		authServiceFactory.login = _login;
+		authServiceFactory.logOut = _logOut;
+		authServiceFactory.fillAuthData = _fillAuthData;
+		authServiceFactory.authentication = _authentication;
+
+		return authServiceFactory;
+	}
 })();
 ///#source 1 1 /app/js/services/dataservice.js
 (function () {
@@ -245,6 +387,88 @@
 			}
 		}
 	}
+})();
+///#source 1 1 /app/js/login/loginController.js
+(function() {
+	'use strict';
+	angular
+		.module('app')
+		.controller('LoginController', LoginController);
+
+	LoginController.$inject = ['$location', 'authService'];
+
+	function LoginController($location, authService) {
+
+		var vm = this;
+		vm.loginData = {
+			userName: "",
+			password: ""
+		};
+
+		vm.message = "";
+
+		vm.login = function () {
+
+			authService.login(vm.loginData).then(function (response) {
+
+				$location.path('/');
+
+			},
+			 function (err) {
+			 	vm.message = err.error_description;
+			 });
+		};
+
+	};
+})();
+///#source 1 1 /app/js/signup/signupController.js
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.controller('SignupController', SignupController);
+
+	SignupController.$inject = ['$location', '$timeout', 'authService'];
+	
+	function SignupController($location, $timeout, authService) {
+		var vm = this;
+		vm.savedSuccessfully = false;
+		vm.message = "";
+
+		vm.registration = {
+			userName: "",
+			password: "",
+			confirmPassword: ""
+		};
+
+		vm.signUp = function () {
+
+			authService.saveRegistration(vm.registration).then(
+				function () {
+					vm.savedSuccessfully = true;
+					vm.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
+					startTimer();
+				},
+				function (response) {
+			 		var errors = [];
+			 		for (var key in response.data.modelState) {
+			 			for (var i = 0; i < response.data.modelState[key].length; i++) {
+			 				errors.push(response.data.modelState[key][i]);
+			 			}
+			 		}
+			 		vm.message = "Failed to register user due to:" + errors.join(' ');
+				}
+			);
+		};
+
+		var startTimer = function () {
+			var timer = $timeout(function () {
+				$timeout.cancel(timer);
+				$location.path('/login');
+			}, 2000);
+		}
+	};
 })();
 ///#source 1 1 /app/js/restaurants/restaurantListController.js
 (function () {
