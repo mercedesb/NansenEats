@@ -43,8 +43,8 @@ namespace EatsAPI
 			//    clientSecret: "0fEqAF3pqQTp6PM8DUOMJ0iuNw7GBaDC");
 
 			//app.UseTwitterAuthentication(
-			//   consumerKey: "",
-			//   consumerSecret: "");
+			//   consumerKey: "67CVHmxlVum3wH9Sh63Idvugo",
+			//   consumerSecret: "Z7ykWpoakZPr0pXlGGpZQLOa3Dwh004hOB5wzyvsxQ1VNFtfrR");
 
 			//app.UseFacebookAuthentication(
 			//   appId: "399151880243548",
