@@ -23,9 +23,25 @@
 			//            var promises = [getAvengers()];
 			//            return dataservice.ready(promises).then(function(){
 			vm.ratingId = $routeParams.ratingid;
-			return dataservice.getRating(vm.ratingId).then(function (data) {
+			dataservice.getRating(vm.ratingId).then(function (data) {
 				vm.rating = data;
 				return vm.rating;
+			});
+
+			dataservice.getTags().then(function (data) {
+				if (data) {
+					vm.availableTags = data.map(function (item) {
+						return item.Name;
+					});
+
+					//create AutoComplete UI component
+					$("#tags").kendoAutoComplete({
+						dataSource: vm.availableTags,
+						filter: "startswith",
+						separator: ", "
+					});
+				}
+
 			});
 		}
 

@@ -35,6 +35,10 @@
 					vm.availableTags = data.map(function (item) {
 						return item.Name;
 					});
+
+					vm.tags = new kendo.data.DataSource({
+						data: data
+					});
 				}
 				
 			});

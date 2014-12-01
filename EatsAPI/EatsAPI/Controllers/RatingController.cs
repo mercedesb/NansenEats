@@ -7,8 +7,10 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EatsAPI.Models;
 using EatsAPI.Models.DtoModels;
+using EatsAPI.Models.Utilities;
 using AutoMapper;
 using EatsAPI.Models.DBModels;
+using System;
 
 namespace EatsAPI.Controllers
 {
@@ -51,6 +53,15 @@ namespace EatsAPI.Controllers
 				return BadRequest();
 			}
 			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
+			
+			//TODO: a better way to do this--preferably AutoMapper
+			var tempTags = new List<Category>();
+			tempTags.AddRange(rating.Tags);
+			tempTags.AddRange(ratingDto.TagNames.GetTags(db));
+
+			rating.Tags = tempTags;
+
+			//TODO: a better way to do this--preferably AutoMapper
 			rating.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == ratingDto.RestaurantId);
 
 			db.Entry(rating).State = EntityState.Modified;
@@ -83,11 +94,17 @@ namespace EatsAPI.Controllers
 			}
 
 			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
+
+			var tempTags = new List<Category>();
+			tempTags.AddRange(rating.Tags);
+			tempTags.AddRange(ratingDto.TagNames.GetTags(db));
+
+			rating.Tags = tempTags;
+			
 			rating.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == ratingDto.RestaurantId);
 
 			if (rating.Restaurant != null)
 			{
-
 				db.Ratings.Add(rating);
 				db.SaveChanges();
 

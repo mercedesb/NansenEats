@@ -28,10 +28,10 @@
 			<ul class="ratings">
 				<li ng-repeat="rating in vm.restaurant.Ratings">
 					<div>
-						<h6>User Name</h6>
-						<p class="pull-left rating"><span class="icon-tags text-light"></span> comma-separated, tags, here, with, icon, styling</p>
+						<h6 class="pull-left">User Name</h6>
 						<h6 class="pull-right">{{rating.Value}}/10</h6>
 						<div class="clearfix"></div>
+						<p ng-show="rating.TagNames" class="rating"><span class="icon-tags text-light"></span> {{rating.TagNames}}</p>
 						<a href="/#/rating/{{rating.Id}}/edit">Edit</a>
 					</div>
 				</li>

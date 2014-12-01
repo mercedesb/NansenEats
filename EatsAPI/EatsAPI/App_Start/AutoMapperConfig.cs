@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.DtoModels;
+using System.Linq;
 
 namespace EatsAPI
 {
@@ -12,7 +13,9 @@ namespace EatsAPI
 				.ForMember(dest => dest.UserGuid, opt => opt.MapFrom(r => r.CreatedBy.Id));
 
 			Mapper.CreateMap<Rating, RatingDto>()
-				.ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(r => r.Restaurant.Id));
+				.ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(r => r.Restaurant.Id))
+				.ForMember(dest => dest.TagNames, opt => opt.MapFrom(t => string.Join(", ", t.Tags.Select(i => i.Name))));
+			
 				//.ForMember(dest => dest.UserId, opt => opt.MapFrom(r => r.CreatedBy.Id));
 
 			Mapper.CreateMap<RatingDto, Rating>()

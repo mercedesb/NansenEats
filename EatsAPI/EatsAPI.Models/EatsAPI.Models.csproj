@@ -105,6 +105,7 @@
     <Compile Include="Repository\BaseReadOnlyRepository.cs" />
     <Compile Include="Repository\IEditableRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Utilities\CategoryExtensions.cs" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

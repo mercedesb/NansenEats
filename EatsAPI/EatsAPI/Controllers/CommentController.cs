@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using EatsAPI.Models;
+using EatsAPI.Models.DBModels;
+using EatsAPI.Models.DtoModels;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
-using EatsAPI.Models;
-using EatsAPI.Models.DtoModels;
-using AutoMapper;
-using EatsAPI.Models.DBModels;
 
 namespace EatsAPI.Controllers
 {
