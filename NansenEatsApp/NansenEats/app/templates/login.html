@@ -1,0 +1,32 @@
+﻿<form role="form">
+	<div class="row">
+		<div class="col-md-4">
+			<h2 class="form-login-heading">Login</h2>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus>
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" placeholder="Password" data-ng-model="vm.loginData.password" required>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="vm.login()">Login</button>
+			</div>
+			<div data-ng-hide="vm.message == ''" class="alert alert-danger">
+				{{vm.message}}
+			</div>
+		</div>
+		<div class="col-md-4">
+			<h2 class="form-login-heading">Social Logins</h2>
+			<p>Or you can login using one of the social logins below</p>
+			<button class="btn btn-lg btn-block btn-facebook" type="button" data-ng-click="vm.authExternalProvider('Facebook')"><i class="icon-facebook"></i> | Connect with Facebook</button>
+			<button class="btn btn-lg btn-block btn-live" type="button" data-ng-click="vm.authExternalProvider('Live')"><i class="icon-windows8"></i> | Connect with Live</button>
+			<button class="btn btn-lg btn-block btn-google-plu" type="button" data-ng-click="vm.authExternalProvider('Google')"><i class="icon-googleplus"></i> | Connect with Google+</button>
+			<button class="btn btn-lg btn-block btn-twitter" type="button" data-ng-click="vm.authExternalProvider('Twitter')"><i class="icon-twitter2"></i> | Connect with Twitter</button>
+		</div>
+		<div class="col-md-4">
+			<h2 class="form-login-heading">Sign up</h2>
+			<p>Or create a new account</p>
+			<a class="btn btn-lg btn-block btn-default" type="button" href="#/signup/">Create an account</a>
+		</div>
+	</div>
+</form>

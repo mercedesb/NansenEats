@@ -4,7 +4,7 @@
 		<!--Determines if the bundle file should be automatically optimized after creation/update.-->
 		<minify>true</minify>
 		<!--Determine whether to generate/re-generate this bundle on building the solution.-->
-		<runOnBuild>false</runOnBuild>
+		<runOnBuild>true</runOnBuild>
 		<!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
 		<outputDirectory />
 	</settings>
@@ -14,7 +14,11 @@
 		<file>/app/js/core/exception.js</file>
 		<file>/app/js/core/logger.js</file>
 		<file>/app/js/core/loader.js</file>
+		<file>/app/js/services/authInterceptorService.js</file>
+		<file>/app/js/services/authService.js</file>
 		<file>/app/js/services/dataservice.js</file>
+		<file>/app/js/login/loginController.js</file>
+		<file>/app/js/signup/signupController.js</file>
 		<file>/app/js/restaurants/restaurantListController.js</file>
 		<file>/app/js/restaurants/restaurantDetailsController.js</file>
 		<file>/app/js/restaurants/addRestaurantController.js</file>
