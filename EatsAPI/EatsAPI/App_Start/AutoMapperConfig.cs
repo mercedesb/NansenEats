@@ -19,7 +19,8 @@ namespace EatsAPI
 				//.ForMember(dest => dest.UserId, opt => opt.MapFrom(r => r.CreatedBy.Id));
 
 			Mapper.CreateMap<RatingDto, Rating>()
-				.ForMember(dest => dest.Restaurant, opt => opt.Ignore());
+				.ForMember(dest => dest.Restaurant, opt => opt.Ignore())
+				.ForMember(dest => dest.Tags, opt => opt.Ignore());
 				//.ForMember(dest => dest.CreatedBy, opt => opt.Ignore());
 
 			Mapper.CreateMap<Comment, CommentDto>()

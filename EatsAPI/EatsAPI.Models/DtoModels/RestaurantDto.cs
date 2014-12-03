@@ -41,7 +41,7 @@ namespace EatsAPI.Models.DtoModels
 		public int Value { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public int RestaurantId { get; set; }
-		public List<Category> Tags { get; set; }
+		//public List<Category> Tags { get; set; }
 		public string TagNames { get; set; }
 		
 		//public int UserId { get; set; }

@@ -33,15 +33,7 @@
 					vm.availableTags = data.map(function (item) {
 						return item.Name;
 					});
-
-					//create AutoComplete UI component
-					$("#tags").kendoAutoComplete({
-						dataSource: vm.availableTags,
-						filter: "startswith",
-						separator: ", "
-					});
 				}
-
 			});
 		}
 

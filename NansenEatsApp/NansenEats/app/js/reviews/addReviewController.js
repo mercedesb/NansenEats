@@ -36,9 +36,9 @@
 						return item.Name;
 					});
 
-					vm.tags = new kendo.data.DataSource({
-						data: data
-					});
+					//vm.tags = new kendo.data.DataSource({
+					//	data: data
+					//});
 				}
 				
 			});

@@ -19,7 +19,7 @@ namespace EatsAPI.Models.DBModels
 		public string ImagePath { get; set; }
 
 		#region Navigational properties
-		//public virtual ICollection<Rating> Ratings { get; set; }
+		public virtual ICollection<Rating> Ratings { get; set; }
 		#endregion
 	}
 }
