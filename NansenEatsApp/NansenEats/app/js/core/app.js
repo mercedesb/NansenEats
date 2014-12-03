@@ -52,7 +52,8 @@
 				controller: "EditCommentController as vm"
 			})
 			.when("/search/:searchTerm", {
-				templateUrl: "app/templates/"
+				templateUrl: "app/templates/search.html",
+				controller: "SearchController as vm"
 			})
 			.otherwise({ redirectTo: "/" });
 	});

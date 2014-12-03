@@ -5,20 +5,21 @@
         .module('app')
         .controller('ShellController', ShellController);
 
-    shellControllerShellController.$inject = ['$location', 'dataservice', 'logger'];
+    ShellController.$inject = ['$location', 'dataservice', 'logger'];
 
     function ShellController($location, dataservice, logger) {
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'ShellController';
         vm.searchTerm = '';
+        vm.search = search;
 
         activate();
 
         function activate() { }
 
         function search() {
-        	$location.url('/search/' + searchTerm);
+        	$location.url('/search/' + vm.searchTerm);
         }
     }
 })();

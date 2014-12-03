@@ -21,7 +21,8 @@
 			editRating: editRating,
 			getComment: getComment,
 			addComment: addComment,
-			editComment: editComment
+			editComment: editComment,
+			search:search
 		};
 
 		return service;
@@ -160,6 +161,19 @@
 				});
 
 			function editCommentComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
+
+		function search(searchTerm) {
+			return $http.get(baseUrl + '/api/search/' + searchTerm)
+			.then(searchComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for getComment')(message);
+					$location.url('/');
+				});
+
+			function searchComplete(data, status, headers, config) {
 				return data.data;
 			}
 		}

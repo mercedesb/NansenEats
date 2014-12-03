@@ -53,7 +53,8 @@
 				controller: "EditCommentController as vm"
 			})
 			.when("/search/:searchTerm", {
-				templateUrl: "app/templates/"
+				templateUrl: "app/templates/search.html",
+				controller: "SearchController as vm"
 			})
 			.otherwise({ redirectTo: "/" });
 	});
@@ -154,6 +155,31 @@
 		return directive;
 	}
 
+})();
+///#source 1 1 /app/js/core/util.js
+(function () {
+	'use strict';
+
+	angular
+		 .module('app')
+		 .factory('util', util);
+
+	util.$inject = ['$http', '$location', 'exception', 'dataservice'];
+
+	function util($http, $location, exception, dataservice) {
+
+		var util = {
+			search:search
+		};
+
+		return util;
+
+		function search(searchTerm) {
+			return dataservice.search(searchTerm).then(function (data) {
+				return data;
+			});
+		}
+	}
 })();
 ///#source 1 1 /app/js/services/authInterceptorService.js
 (function() {
@@ -306,7 +332,8 @@
 			editRating: editRating,
 			getComment: getComment,
 			addComment: addComment,
-			editComment: editComment
+			editComment: editComment,
+			search:search
 		};
 
 		return service;
@@ -448,6 +475,19 @@
 				return data.data;
 			}
 		}
+
+		function search(searchTerm) {
+			return $http.get(baseUrl + '/api/search/' + searchTerm)
+			.then(searchComplete)
+				.catch(function (message) {
+					exception.catcher('XHR Failed for getComment')(message);
+					$location.url('/');
+				});
+
+			function searchComplete(data, status, headers, config) {
+				return data.data;
+			}
+		}
 	}
 })();
 ///#source 1 1 /app/js/login/loginController.js
@@ -534,6 +574,65 @@
 		}
 	};
 })();
+///#source 1 1 /app/js/layout/shellController.js
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('ShellController', ShellController);
+
+    ShellController.$inject = ['$location', 'dataservice', 'logger'];
+
+    function ShellController($location, dataservice, logger) {
+        /* jshint validthis:true */
+        var vm = this;
+        vm.title = 'ShellController';
+        vm.searchTerm = '';
+        vm.search = search;
+
+        activate();
+
+        function activate() { }
+
+        function search() {
+        	$location.url('/search/' + vm.searchTerm);
+        }
+    }
+})();
+
+///#source 1 1 /app/js/search/searchController.js
+(function () {
+    'use strict';
+
+    angular
+        .module('app')
+        .controller('SearchController', SearchController);
+
+    SearchController.$inject = ['$location', 'util', 'logger', '$routeParams'];
+
+    function SearchController($location, util, logger, $routeParams) {
+        /* jshint validthis:true */
+        var vm = this;
+        vm.title = 'SearchController';
+        vm.search = doSearch;
+
+        activate();
+
+        function activate() {
+        	vm.searchTerm = $routeParams.searchTerm;
+        	return doSearch(vm.searchTerm);
+        }
+
+        function doSearch(searchTerm) {
+        	return util.search(searchTerm).then(function (data) {
+        		vm.results = data;
+        		return vm.results;
+        	});
+        }
+    }
+})();
+
 ///#source 1 1 /app/js/restaurants/restaurantListController.js
 (function () {
 	'use strict';

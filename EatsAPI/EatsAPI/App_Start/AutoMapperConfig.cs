@@ -30,6 +30,10 @@ namespace EatsAPI
 			Mapper.CreateMap<CommentDto, Comment>()
 				.ForMember(dest => dest.Restaurant, opt => opt.Ignore());
 				//.ForMember(dest => dest.CreatedBy, opt => opt.Ignore());
+
+			Mapper.CreateMap<UserProfile, UserModel>()
+				.ForMember(dest => dest.Password, opt => opt.Ignore())
+				.ForMember(dest => dest.ConfirmPassword, opt => opt.Ignore());
 		}
 	}
 }

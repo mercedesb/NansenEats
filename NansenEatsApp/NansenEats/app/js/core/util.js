@@ -16,12 +16,8 @@
 		return util;
 
 		function search(searchTerm) {
-			dataservice.search(searchTerm).then(function (data) {
-				if (data) {
-					$location.url('/search/?q=' + data.Query);
-				} else {
-					//handle exception (show error or something)
-				}
+			return dataservice.search(searchTerm).then(function (data) {
+				return data;
 			});
 		}
 	}

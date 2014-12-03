@@ -6,13 +6,16 @@
 	<link rel="stylesheet" href="app/css/app.css" />
 </head>
 <body>
-	<div ng-include="'/app/templates/nav.html'"></div>
-	
-	<div class="container">
-		<div role="main" ng-view></div>
+	<div ng-controller="ShellController as vm">
+		<div ng-include="'/app/templates/nav.html'"></div>
 
-		<div ng-include="'/app/templates/footer.html'"></div>
+		<div class="container">
+			<div role="main" ng-view></div>
+
+			<div ng-include="'/app/templates/footer.html'"></div>
+		</div>
 	</div>
+	
 
 	<!-- Scripts -->
 

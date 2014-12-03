@@ -90,6 +90,7 @@
     <Compile Include="DBModels\Rating.cs" />
     <Compile Include="DBModels\Restaurant.cs" />
     <Compile Include="DBModels\UserProfile.cs" />
+    <Compile Include="DtoModels\SearchResult.cs" />
     <Compile Include="DtoModels\UserModel.cs" />
     <Compile Include="DtoModels\RestaurantDto.cs" />
     <Compile Include="EatsContext.cs" />
