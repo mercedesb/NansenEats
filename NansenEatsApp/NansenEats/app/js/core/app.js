@@ -43,6 +43,9 @@
 				templateUrl: "app/templates/reviewForm.html",
 				controller: "EditCommentController as vm"
 			})
+			.when("/search/:searchTerm", {
+				templateUrl: "app/templates/"
+			})
 			.otherwise({ redirectTo: "/" });
 	});
 })();
