@@ -1,6 +1,6 @@
 ﻿<div class="row">
 	<loader loadedproperty="vm.restaurant.Name"></loader>
-	<div class="col-md-12" ng-show="vm.restaurant.Name" style="max-height:">
+	<div class="col-md-12" ng-show="vm.restaurant.Name">
 		<div class="col-lg-8">
 			<img src="/Content/images/placeholder.jpg" />
 		</div>
@@ -13,7 +13,6 @@
 
 			</div>
 			<div class="col-lg-12">
-
 				<p>{{vm.restaurant.Address}}</p>
 				<a href="#/restaurant/{{vm.restaurant.Id}}/new-review">Add Review</a> |
 				<a href="#/restaurant/{{vm.restaurant.Id}}/edit">Edit Restaurant</a>

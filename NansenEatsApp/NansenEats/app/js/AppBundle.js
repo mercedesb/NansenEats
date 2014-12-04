@@ -6,6 +6,7 @@
 		 // Angular modules 
 		 'ngAnimate',
 		 'ngRoute',
+		 'ngSanitize',
 
 		 // Custom modules 
 
@@ -477,10 +478,10 @@
 		}
 
 		function search(searchTerm) {
-			return $http.get(baseUrl + '/api/search/' + searchTerm)
+			return $http.get(baseUrl + '/api/search/?searchTerm=' + searchTerm)
 			.then(searchComplete)
 				.catch(function (message) {
-					exception.catcher('XHR Failed for getComment')(message);
+					exception.catcher('XHR Failed for search')(message);
 					$location.url('/');
 				});
 
