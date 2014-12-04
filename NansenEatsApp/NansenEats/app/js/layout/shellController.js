@@ -1,25 +1,34 @@
 ﻿(function () {
-    'use strict';
+	'use strict';
 
-    angular
-        .module('app')
-        .controller('ShellController', ShellController);
+	angular
+		.module('app')
+		.controller('ShellController', ShellController);
 
-    ShellController.$inject = ['$location', 'dataservice', 'logger'];
+	ShellController.$inject = ['$location', 'dataservice', 'logger'];
 
-    function ShellController($location, dataservice, logger) {
-        /* jshint validthis:true */
-        var vm = this;
-        vm.title = 'ShellController';
-        vm.searchTerm = '';
-        vm.search = search;
+	function ShellController($location, dataservice, logger) {
+		/* jshint validthis:true */
+		var vm = this;
+		vm.title = 'ShellController';
+		vm.searchTerm = '';
+		vm.search = search;
 
-        activate();
+		activate();
 
-        function activate() { }
+		function activate() {
+			bindEvents();
+		}
 
-        function search() {
-        	$location.url('/search/' + vm.searchTerm);
-        }
-    }
+		function bindEvents() {
+			$(document).on('click', '[data-toggle="offcanvas"]', function (e) {
+				e.preventDefault();
+				$('.row-offcanvas').toggleClass('active');
+			});
+		}
+
+		function search() {
+			$location.url('/search/' + vm.searchTerm);
+		}
+	}
 })();
