@@ -144,6 +144,8 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Content\images\kendoui.ttf" />
+    <Content Include="Content\images\kendoui.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.min.js" />
