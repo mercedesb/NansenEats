@@ -14,17 +14,25 @@
 		vm.searchTerm = '';
 		vm.search = search;
 
-		activate();
+		vm.offcanvasActive = false;
+		vm.showOffcanvasButton = true;
+		vm.toggleCanvas = toggleCanvas;
 
-		function activate() {
-			bindEvents();
-		}
+		//activate();
 
-		function bindEvents() {
-			$(document).on('click', '[data-toggle="offcanvas"]', function (e) {
-				e.preventDefault();
-				$('.row-offcanvas').toggleClass('active');
-			});
+		//function activate() {
+		//	bindEvents();
+		//}
+
+		//function bindEvents() {
+		//	$(document).on('click', '[data-toggle="offcanvas"]', function (e) {
+		//		e.preventDefault();
+		//		$('.row-offcanvas').toggleClass('active');
+		//	});
+		//}
+
+		function toggleCanvas() {
+			vm.offcanvasActive = !vm.offcanvasActive;
 		}
 
 		function search() {
