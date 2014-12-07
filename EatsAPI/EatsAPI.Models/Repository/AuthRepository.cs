@@ -24,7 +24,8 @@ namespace EatsAPI.Models.Repository
 			UserProfile user = new UserProfile
 			{
 				UserName = userModel.UserName,
-				DisplayName = userModel.DisplayName
+				DisplayName = userModel.DisplayName,
+				Email = userModel.Email
 			};
 
 			var result = await _userManager.CreateAsync(user, userModel.Password);

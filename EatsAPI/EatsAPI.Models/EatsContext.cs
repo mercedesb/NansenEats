@@ -23,8 +23,5 @@ namespace EatsAPI.Models
 		public DbSet<Rating> Ratings { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Category> Categories { get; set; }
-		//public DbSet<UserProfile> Users { get; set; }
-
-		//public System.Data.Entity.DbSet<EatsAPI.Models.DtoModels.CommentDto> CommentDtoes { get; set; }
 	}
 }
