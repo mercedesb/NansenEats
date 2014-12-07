@@ -16,7 +16,9 @@
 			isAuth: false,
 			userName: "",
 			userId: "",
-			userDisplayName: ""
+			userDisplayName: "",
+			userImageUrl: "",
+			userEmail: ""
 		};
 
 		var _saveRegistration = function (registration) {
@@ -37,10 +39,19 @@
 
 			$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-				localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+				var token = response.access_token;
+				var userName = loginData.userName;
+				var userId = response.userId;
+				var userDisplayName = response.userDisplayName;
+				var userImageUrl = response.userImageUrl;
+				var userEmail = loginData.email;
+
+				localStorageService.set('authorizationData', { token: token, userName: userName, userId: userId, userDisplayName: userDisplayName, userImageUrl: userImageUrl, userEmail: userEmail });
 
 				_authentication.isAuth = true;
 				_authentication.userName = loginData.userName;
+				_authentication.userId = response.userId;
+				_authentication.userDisplayName = response.displayName;
 
 				deferred.resolve(response);
 
@@ -61,6 +72,8 @@
 			_authentication.userName = "";
 			_authentication.userId = "";
 			_authentication.userDisplayName = "";
+			_authentication.userImageUrl = "";
+			_authentication.userEmail = "";
 
 		};
 
@@ -72,6 +85,8 @@
 				_authentication.userName = authData.userName;
 				_authentication.userId = authData.userId;
 				_authentication.userDisplayName = authData.userDisplayName;
+				_authentication.userImageUrl = authData.userImageUrl;
+				_authentication.userEmail = authData.userEmail;
 			}
 
 		}

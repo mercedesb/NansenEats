@@ -62,7 +62,12 @@
 	app.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
 		localStorageServiceProvider.setPrefix('app');
 	}]);
-	//.config(function ($httpProvider) {
-	//	$httpProvider.interceptors.push('authInterceptorService');
-	//});
+
+	app.config(function ($httpProvider) {
+		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	app.run(['authService', function (authService) {
+		authService.fillAuthData();
+	}]);
 })();

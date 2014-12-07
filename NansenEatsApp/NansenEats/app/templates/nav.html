@@ -17,8 +17,10 @@
 		</div>-->
 		<div class="collapse navbar-collapse navbar-left col-sm-7 pull-right">
 			<ul class="nav navbar-nav navbar-left">
-				<li class=""><a href="/#/restaurant/new-restaurant">Add Restaurant</a></li>
-				<li class=""><a href="#/login"><span class="icon-lock"></span><span> Log in</span></a></li>
+				<li class="" ng-hide="!shell.authentication.isAuth"><a href="/#/restaurant/new-restaurant">Add Restaurant</a></li>
+				<li class="" ng-hide="shell.authentication.isAuth"><a href="#/login"><span class="icon-lock"></span><span> Log in</span></a></li>
+				<li class="" ng-hide="!shell.authentication.isAuth"><p class="navbar-text"><span>{{shell.authentication.userDisplayName}} </span><span class="icon-user"></span></p></li>
+				<li class="" ng-hide="!shell.authentication.isAuth"><a href="" ng-click="shell.logOut()"><span> Log out</span></a></li>
 			</ul>
 			<div class="navbar-right">
 				<form class="navbar-form" role="search" ng-submit="shell.search()">

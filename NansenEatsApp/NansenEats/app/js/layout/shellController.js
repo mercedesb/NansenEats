@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('ShellController', ShellController);
 
-	ShellController.$inject = ['$location', 'dataservice', 'logger'];
+	ShellController.$inject = ['$location', 'dataservice', 'logger', 'authService'];
 
-	function ShellController($location, dataservice, logger) {
+	function ShellController($location, dataservice, logger, authService) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'ShellController';
@@ -17,19 +17,13 @@
 		vm.offcanvasActive = false;
 		vm.showOffcanvasButton = true;
 		vm.toggleCanvas = toggleCanvas;
-
-		//activate();
-
-		//function activate() {
-		//	bindEvents();
-		//}
-
-		//function bindEvents() {
-		//	$(document).on('click', '[data-toggle="offcanvas"]', function (e) {
-		//		e.preventDefault();
-		//		$('.row-offcanvas').toggleClass('active');
-		//	});
-		//}
+ 
+		vm.logOut = function () {
+			authService.logOut();
+			$location.path('/');
+		}
+ 
+		vm.authentication = authService.authentication;
 
 		function toggleCanvas() {
 			vm.offcanvasActive = !vm.offcanvasActive;

@@ -63,9 +63,14 @@
 	app.config(['localStorageServiceProvider', function (localStorageServiceProvider) {
 		localStorageServiceProvider.setPrefix('app');
 	}]);
-	//.config(function ($httpProvider) {
-	//	$httpProvider.interceptors.push('authInterceptorService');
-	//});
+
+	app.config(function ($httpProvider) {
+		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	app.run(['authService', function (authService) {
+		authService.fillAuthData();
+	}]);
 })();
 ///#source 1 1 /app/js/core/exception.js
 (function () {
@@ -240,7 +245,9 @@
 			isAuth: false,
 			userName: "",
 			userId: "",
-			userDisplayName: ""
+			userDisplayName: "",
+			userImageUrl: "",
+			userEmail: ""
 		};
 
 		var _saveRegistration = function (registration) {
@@ -261,10 +268,19 @@
 
 			$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-				localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+				var token = response.access_token;
+				var userName = loginData.userName;
+				var userId = response.userId;
+				var userDisplayName = response.userDisplayName;
+				var userImageUrl = response.userImageUrl;
+				var userEmail = loginData.email;
+
+				localStorageService.set('authorizationData', { token: token, userName: userName, userId: userId, userDisplayName: userDisplayName, userImageUrl: userImageUrl, userEmail: userEmail });
 
 				_authentication.isAuth = true;
 				_authentication.userName = loginData.userName;
+				_authentication.userId = response.userId;
+				_authentication.userDisplayName = response.displayName;
 
 				deferred.resolve(response);
 
@@ -285,6 +301,8 @@
 			_authentication.userName = "";
 			_authentication.userId = "";
 			_authentication.userDisplayName = "";
+			_authentication.userImageUrl = "";
+			_authentication.userEmail = "";
 
 		};
 
@@ -296,6 +314,8 @@
 				_authentication.userName = authData.userName;
 				_authentication.userId = authData.userId;
 				_authentication.userDisplayName = authData.userDisplayName;
+				_authentication.userImageUrl = authData.userImageUrl;
+				_authentication.userEmail = authData.userEmail;
 			}
 
 		}
@@ -583,9 +603,9 @@
 		.module('app')
 		.controller('ShellController', ShellController);
 
-	ShellController.$inject = ['$location', 'dataservice', 'logger'];
+	ShellController.$inject = ['$location', 'dataservice', 'logger', 'authService'];
 
-	function ShellController($location, dataservice, logger) {
+	function ShellController($location, dataservice, logger, authService) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'ShellController';
@@ -595,19 +615,13 @@
 		vm.offcanvasActive = false;
 		vm.showOffcanvasButton = true;
 		vm.toggleCanvas = toggleCanvas;
-
-		//activate();
-
-		//function activate() {
-		//	bindEvents();
-		//}
-
-		//function bindEvents() {
-		//	$(document).on('click', '[data-toggle="offcanvas"]', function (e) {
-		//		e.preventDefault();
-		//		$('.row-offcanvas').toggleClass('active');
-		//	});
-		//}
+ 
+		vm.logOut = function () {
+			authService.logOut();
+			$location.path('/');
+		}
+ 
+		vm.authentication = authService.authentication;
 
 		function toggleCanvas() {
 			vm.offcanvasActive = !vm.offcanvasActive;
