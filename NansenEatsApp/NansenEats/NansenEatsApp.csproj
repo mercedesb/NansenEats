@@ -56,6 +56,8 @@
     <Content Include="app\js\restaurants\restaurantController.js" />
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
     <Content Include="app\js\services\dataservice.js" />
+    <Content Include="app\js\reviews\addreview.js" />
+    <Content Include="app\templates\addreview.html" />
     <Content Include="app\templates\restaurantdetails.html" />
     <Content Include="app\templates\restaurantlist.html" />
     <Content Include="Content\bootstrap-theme.css" />
