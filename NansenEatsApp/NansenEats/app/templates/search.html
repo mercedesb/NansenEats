@@ -1,0 +1,16 @@
+﻿<div class="row">
+	<header>
+		<h2>Your search returned {{vm.results.length}} results</h2>
+	</header>
+	<div ng-repeat="result in vm.results">
+		<div ng-show="result.TeaserImageUrl" class="pull-left col-xs-4">
+			<img ng-show="result.TeaserImageUrl" src="{{result.TeaserImageUrl}}" />
+		</div>		
+		<div class="pull-left col-xs-8">
+			<a href="/#/{{result.TypePath}}/{{result.Id}}">
+				<h4>{{result.Title}}</h4>
+			</a>
+			<p ng-bind-html="result.Description"></p>
+		</div>
+	</div>
+</div>

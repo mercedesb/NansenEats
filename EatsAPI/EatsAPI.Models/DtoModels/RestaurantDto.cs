@@ -18,6 +18,7 @@ namespace EatsAPI.Models.DtoModels
 		public int PriceRangeMax { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public double DistanceFromOffice { get; set; }
+		public string UserGuid { get; set; }
 
 		public double AverageRating
 		{
@@ -39,7 +40,16 @@ namespace EatsAPI.Models.DtoModels
 		public int Id { get; set; }
 		public int Value { get; set; }
 		public DateTime CreatedDate { get; set; }
-		public List<Category> Tags { get; set; }
+		public int RestaurantId { get; set; }
+		//public List<Category> Tags { get; set; }
+		public string TagNames { get; set; }
+		
+		//public int UserId { get; set; }
+
+		public RatingDto()
+		{
+			CreatedDate = DateTime.Now;
+		}
 	}
 
 	public class CommentDto
@@ -47,5 +57,12 @@ namespace EatsAPI.Models.DtoModels
 		public int Id { get; set; }
 		public string Value { get; set; }
 		public DateTime CreatedDate { get; set; }
+		public int RestaurantId { get; set; }
+		//public int UserId { get; set; }
+
+		public CommentDto()
+		{
+			CreatedDate = DateTime.Now;
+		}
 	}
 }

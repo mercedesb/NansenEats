@@ -1,13 +1,35 @@
-﻿<div class="row">
-	<ul class="restaurants">
-		<li class="col-md-2 col-sm-2 col-lg-2" ng-repeat="restaurant in vm.restaurants">
-			<div>
-				<h4>{{restaurant.Name}}</h4>
-				<p>{{restaurant.Address}}</p>
-				<progress max="10" value="{{restaurant.AverageRating}}"></progress>
-				<a class="pull-right" href="#/restaurant/{{restaurant.Id}}" ng-click>See Reviews</a>
-				<div class="clearfix"></div>
-			</div>
-		</li>
-	</ul>
-</div>
+﻿<div class="row row-offcanvas row-offcanvas-left" ng-class="{'active':shell.offcanvasActive}" ng-show="shell.showOffcanvasButton">
+	<!--<div class="col-xs-12 col-sm-9">
+	</div>-->
+	<div class="col-xs-12 col-sm-9">
+		<div class="row">
+			<loader loadedproperty="vm.restaurants.length"></loader>
+			<ul class="restaurants">
+				<li class="col-xs-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:vm.sort:vm.reverse">
+					<div>
+						<a href="#/restaurant/{{restaurant.Id}}"><h4>{{restaurant.Name}}</h4></a>
+						<p>{{restaurant.Address}}</p>
+						<p>${{restaurant.PriceRangeMin}} - ${{restaurant.PriceRangeMax}}</p>
+						<div class="progress">
+							<div class="progress-bar progress-bar-nansen" role="progressbar" aria-valuenow="{{restaurant.AverageRating}}" aria-valuemin="0" aria-valuemax="10" style="width: {{(restaurant.AverageRating*10)}}%">
+								<span class="sr-only">{{restaurant.AverageRating}} out of 10</span>
+							</div>
+						</div>
+						<!--<div class="pull-right">{{restaurant.AverageRating}}/10</div>-->
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+		<div class="list-group" ng-show="{{vm.sortGroup.length}}">
+			<div class="list-group-item list-group-item-heading">Sort Order</div>
+			<a href="" class="list-group-item" ng-repeat="sortItem in vm.sortGroup" ng-class="{active:vm.sort == sortItem.Sort}" ng-click="vm.changeSort(sortItem.Sort)">{{sortItem.Name}}<span class="pull-right" ng-show="vm.sort == sortItem.Sort" ng-class="{'icon-arrow-up': !vm.reverse, 'icon-arrow-down': vm.reverse}"></span></a>
+			<!--<a href="" class="list-group-item" ng-repeat="sortItem in vm.sortGroup" ng-class="{active:$parent.sort == sortItem.Sort}" ng-click="$parent.reverse = $parent.sort == sortItem.Sort && !reverse; $parent.sort = sortItem.Sort">{{sortItem.Name}}<span class="pull-right" ng-show="$parent.sort == sortItem.Sort" ng-class="{'icon-arrow-up': !$parent.reverse, 'icon-arrow-down': $parent.reverse}"></span></a>-->
+		</div>
+		<div class="list-group" ng-show="{{vm.tags.length}}">
+			<div class="list-group-item list-group-item-heading">Filter By</div>
+			<a href="" class="list-group-item" ng-repeat="tag in vm.tags" ng-click="filter = '{{tag.Name}}'">{{tag.Name}}</a>
+		</div>
+	</div><!--/.sidebar-offcanvas-->
+</div><!--/row-->

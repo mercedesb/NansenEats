@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
+﻿using AutoMapper;
 using EatsAPI.Models;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.DtoModels;
-using AutoMapper;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
+using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace EatsAPI.Controllers
 {
@@ -20,11 +16,11 @@ namespace EatsAPI.Controllers
 		private EatsContext db = new EatsContext();
 
 		// GET: api/Restaurants
-		public IHttpActionResult GetRestaurants()
+		public IQueryable<RestaurantDto> GetRestaurants()
 		{
 			var tempRestaurants = db.Restaurants.ToList();
 			// GET: api/Restaurants/5
-			return Ok(Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants));
+			return Mapper.Map<List<Restaurant>, List<RestaurantDto>>(tempRestaurants).AsQueryable();
 		}
 
 		[ResponseType(typeof(RestaurantDto))]
@@ -40,6 +36,7 @@ namespace EatsAPI.Controllers
 		}
 
 		// PUT: api/Restaurants/5
+		[Authorize]
 		[ResponseType(typeof(void))]
 		public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
 		{
@@ -71,10 +68,11 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return StatusCode(HttpStatusCode.NoContent);
+			return Ok(restaurant);
 		}
 
 		// POST: api/Restaurants
+		[Authorize]
 		[ResponseType(typeof(Restaurant))]
 		public IHttpActionResult PostRestaurant(Restaurant restaurant)
 		{
@@ -83,6 +81,11 @@ namespace EatsAPI.Controllers
 				return BadRequest(ModelState);
 			}
 
+			//var currentUserId = User.Identity.GetUserId();
+			//var user = db.Users.FirstOrDefault(u => u.Id == currentUserId);
+
+			//if (user != null) restaurant.CreatedBy = user;
+
 			db.Restaurants.Add(restaurant);
 			db.SaveChanges();
 
@@ -90,6 +93,7 @@ namespace EatsAPI.Controllers
 		}
 
 		// DELETE: api/Restaurants/5
+		[Authorize]
 		[ResponseType(typeof(Restaurant))]
 		public IHttpActionResult DeleteRestaurant(int id)
 		{

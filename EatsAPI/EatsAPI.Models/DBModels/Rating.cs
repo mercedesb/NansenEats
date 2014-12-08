@@ -13,9 +13,15 @@ namespace EatsAPI.Models.DBModels
 		public int Value { get; set; }
 		public DateTime CreatedDate { get; set; }
 
+		public Rating()
+		{
+			CreatedDate = DateTime.Now;
+		}
+
 		#region Navigational properties 
 		public virtual Restaurant Restaurant { get; set; }
 		public virtual ICollection<Category> Tags { get; set; }
+		//public virtual UserProfile CreatedBy { get; set; }
 		#endregion
 	}
 }

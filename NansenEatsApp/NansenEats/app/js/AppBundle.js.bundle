@@ -4,18 +4,31 @@
 		<!--Determines if the bundle file should be automatically optimized after creation/update.-->
 		<minify>true</minify>
 		<!--Determine whether to generate/re-generate this bundle on building the solution.-->
-		<runOnBuild>false</runOnBuild>
+		<runOnBuild>true</runOnBuild>
 		<!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
 		<outputDirectory />
 	</settings>
 	<!--The order of the <file> elements determines the order of the files in the bundle.-->
 	<files>
 		<file>/app/js/core/app.js</file>
-		<file>/app/js/services/dataservice.js</file>
 		<file>/app/js/core/exception.js</file>
 		<file>/app/js/core/logger.js</file>
-		<file>/app/js/restaurants/restaurantController.js</file>
+		<file>/app/js/core/loader.js</file>
+		<file>/app/js/core/util.js</file>
+		<file>/app/js/services/authInterceptorService.js</file>
+		<file>/app/js/services/authService.js</file>
+		<file>/app/js/services/dataservice.js</file>
+		<file>/app/js/login/loginController.js</file>
+		<file>/app/js/signup/signupController.js</file>
+		<file>/app/js/layout/shellController.js</file>
+		<file>/app/js/search/searchController.js</file>
+		<file>/app/js/restaurants/restaurantListController.js</file>
 		<file>/app/js/restaurants/restaurantDetailsController.js</file>
-		<file>/app/js/reviews/addreview.js</file>
+		<file>/app/js/restaurants/addRestaurantController.js</file>
+		<file>/app/js/restaurants/editRestaurantController.js</file>
+		<file>/app/js/reviews/addReviewController.js</file>
+		<file>/app/js/reviews/editRatingController.js</file>
+		<file>/app/js/reviews/editCommentController.js</file>
+		
 	</files>
 </bundle>

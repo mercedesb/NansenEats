@@ -6,20 +6,41 @@
 	<link rel="stylesheet" href="app/css/app.css" />
 </head>
 <body>
+	<div ng-controller="ShellController as shell">
+		<div ng-include="'/app/templates/nav.html'"></div>
 
-	 <div role="main" ng-view></div> 
- 
+		<div class="container">
+			<div role="main" ng-view></div>
+
+			<div ng-include="'/app/templates/footer.html'"></div>
+		</div>
+	</div>
+	
+
+	<!-- Scripts -->
+
 	<script src="Scripts/jquery-1.10.2.min.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
 
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
+	<script src="Scripts/angular.min.js"></script>
+	<script src="Scripts/angular-route.min.js"></script>
+	<script src="Scripts/angular-animate.min.js"></script>
+	<script src="Scripts/angular-sanitize.min.js"></script>
+
+	<script src="Scripts/underscore-min.js"></script>
+
+	<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-route.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.js"></script>
-
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-animate.js"></script>-->
+	<script src="Scripts/angular-local-storage.min.js"></script>
+	<script src="//cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script>
 	<script src="Scripts/kendo-ui/kendo.core.min.js"></script>
 	<script src="Scripts/kendo-ui/kendo.ui.core.min.js"></script>
 	<script src="Scripts/kendo-ui/kendo.angular.min.js"></script>
-	<script src="Scripts/kendo-ui/kendo.listview.min.js"></script>
+	<!--<script src="Scripts/kendo-ui/kendo.autocomplete.min.js"></script>-->
+
 
 	<script src="app/js/AppBundle.js"></script>
+	<!--<script src="Scripts/offcanvas.js"></script>-->
 </body>
 </html>
