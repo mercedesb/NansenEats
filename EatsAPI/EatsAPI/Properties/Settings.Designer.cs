@@ -31,5 +31,23 @@ namespace EatsAPI.Properties {
                 return ((string)(this["CorsAllowedOrigins"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("41.8894833")]
+        public double OfficeLat {
+            get {
+                return ((double)(this["OfficeLat"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-87.6517475")]
+        public double OfficeLng {
+            get {
+                return ((double)(this["OfficeLng"]));
+            }
+        }
     }
 }

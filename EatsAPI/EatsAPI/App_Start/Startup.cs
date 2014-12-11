@@ -4,6 +4,7 @@ using EatsAPI.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using EatsAPI.App_Start;
 
 [assembly: OwinStartup(typeof(EatsAPI.Startup))]
 namespace EatsAPI
@@ -12,6 +13,8 @@ namespace EatsAPI
 	{
 		public void Configuration(IAppBuilder app)
 		{
+			UnityConfig.RegisterComponents();
+
 			ConfigureOAuth(app);
 	
 			HttpConfiguration config = new HttpConfiguration();
