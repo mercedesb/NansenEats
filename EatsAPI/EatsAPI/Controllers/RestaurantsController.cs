@@ -68,7 +68,7 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return Ok(restaurant);
+			return Ok(Mapper.Map<Restaurant, RestaurantDto>(restaurant));
 		}
 
 		// POST: api/Restaurants

@@ -918,7 +918,7 @@
 				return;
 			}
 			dataservice.addRating(vm.rating).then(function (data) {
-				if (data && vm.comment.value) {
+				if (data && vm.comment.Value) {
 					dataservice.addComment(vm.comment).then(function (data) {
 						if (data) {
 							$location.url('/restaurant/' + $routeParams.restaurantid);

@@ -102,8 +102,9 @@ namespace EatsAPI.Controllers
 			var tempTags = new List<Category>();
 			if (rating.Tags != null)
 				tempTags.AddRange(rating.Tags);
-			
-			tempTags.AddRange(ratingDto.TagNames.GetTags(db));
+
+			if (ratingDto.TagNames != null)
+				tempTags.AddRange(ratingDto.TagNames.GetTags(db));
 
 			rating.Tags = tempTags;
 			
