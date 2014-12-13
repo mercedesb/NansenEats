@@ -13,8 +13,6 @@ namespace EatsAPI
 	{
 		public void Configuration(IAppBuilder app)
 		{
-			UnityConfig.RegisterComponents();
-
 			ConfigureOAuth(app);
 	
 			HttpConfiguration config = new HttpConfiguration();
@@ -22,6 +20,9 @@ namespace EatsAPI
 
 			app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 			app.UseWebApi(config);
+
+
+			var _container = UnityConfig.RegisterComponents(config);
 
 			AutoMapperConfig.Register();
 			AutoMapper.Mapper.AssertConfigurationIsValid();

@@ -11,7 +11,7 @@ namespace EatsAPI.App_Start
 {
 	public static class UnityConfig
 	{
-		public static UnityContainer RegisterComponents()
+		public static UnityContainer RegisterComponents(HttpConfiguration config)
 		{
 			var container = new UnityContainer();
 
@@ -21,9 +21,9 @@ namespace EatsAPI.App_Start
 			// e.g. container.RegisterType<ITestService, TestService>();
 
 
-			container.RegisterType<IGeocoder, GoogleGeocoder>();
+			container.RegisterType<IGeocoder, GoogleGeocoder>(new InjectionConstructor());
 
-			GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+			config.DependencyResolver = new UnityDependencyResolver(container);
 
 			return container;
 		}
