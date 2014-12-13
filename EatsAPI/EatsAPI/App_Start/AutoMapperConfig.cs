@@ -14,7 +14,7 @@ namespace EatsAPI
 
 			Mapper.CreateMap<Rating, RatingDto>()
 				.ForMember(dest => dest.RestaurantId, opt => opt.MapFrom(r => r.Restaurant.Id))
-				.ForMember(dest => dest.TagNames, opt => opt.MapFrom(t => string.Join(", ", t.Tags.Select(i => i.Name))));
+				.ForMember(dest => dest.TagNames, opt => opt.MapFrom(t => t.Tags != null ? string.Join(", ", t.Tags.Select(i => i.Name)) : string.Empty));
 			
 				//.ForMember(dest => dest.UserId, opt => opt.MapFrom(r => r.CreatedBy.Id));
 
