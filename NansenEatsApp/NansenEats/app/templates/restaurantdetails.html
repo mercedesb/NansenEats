@@ -1,11 +1,8 @@
 ﻿<div ng-controller="RestaurantDetailsController as vm">
 	<div class="row">
 		<loader loadedproperty="vm.restaurant.Name"></loader>
-		<div class="col-md-12" ng-show="vm.restaurant.Name">
-			<div id="map_canvas" class="col-lg-8">
-				<img src="/Content/images/placeholder.jpg" />
-			</div>
-			<div class="col-lg-4">
+		<div ng-show="vm.restaurant.Name">
+			<div class="col-lg-6 col-lg-push-6">
 				<div class="col-lg-6">
 					<h4>{{vm.restaurant.Name}}</h4>
 				</div>
@@ -19,12 +16,14 @@
 					<a href="#/restaurant/{{vm.restaurant.Id}}/edit">Edit Restaurant</a>
 				</div>
 			</div>
+			<div id="map_canvas" class="col-lg-6 col-lg-pull-6">
+			</div>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-push-8 col-md-3" ng-show="vm.restaurant.Ratings.length">
+		<div>
+			<div class="col-md-push-6 col-md-4" ng-show="vm.restaurant.Ratings.length">
 				<ul class="ratings">
 					<li ng-repeat="rating in vm.restaurant.Ratings">
 						<div>
@@ -37,7 +36,7 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-md-6 col-md-pull-3">
+			<div class="col-md-6 col-md-pull-4">
 				<ul class="comments">
 					<li ng-repeat="comment in vm.restaurant.Comments">
 						<div>

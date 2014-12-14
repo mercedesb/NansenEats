@@ -17,14 +17,16 @@
 		var service = {};
 
 		function _load(markers) {
-			window.initializeMap = _initializeMap;
-
 			_loadScript();
 
 			function _loadScript() {
 				var script = document.createElement('script');
 				script.type = 'text/javascript';
 				script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=initializeMap';
+
+				//so google maps can find the callback
+				window.initializeMap = _initializeMap;
+
 				document.body.appendChild(script);
 			}
 
