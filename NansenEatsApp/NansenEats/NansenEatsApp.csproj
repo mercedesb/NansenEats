@@ -63,6 +63,7 @@
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
     <Content Include="app\js\reviews\addReviewController.js" />
     <Content Include="app\js\search\searchController.js" />
+    <Content Include="app\js\services\googleMapsService.js" />
     <Content Include="app\templates\addrestaurant.html" />
     <Content Include="app\templates\addreview.html" />
     <Content Include="app\templates\editcomment.html" />

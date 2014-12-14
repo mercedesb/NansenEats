@@ -4,6 +4,7 @@ using EatsAPI.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
+using EatsAPI.App_Start;
 
 [assembly: OwinStartup(typeof(EatsAPI.Startup))]
 namespace EatsAPI

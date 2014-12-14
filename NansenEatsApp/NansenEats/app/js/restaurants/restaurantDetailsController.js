@@ -5,9 +5,9 @@
 		.module('app')
 		.controller('RestaurantDetailsController', RestaurantDetailsController);
 
-	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'googleMapsService', 'logger', '$routeParams'];
 
-	function RestaurantDetailsController($location, dataservice, logger, $routeParams) {
+	function RestaurantDetailsController($location, dataservice, googleMapsService, logger, $routeParams) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'RestaurantDetailsController';
@@ -28,6 +28,13 @@
 			vm.restaurantId = $routeParams.restaurantid;
 			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
 				vm.restaurant = data;
+				if (!!vm.restaurant.Lat && !!vm.restaurant.Lng) {
+					var markers = [
+						[vm.restaurant.Name, vm.restaurant.Lat, vm.restaurant.Lng]
+					];
+
+					googleMapsService.load(markers);
+				}
 				return vm.restaurant;
 			});
 		}

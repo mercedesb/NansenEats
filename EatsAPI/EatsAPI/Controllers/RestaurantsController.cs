@@ -2,6 +2,10 @@
 using EatsAPI.Models;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.DtoModels;
+using EatsAPI.Properties;
+using EatsAPI.Utility;
+using Geocoding;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -14,6 +18,12 @@ namespace EatsAPI.Controllers
 	public class RestaurantsController : ApiController
 	{
 		private EatsContext db = new EatsContext();
+		private IGeocoder _geocoder;
+		public RestaurantsController(IGeocoder geocoder)
+		{
+			_geocoder = geocoder;
+		}
+
 
 		// GET: api/Restaurants
 		public IQueryable<RestaurantDto> GetRestaurants()
@@ -52,6 +62,20 @@ namespace EatsAPI.Controllers
 
 			db.Entry(restaurant).State = EntityState.Modified;
 
+			var geocoded = _geocoder.Geocode(restaurant.Address, restaurant.City, "IL", restaurant.Zip, "USA").FirstOrDefault();
+			if (geocoded != null)
+			{
+				Restaurant dbRestaurant = db.Restaurants.Find(restaurant.Id);
+				if (dbRestaurant.Lat != geocoded.Coordinates.Latitude || dbRestaurant.Lng != geocoded.Coordinates.Longitude)
+				{
+					restaurant.Lat = geocoded.Coordinates.Latitude;
+					restaurant.Lng = geocoded.Coordinates.Longitude;
+					double dist = GeoUtility.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, restaurant.Lat, restaurant.Lng);
+					dist = Math.Round(dist, 2);
+					restaurant.DistanceFromOffice = dist;
+				}
+			}
+
 			try
 			{
 				db.SaveChanges();
@@ -85,6 +109,17 @@ namespace EatsAPI.Controllers
 			//var user = db.Users.FirstOrDefault(u => u.Id == currentUserId);
 
 			//if (user != null) restaurant.CreatedBy = user;
+
+			var geocoded = _geocoder.Geocode(restaurant.Address, restaurant.City, "IL", restaurant.Zip, "USA").FirstOrDefault();
+			if (geocoded != null)
+			{
+				restaurant.Lat = geocoded.Coordinates.Latitude;
+				restaurant.Lng = geocoded.Coordinates.Longitude;
+
+				double dist = GeoUtility.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, restaurant.Lat, restaurant.Lng);
+				dist = Math.Round(dist, 2);
+				restaurant.DistanceFromOffice = dist;
+			}
 
 			db.Restaurants.Add(restaurant);
 			db.SaveChanges();
