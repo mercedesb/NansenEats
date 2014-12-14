@@ -30,9 +30,15 @@
 
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", ",
+						select: _autocompleteChange
+					}
 				}
 			});
 		}
@@ -48,6 +54,15 @@
 					//handle exception (show error or something)
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();

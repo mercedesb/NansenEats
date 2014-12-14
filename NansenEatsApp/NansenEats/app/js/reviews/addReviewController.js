@@ -39,7 +39,8 @@
 						dataTextField: 'Name',
 						dataSource: vm.availableTags,
 						template: '<span title="#: Description#">#: Name#</span>',
-						separator: ", "
+						separator: ", ",
+						select: _autocompleteChange
 					}
 				}
 				
@@ -67,6 +68,15 @@
 					}
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();

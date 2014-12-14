@@ -54,15 +54,6 @@ namespace EatsAPI.Controllers
 			}
 			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
 			
-			//TODO: a better way to do this--preferably AutoMapper
-			var tempTags = new List<Category>();
-			if (rating.Tags != null)
-				tempTags.AddRange(rating.Tags);
-			
-			tempTags.AddRange(ratingDto.TagNames.GetTags(db));
-
-			rating.Tags = tempTags;
-
 			//Restaurant r = new Restaurant { Id = ratingDto.RestaurantId };
 
 			//TODO: a better way to do this--preferably AutoMapper
@@ -99,15 +90,6 @@ namespace EatsAPI.Controllers
 
 			Rating rating = Mapper.Map<RatingDto, Rating>(ratingDto);
 
-			var tempTags = new List<Category>();
-			if (rating.Tags != null)
-				tempTags.AddRange(rating.Tags);
-
-			if (ratingDto.TagNames != null)
-				tempTags.AddRange(ratingDto.TagNames.GetTags(db));
-
-			rating.Tags = tempTags;
-			
 			rating.Restaurant = db.Restaurants.SingleOrDefault(r => r.Id == ratingDto.RestaurantId);
 
 			if (rating.Restaurant != null)

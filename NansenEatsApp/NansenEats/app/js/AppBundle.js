@@ -829,6 +829,17 @@
 			vm.restaurantId = $routeParams.restaurantid;
 			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
 				vm.restaurant = data;
+				if (!!vm.restaurant.Ratings && !!vm.restaurant.Ratings.length) {
+					angular.forEach(vm.restaurant.Ratings, function (value, key) {
+
+						if (!!value.Tags && !!value.Tags.length) {
+							var tagNames = value.Tags.map(function (item) {
+								return item.Name;
+							});
+							value.TagNames = tagNames.join(', ');
+						}
+					});
+				}
 				if (!!vm.restaurant.Lat && !!vm.restaurant.Lng) {
 					var markers = [
 						[vm.restaurant.Name, vm.restaurant.Lat, vm.restaurant.Lng]
@@ -976,7 +987,8 @@
 						dataTextField: 'Name',
 						dataSource: vm.availableTags,
 						template: '<span title="#: Description#">#: Name#</span>',
-						separator: ", "
+						separator: ", ",
+						select: _autocompleteChange
 					}
 				}
 				
@@ -1004,6 +1016,15 @@
 					}
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();
@@ -1041,9 +1062,15 @@
 
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", ",
+						select: _autocompleteChange
+					}
 				}
 			});
 		}
@@ -1059,6 +1086,15 @@
 					//handle exception (show error or something)
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();

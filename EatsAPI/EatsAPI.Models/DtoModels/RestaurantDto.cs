@@ -34,35 +34,4 @@ namespace EatsAPI.Models.DtoModels
 		public List<RatingDto> Ratings { get; set; }
 		public List<CommentDto> Comments { get; set; }
 	}
-
-	public class RatingDto
-	{
-		public int Id { get; set; }
-		public int Value { get; set; }
-		public DateTime CreatedDate { get; set; }
-		public int RestaurantId { get; set; }
-		//public List<Category> Tags { get; set; }
-		public string TagNames { get; set; }
-		
-		//public int UserId { get; set; }
-
-		public RatingDto()
-		{
-			CreatedDate = DateTime.Now;
-		}
-	}
-
-	public class CommentDto
-	{
-		public int Id { get; set; }
-		public string Value { get; set; }
-		public DateTime CreatedDate { get; set; }
-		public int RestaurantId { get; set; }
-		//public int UserId { get; set; }
-
-		public CommentDto()
-		{
-			CreatedDate = DateTime.Now;
-		}
-	}
 }

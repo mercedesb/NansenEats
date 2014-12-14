@@ -28,6 +28,17 @@
 			vm.restaurantId = $routeParams.restaurantid;
 			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
 				vm.restaurant = data;
+				if (!!vm.restaurant.Ratings && !!vm.restaurant.Ratings.length) {
+					angular.forEach(vm.restaurant.Ratings, function (value, key) {
+
+						if (!!value.Tags && !!value.Tags.length) {
+							var tagNames = value.Tags.map(function (item) {
+								return item.Name;
+							});
+							value.TagNames = tagNames.join(', ');
+						}
+					});
+				}
 				if (!!vm.restaurant.Lat && !!vm.restaurant.Lng) {
 					var markers = [
 						[vm.restaurant.Name, vm.restaurant.Lat, vm.restaurant.Lng]
