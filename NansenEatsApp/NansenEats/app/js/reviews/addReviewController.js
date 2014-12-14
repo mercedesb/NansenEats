@@ -32,13 +32,15 @@
 			vm.comment.RestaurantId = $routeParams.restaurantid;
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
 
-					//vm.tags = new kendo.data.DataSource({
-					//	data: data
-					//});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", "
+					}
 				}
 				
 			});

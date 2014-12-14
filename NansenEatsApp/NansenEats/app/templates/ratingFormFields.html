@@ -1,4 +1,4 @@
 ﻿<label>Rating</label>
 <input type="number" max="10" min="1" ng-required="vm.showRating" ng-model="vm.rating.Value" />
 <label>Tags</label>
-<input kendo-auto-complete ng-model="vm.rating.TagNames" k-data-source="vm.availableTags" />
+<input kendo-auto-complete ng-model="vm.rating.TagNames" k-options="vm.options" />
