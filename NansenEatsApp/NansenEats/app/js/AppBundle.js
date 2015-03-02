@@ -25,6 +25,10 @@
 				templateUrl: "app/templates/login.html",
 				controller: "LoginController as vm"
 			})
+			.when("/associate", {
+				templateUrl: "app/templates/associate.html",
+				controller: "AssociateController as vm"
+			})
 			.when("/signup", {
 				templateUrl: "app/templates/signup.html",
 				controller: "SignupController as vm"
@@ -66,6 +70,12 @@
 
 	app.config(function ($httpProvider) {
 		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	var serviceBase = 'http://eatsapi.azurewebsites.net/';//'http://eatsapi/';
+	app.constant('ngAuthSettings', {
+		apiServiceBaseUri: serviceBase,
+		clientId: 'angJsApp'
 	});
 
 	app.run(['authService', function (authService) {
@@ -234,11 +244,11 @@
 		.module('app')
 		.factory('authService', authService);
 
-	authService.$inject = ['$http', '$q', 'localStorageService'];
+	authService.$inject = ['$http', '$q', 'localStorageService', 'ngAuthSettings'];
 
-	function authService($http, $q, localStorageService) {
+	function authService($http, $q, localStorageService, ngAuthSettings) {
 
-		var serviceBase = 'http://eatsapi.local/';
+		var serviceBase = ngAuthSettings.apiServiceBaseUri;
 		var authServiceFactory = {};
 
 		var _authentication = {
@@ -247,9 +257,15 @@
 			userId: "",
 			userDisplayName: "",
 			userImageUrl: "",
-			userEmail: ""
+			userEmail: "",
+			useRefreshTokens: false
 		};
 
+		var _externalAuthData = {
+			provider: "",
+			userName: "",
+			externalAccessToken: ""
+		};
 		var _saveRegistration = function (registration) {
 
 			_logOut();
@@ -264,6 +280,10 @@
 
 			var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
+			if (loginData.useRefreshTokens) {
+				data = data + "&client_id=" + ngAuthSettings.clientId;
+			}
+
 			var deferred = $q.defer();
 
 			$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
@@ -275,12 +295,20 @@
 				var userImageUrl = response.userImageUrl;
 				var userEmail = loginData.email;
 
-				localStorageService.set('authorizationData', { token: token, userName: userName, userId: userId, userDisplayName: userDisplayName, userImageUrl: userImageUrl, userEmail: userEmail });
+				if (loginData.useRefreshTokens) {
+					localStorageService.set('authorizationData', { token: token, userName: userName, refreshToken: response.refresh_token, useRefreshTokens: true, userId: userId, userDisplayName: userDisplayName, userImageUrl: userImageUrl, userEmail: userEmail });
+				}
+				else {
+					localStorageService.set('authorizationData', { token: token, userName: userName, refreshToken: "", useRefreshTokens: false, userId: userId, userDisplayName: userDisplayName, userImageUrl: userImageUrl, userEmail: userEmail });
+				}
 
 				_authentication.isAuth = true;
-				_authentication.userName = loginData.userName;
-				_authentication.userId = response.userId;
-				_authentication.userDisplayName = response.displayName;
+				_authentication.userName = userName;
+				_authentication.userId = userId;
+				_authentication.userDisplayName = userDisplayName;
+				_authentication.userImageUrl = userImageUrl;
+				_authentication.userEmail = "";
+				_authentication.useRefreshTokens = loginData.useRefreshTokens;
 
 				deferred.resolve(response);
 
@@ -303,7 +331,7 @@
 			_authentication.userDisplayName = "";
 			_authentication.userImageUrl = "";
 			_authentication.userEmail = "";
-
+			_authentication.useRefreshTokens = false;
 		};
 
 		var _fillAuthData = function () {
@@ -316,16 +344,95 @@
 				_authentication.userDisplayName = authData.userDisplayName;
 				_authentication.userImageUrl = authData.userImageUrl;
 				_authentication.userEmail = authData.userEmail;
+				_authentication.useRefreshTokens = authData.useRefreshTokens;
 			}
 
-		}
+		};
 
+		var _refreshToken = function () {
+			var deferred = $q.defer();
+
+			var authData = localStorageService.get('authorizationData');
+
+			if (authData) {
+
+				if (authData.useRefreshTokens) {
+
+					var data = "grant_type=refresh_token&refresh_token=" + authData.refreshToken + "&client_id=" + ngAuthSettings.clientId;
+
+					localStorageService.remove('authorizationData');
+
+					$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+
+						localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+
+						deferred.resolve(response);
+
+					}).error(function (err, status) {
+						_logOut();
+						deferred.reject(err);
+					});
+				}
+			}
+
+			return deferred.promise;
+		};
+
+		var _obtainAccessToken = function (externalData) {
+
+			var deferred = $q.defer();
+
+			$http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
+
+				localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+
+				_authentication.isAuth = true;
+				_authentication.userName = response.userName;
+				_authentication.useRefreshTokens = false;
+
+				deferred.resolve(response);
+
+			}).error(function (err, status) {
+				_logOut();
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+
+		};
+
+		var _registerExternal = function (registerExternalData) {
+
+			var deferred = $q.defer();
+
+			$http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
+
+				localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+
+				_authentication.isAuth = true;
+				_authentication.userName = response.userName;
+				_authentication.useRefreshTokens = false;
+
+				deferred.resolve(response);
+
+			}).error(function (err, status) {
+				_logOut();
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+
+		};
 		authServiceFactory.saveRegistration = _saveRegistration;
 		authServiceFactory.login = _login;
 		authServiceFactory.logOut = _logOut;
 		authServiceFactory.fillAuthData = _fillAuthData;
 		authServiceFactory.authentication = _authentication;
+		authServiceFactory.refreshToken = _refreshToken;
 
+		authServiceFactory.obtainAccessToken = _obtainAccessToken;
+		authServiceFactory.externalAuthData = _externalAuthData;
+		authServiceFactory.registerExternal = _registerExternal;
 		return authServiceFactory;
 	}
 })();
@@ -337,10 +444,10 @@
 		 .module('app')
 		 .factory('dataservice', dataservice);
 
-	dataservice.$inject = ['$http', '$location', 'exception'];
+	dataservice.$inject = ['$http', '$location', 'exception', 'ngAuthSettings'];
 
-	function dataservice($http, $location, exception) {
-		var baseUrl = "http://eatsapi.local";
+	function dataservice($http, $location, exception, ngAuthSettings) {
+		var baseUrl = ngAuthSettings.apiServiceBaseUri;
 
 		var service = {
 			getRestaurants: getRestaurants,
@@ -511,6 +618,54 @@
 		}
 	}
 })();
+///#source 1 1 /app/js/associate/associateController.js
+(function() {
+	'use strict';
+	angular
+		.module('app')
+		.controller('AssociateController', AssociateController);
+
+	AssociateController.$inject = ['$location', 'authService', '$timeout'];
+
+	function AssociateController($location, authService, $timeout) {
+
+		var vm = this;
+		vm.savedSuccessfully = false;
+		vm.message = "";
+
+		vm.registerData = {
+			userName: authService.externalAuthData.userName,
+			provider: authService.externalAuthData.provider,
+			externalAccessToken: authService.externalAuthData.externalAccessToken
+		};
+
+		vm.registerExternal = function() {
+
+			authService.registerExternal(vm.registerData).then(function(response) {
+
+					vm.savedSuccessfully = true;
+					vm.message = "User has been registered successfully, you will be redicted to orders page in 2 seconds.";
+					startTimer();
+
+				},
+				function(response) {
+					var errors = [];
+					for (var key in response.modelState) {
+						errors.push(response.modelState[key]);
+					}
+					vm.message = "Failed to register user due to:" + errors.join(' ');
+				});
+		};
+
+		var startTimer = function() {
+			var timer = $timeout(function() {
+				$timeout.cancel(timer);
+				$location.path('/');
+			}, 2000);
+		}
+
+	}
+})();
 ///#source 1 1 /app/js/login/loginController.js
 (function() {
 	'use strict';
@@ -518,31 +673,75 @@
 		.module('app')
 		.controller('LoginController', LoginController);
 
-	LoginController.$inject = ['$location', 'authService'];
+	LoginController.$inject = ['$location', 'authService','ngAuthSettings'];
 
-	function LoginController($location, authService) {
+	function LoginController($location, authService, ngAuthSettings) {
 
 		var vm = this;
 		vm.loginData = {
 			userName: "",
-			password: ""
+			password: "",
+			useRefreshTokens: false
 		};
 
 		vm.message = "";
 
-		vm.login = function () {
+		vm.login = function() {
 
-			authService.login(vm.loginData).then(function (response) {
+			authService.login(vm.loginData).then(function(response) {
 
-				$location.path('/');
+					$location.path('/');
 
-			},
-			 function (err) {
-			 	vm.message = err.error_description;
-			 });
+				},
+				function(err) {
+					vm.message = err.error_description;
+				});
 		};
 
-	};
+		vm.authExternalProvider = function(provider) {
+
+			var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
+
+			var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
+				+ "&response_type=token&client_id=" + ngAuthSettings.clientId
+				+ "&redirect_uri=" + redirectUri;
+			window.$windowScope = this;
+
+			var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
+		};
+
+		vm.authCompletedCB = function(fragment) {
+
+			vm.$apply(function() {
+
+				if (fragment.haslocalaccount == 'False') {
+
+					authService.logOut();
+
+					authService.externalAuthData = {
+						provider: fragment.provider,
+						userName: fragment.external_user_name,
+						externalAccessToken: fragment.external_access_token
+					};
+
+					$location.path('/associate');
+
+				} else {
+					//Obtain access token and redirect to orders
+					var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
+					authService.obtainAccessToken(externalData).then(function(response) {
+
+							$location.path('/');
+
+						},
+						function(err) {
+							vm.message = err.error_description;
+						});
+				}
+
+			});
+		};
+	}
 })();
 ///#source 1 1 /app/js/signup/signupController.js
 (function() {

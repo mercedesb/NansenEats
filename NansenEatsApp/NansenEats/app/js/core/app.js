@@ -24,6 +24,10 @@
 				templateUrl: "app/templates/login.html",
 				controller: "LoginController as vm"
 			})
+			.when("/associate", {
+				templateUrl: "app/templates/associate.html",
+				controller: "AssociateController as vm"
+			})
 			.when("/signup", {
 				templateUrl: "app/templates/signup.html",
 				controller: "SignupController as vm"
@@ -65,6 +69,12 @@
 
 	app.config(function ($httpProvider) {
 		$httpProvider.interceptors.push('authInterceptorService');
+	});
+
+	var serviceBase = 'http://eatsapi.azurewebsites.net/';//'http://eatsapi/';
+	app.constant('ngAuthSettings', {
+		apiServiceBaseUri: serviceBase,
+		clientId: 'angJsApp'
 	});
 
 	app.run(['authService', function (authService) {

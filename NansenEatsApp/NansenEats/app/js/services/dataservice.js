@@ -5,10 +5,10 @@
 		 .module('app')
 		 .factory('dataservice', dataservice);
 
-	dataservice.$inject = ['$http', '$location', 'exception'];
+	dataservice.$inject = ['$http', '$location', 'exception', 'ngAuthSettings'];
 
-	function dataservice($http, $location, exception) {
-		var baseUrl = "http://eatsapi.local";
+	function dataservice($http, $location, exception, ngAuthSettings) {
+		var baseUrl = ngAuthSettings.apiServiceBaseUri;
 
 		var service = {
 			getRestaurants: getRestaurants,

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.Initialization;
+using EatsAPI.Models.Properties;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EatsAPI.Models
@@ -13,7 +10,7 @@ namespace EatsAPI.Models
 	{
 		public EatsContext() : base("NansenEats")
 		{
-			if (Properties.Settings.Default.SeedDatabase)
+			if (Settings.Default.SeedDatabase)
 				Database.SetInitializer<EatsContext>(new EatsDbInitializer());
 			else
 				Database.SetInitializer<EatsContext>(null);
@@ -23,5 +20,7 @@ namespace EatsAPI.Models
 		public DbSet<Rating> Ratings { get; set; }
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Category> Categories { get; set; }
+		public DbSet<Client> Clients { get; set; }
+		public DbSet<RefreshToken> RefreshTokens { get; set; }
 	}
 }

@@ -49,6 +49,7 @@
     <Content Include="app\js\AppBundle.min.js">
       <DependentUpon>AppBundle.js</DependentUpon>
     </Content>
+    <Content Include="app\js\associate\associateController.js" />
     <Content Include="app\js\core\app.js" />
     <Content Include="app\js\core\loader.js" />
     <Content Include="app\js\core\logger.js" />
@@ -63,8 +64,10 @@
     <Content Include="app\js\restaurants\restaurantDetailsController.js" />
     <Content Include="app\js\reviews\addReviewController.js" />
     <Content Include="app\js\search\searchController.js" />
+    <Content Include="app\templates\associate.html" />
     <Content Include="app\templates\search.html" />
     <Content Include="app\templates\shell.html" />
+    <Content Include="authComplete.html" />
     <Content Include="Scripts\angular-local-storage.js" />
     <Content Include="app\js\services\authInterceptorService.js" />
     <Content Include="app\js\services\authService.js" />
@@ -146,10 +149,13 @@
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Content\images\kendoui.ttf" />
     <Content Include="Content\images\kendoui.woff" />
+    <None Include="Properties\PublishProfiles\nanseneats - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\nanseneats - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\authComplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -245,6 +251,15 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Azure|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

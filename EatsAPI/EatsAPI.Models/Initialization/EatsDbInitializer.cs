@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using EatsAPI.Models.Enums;
+using EatsAPI.Models.Helpers;
 
 namespace EatsAPI.Models.Initialization
 {
@@ -12,12 +14,14 @@ namespace EatsAPI.Models.Initialization
 		protected IList<Restaurant> _defaultRestaurants;
 		protected IList<Rating> _defaultRatings;
 		protected IList<Comment> _defaultComments;
+		protected IList<Client> _defaultClients; 
 
 		protected override void Seed(EatsContext context)
 		{
 			SeedCategories();
 			SeedRestaurants();
 			SeedReviews();
+			SeedClients();
 
 			foreach (Category category in _defaultCategories)
 				context.Categories.Add(category);
@@ -31,9 +35,39 @@ namespace EatsAPI.Models.Initialization
 			foreach (Restaurant restaurant in _defaultRestaurants)
 				context.Restaurants.Add(restaurant);
 
+			foreach (Client client in _defaultClients)
+				context.Clients.Add(client);
+
 			context.SaveChanges();
 
 			base.Seed(context);
+		}
+
+		private void SeedClients()
+		{
+			_defaultClients = new List<Client>();
+
+			_defaultClients.Add(new Client
+			{
+				Active = true,
+				AllowedOrigin = "*",
+				ApplicationType = ApplicationTypes.NativeConfidential,
+				Id = "consoleApp",
+				Name = "Console Application",
+				RefreshTokenLifeTime = 14400,
+				Secret = Helper.GetHash("abc@123")
+			});
+
+			_defaultClients.Add(new Client
+			{
+				Active = true,
+				AllowedOrigin = "http://nanseneatsapp.local",
+				ApplicationType = ApplicationTypes.JavaScript,
+				Id = "angJsApp",
+				Name = "AngularJS Front End Application",
+				RefreshTokenLifeTime = 7200,
+				Secret = Helper.GetHash("abc@123")
+			});
 		}
 
 		private void SeedCategories()
