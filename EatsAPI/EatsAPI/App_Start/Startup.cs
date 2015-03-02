@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.MicrosoftAccount;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Security.Twitter;
 using Owin;
+using EatsAPI.App_Start;
 
 [assembly: OwinStartup(typeof(EatsAPI.Startup))]
 namespace EatsAPI
@@ -30,6 +31,9 @@ namespace EatsAPI
 
 			app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 			app.UseWebApi(config);
+
+
+			var _container = UnityConfig.RegisterComponents(config);
 
 			AutoMapperConfig.Register();
 			AutoMapper.Mapper.AssertConfigurationIsValid();

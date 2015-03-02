@@ -2,6 +2,9 @@
 using EatsAPI.Models;
 using EatsAPI.Models.DBModels;
 using EatsAPI.Models.DtoModels;
+using EatsAPI.Properties;
+using EatsAPI.Utility;
+using Geocoding;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -14,6 +17,12 @@ namespace EatsAPI.Controllers
 	public class RestaurantsController : ApiController
 	{
 		private EatsContext db = new EatsContext();
+		private IGeocoder _geocoder;
+
+		public RestaurantsController(IGeocoder geocoder)
+		{
+			_geocoder = geocoder;
+		}
 
 		// GET: api/Restaurants
 		public IQueryable<RestaurantDto> GetRestaurants()
@@ -50,6 +59,16 @@ namespace EatsAPI.Controllers
 				return BadRequest();
 			}
 
+			var addressToGeocode = string.Format("{0}, {1}, {2}", restaurant.Address, restaurant.City, "IL");
+			var code = _geocoder.Geocode(addressToGeocode).FirstOrDefault();
+			if (code == null)
+			{
+				//TODO: handle exception
+			}
+			else
+			{
+				restaurant.DistanceFromOffice = DistanceHelper.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, code.Coordinates.Latitude, code.Coordinates.Longitude);
+			}
 			db.Entry(restaurant).State = EntityState.Modified;
 
 			try
@@ -80,6 +99,19 @@ namespace EatsAPI.Controllers
 			{
 				return BadRequest(ModelState);
 			}
+
+			// Geocode address so we can set the two closest stores
+			var addressToGeocode = string.Format("{0}, {1}, {2}", restaurant.Address, restaurant.City, "IL");
+			var code = _geocoder.Geocode(addressToGeocode).FirstOrDefault();
+			if (code == null)
+			{
+				//TODO: handle exception
+			}
+			else
+			{
+				restaurant.DistanceFromOffice = DistanceHelper.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, code.Coordinates.Latitude, code.Coordinates.Longitude);
+			}
+
 
 			//var currentUserId = User.Identity.GetUserId();
 			//var user = db.Users.FirstOrDefault(u => u.Id == currentUserId);
