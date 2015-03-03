@@ -74,7 +74,7 @@
 	var serviceBase = 'http://eatsapi.azurewebsites.net/';//'http://eatsapi/';
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,
-		clientId: 'angJsApp'
+		clientId: 'angJsAzureApp' //'angJsApp'
 	});
 
 	app.run(['authService', function (authService) {

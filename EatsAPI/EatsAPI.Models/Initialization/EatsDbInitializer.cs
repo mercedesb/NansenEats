@@ -68,6 +68,17 @@ namespace EatsAPI.Models.Initialization
 				RefreshTokenLifeTime = 7200,
 				Secret = Helper.GetHash("abc@123")
 			});
+
+			_defaultClients.Add(new Client
+			{
+				Active = true,
+				AllowedOrigin = "http://nanseneats.azurewebsites.net",
+				ApplicationType = ApplicationTypes.JavaScript,
+				Id = "angJsAzureApp",
+				Name = "AngularJS Front End Application in Azure",
+				RefreshTokenLifeTime = 7200,
+				Secret = Helper.GetHash("abc@123")
+			});
 		}
 
 		private void SeedCategories()
