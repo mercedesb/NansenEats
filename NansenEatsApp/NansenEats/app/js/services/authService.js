@@ -31,7 +31,7 @@
 
 			_logOut();
 
-			return $http.post(serviceBase + 'api/account/register', registration).then(function (response) {
+			return $http.post(serviceBase + '/api/account/register', registration).then(function (response) {
 				return response;
 			});
 
@@ -47,7 +47,7 @@
 
 			var deferred = $q.defer();
 
-			$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+			$http.post(serviceBase + '/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
 				var token = response.access_token;
 				var userName = loginData.userName;
@@ -123,7 +123,7 @@
 
 					localStorageService.remove('authorizationData');
 
-					$http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+					$http.post(serviceBase + '/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
 						localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
 
@@ -143,7 +143,7 @@
 
 			var deferred = $q.defer();
 
-			$http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
+			$http.get(serviceBase + '/api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
 
 				localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 
@@ -166,7 +166,7 @@
 
 			var deferred = $q.defer();
 
-			$http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
+			$http.post(serviceBase + '/api/account/registerexternal', registerExternalData).success(function (response) {
 
 				localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
 

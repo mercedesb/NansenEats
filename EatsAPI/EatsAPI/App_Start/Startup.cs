@@ -62,7 +62,8 @@ namespace EatsAPI
 			{
 				ClientId = "845690146160-t1n5pde1l17tf1oriq153r7u5f2sqfgf.apps.googleusercontent.com",
 				ClientSecret = "J64tsYKiWZZ9hX-PH0DP3q_s",
-				Provider = new GoogleAuthProvider()
+				Provider = new GoogleAuthProvider(),
+				CallbackPath = new PathString("/signin-google")
 			};
 			app.UseGoogleAuthentication(googleAuthOptions);
 
