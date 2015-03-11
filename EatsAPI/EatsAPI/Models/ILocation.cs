@@ -1,5 +1,4 @@
-﻿
-namespace EatsAPI.Interfaces
+﻿namespace EatsAPI.Models
 {
 	public interface ILocation
 	{

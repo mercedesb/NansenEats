@@ -17,9 +17,5 @@ namespace EatsAPI.Models.DBModels
 
 		[MaxLength(1000)]
 		public string ImagePath { get; set; }
-
-		#region Navigational properties
-		public virtual ICollection<Rating> Ratings { get; set; }
-		#endregion
 	}
 }

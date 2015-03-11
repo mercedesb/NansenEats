@@ -32,13 +32,16 @@
 			vm.comment.RestaurantId = $routeParams.restaurantid;
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
 
-					//vm.tags = new kendo.data.DataSource({
-					//	data: data
-					//});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", ",
+						select: _autocompleteChange
+					}
 				}
 				
 			});
@@ -49,7 +52,7 @@
 				return;
 			}
 			dataservice.addRating(vm.rating).then(function (data) {
-				if (data && vm.comment.value) {
+				if (data && vm.comment.Value) {
 					dataservice.addComment(vm.comment).then(function (data) {
 						if (data) {
 							$location.url('/restaurant/' + $routeParams.restaurantid);
@@ -65,6 +68,15 @@
 					}
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();

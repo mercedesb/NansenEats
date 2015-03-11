@@ -137,26 +137,6 @@ ul.restaurants li h4, ul.restaurants li p {
 	margin-right: 5px;
 }
 
-/*.circle-nav {
-	display:inline-block;
-	width: 100px;
-	height: 100px;
-	-moz-border-radius: 50px;
-	-webkit-border-radius: 50px;
-	border-radius: 50px;
-	color: #fff;
-	background-color: #ec8245;
-	font-weight: bold;
-	border-color: #eb592f;
-	text-shadow: 0 -1px 0 #eb592f;
-	background-image: -webkit-linear-gradient(top, #ec8245 0%, #eb592f 100%);
-	background-image:      -o-linear-gradient(top, #ec8245 0%, #eb592f 100%);
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ec8245), to(#eb592f));
-	background-image:         linear-gradient(to bottom, #ec8245 0%, #eb592f 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec8245', endColorstr='#ffeb592f', GradientType=0);
-	background-repeat: repeat-x;
-}*/
-
 /* custom elements */
 
 .progress-bar-nansen {
@@ -194,4 +174,9 @@ ul.restaurants li h4, ul.restaurants li p {
 	 background-color: #55acee;
     border-color: #2e6da4;
     color: #fff;
+}
+
+/* Map styling */
+#map_canvas {
+	min-height:300px;
 }

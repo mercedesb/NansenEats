@@ -19,6 +19,7 @@
 		<file>/app/js/services/authService.js</file>
 		<file>/app/js/services/dataservice.js</file>
 		<file>/app/js/associate/associateController.js</file>
+		<file>/app/js//services/googleMapsService.js</file>
 		<file>/app/js/login/loginController.js</file>
 		<file>/app/js/signup/signupController.js</file>
 		<file>/app/js/layout/shellController.js</file>

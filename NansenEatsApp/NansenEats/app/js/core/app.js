@@ -17,48 +17,38 @@
 	app.config(function($routeProvider) {
 		$routeProvider
 			.when("/", {
-				templateUrl: "app/templates/restaurantlist.html",
-				controller: "RestaurantListController as vm"
+				templateUrl: "app/templates/restaurantlist.html"
 			})
 			.when("/login", {
-				templateUrl: "app/templates/login.html",
-				controller: "LoginController as vm"
+				templateUrl: "app/templates/login.html"
 			})
 			.when("/associate", {
 				templateUrl: "app/templates/associate.html",
 				controller: "AssociateController as vm"
 			})
 			.when("/signup", {
-				templateUrl: "app/templates/signup.html",
-				controller: "SignupController as vm"
+				templateUrl: "app/templates/signup.html"
 			})
 			.when("/restaurant/new-restaurant", {
-				templateUrl: "app/templates/restaurantform.html",
-				controller: "AddRestaurantController as vm"
+				templateUrl: "app/templates/addrestaurant.html"
 			})
 			.when("/restaurant/:restaurantid", {
-				templateUrl: "app/templates/restaurantdetails.html",
-				controller: "RestaurantDetailsController as vm"
+				templateUrl: "app/templates/restaurantdetails.html"
 			})
 			.when("/restaurant/:restaurantid/edit", {
-				templateUrl: "app/templates/restaurantform.html",
-				controller: "EditRestaurantController as vm"
+				templateUrl: "app/templates/editrestaurant.html"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "AddReviewController as vm"
+				templateUrl: "app/templates/addreview.html"
 			})
 			.when("/rating/:ratingid/edit", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "EditRatingController as vm"
+				templateUrl: "app/templates/editrating.html"
 			})
 			.when("/comment/:commentid/edit", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "EditCommentController as vm"
+				templateUrl: "app/templates/editcomment.html"
 			})
 			.when("/search/:searchTerm", {
-				templateUrl: "app/templates/search.html",
-				controller: "SearchController as vm"
+				templateUrl: "app/templates/search.html"
 			})
 			.otherwise({ redirectTo: "/" });
 	});

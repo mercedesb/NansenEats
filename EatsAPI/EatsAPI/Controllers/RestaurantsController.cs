@@ -5,6 +5,7 @@ using EatsAPI.Models.DtoModels;
 using EatsAPI.Properties;
 using EatsAPI.Utility;
 using Geocoding;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -18,11 +19,11 @@ namespace EatsAPI.Controllers
 	{
 		private EatsContext db = new EatsContext();
 		private IGeocoder _geocoder;
-
 		public RestaurantsController(IGeocoder geocoder)
 		{
 			_geocoder = geocoder;
 		}
+
 
 		// GET: api/Restaurants
 		public IQueryable<RestaurantDto> GetRestaurants()
@@ -59,17 +60,21 @@ namespace EatsAPI.Controllers
 				return BadRequest();
 			}
 
-			var addressToGeocode = string.Format("{0}, {1}, {2}", restaurant.Address, restaurant.City, "IL");
-			var code = _geocoder.Geocode(addressToGeocode).FirstOrDefault();
-			if (code == null)
-			{
-				//TODO: handle exception
-			}
-			else
-			{
-				restaurant.DistanceFromOffice = DistanceHelper.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, code.Coordinates.Latitude, code.Coordinates.Longitude);
-			}
 			db.Entry(restaurant).State = EntityState.Modified;
+
+			var geocoded = _geocoder.Geocode(restaurant.Address, restaurant.City, "IL", restaurant.Zip, "USA").FirstOrDefault();
+			if (geocoded != null)
+			{
+				Restaurant dbRestaurant = db.Restaurants.Find(restaurant.Id);
+				if (dbRestaurant.Lat != geocoded.Coordinates.Latitude || dbRestaurant.Lng != geocoded.Coordinates.Longitude)
+				{
+					restaurant.Lat = geocoded.Coordinates.Latitude;
+					restaurant.Lng = geocoded.Coordinates.Longitude;
+					double dist = GeoUtility.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, restaurant.Lat, restaurant.Lng);
+					dist = Math.Round(dist, 2);
+					restaurant.DistanceFromOffice = dist;
+				}
+			}
 
 			try
 			{
@@ -87,7 +92,7 @@ namespace EatsAPI.Controllers
 				}
 			}
 
-			return Ok(restaurant);
+			return Ok(Mapper.Map<Restaurant, RestaurantDto>(restaurant));
 		}
 
 		// POST: api/Restaurants
@@ -100,23 +105,21 @@ namespace EatsAPI.Controllers
 				return BadRequest(ModelState);
 			}
 
-			// Geocode address so we can set the two closest stores
-			var addressToGeocode = string.Format("{0}, {1}, {2}", restaurant.Address, restaurant.City, "IL");
-			var code = _geocoder.Geocode(addressToGeocode).FirstOrDefault();
-			if (code == null)
-			{
-				//TODO: handle exception
-			}
-			else
-			{
-				restaurant.DistanceFromOffice = DistanceHelper.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, code.Coordinates.Latitude, code.Coordinates.Longitude);
-			}
-
-
 			//var currentUserId = User.Identity.GetUserId();
 			//var user = db.Users.FirstOrDefault(u => u.Id == currentUserId);
 
 			//if (user != null) restaurant.CreatedBy = user;
+
+			var geocoded = _geocoder.Geocode(restaurant.Address, restaurant.City, "IL", restaurant.Zip, "USA").FirstOrDefault();
+			if (geocoded != null)
+			{
+				restaurant.Lat = geocoded.Coordinates.Latitude;
+				restaurant.Lng = geocoded.Coordinates.Longitude;
+
+				double dist = GeoUtility.GetDistance(Settings.Default.OfficeLat, Settings.Default.OfficeLng, restaurant.Lat, restaurant.Lng);
+				dist = Math.Round(dist, 2);
+				restaurant.DistanceFromOffice = dist;
+			}
 
 			db.Restaurants.Add(restaurant);
 			db.SaveChanges();

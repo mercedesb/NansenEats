@@ -1,4 +1,4 @@
-﻿using EatsAPI.Interfaces;
+﻿using EatsAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace EatsAPI.Utility
 	/// <summary>
 	/// Static helper class for getting distances and converting rad/degrees.
 	/// </summary>
-	public static class DistanceHelper
+	public static class GeoUtility
 	{
 		/// <summary>
 		/// Convert from Degrees to Radians
@@ -78,30 +78,6 @@ namespace EatsAPI.Utility
 			list.Sort();
 
 			return list.First();
-		}
-
-		/// <summary>
-		/// Gets the closest points.
-		/// </summary>
-		/// <param name="originLat">The origin lat.</param>
-		/// <param name="originLong">The origin long.</param>
-		/// <param name="locations">The locations.</param>
-		/// <returns>A list of Distances sorted by the closest first (or null)</returns>
-		public static List<Distance> GetClosestPoints(double originLat, double originLong, IEnumerable<ILocation> locations)
-		{
-			// Build a List<Distance> that contains the calculated distance for each point
-			var list = locations
-					.Select(p => new Distance(p, GetDistance(originLat, originLong, p.Lat, p.Lng)))
-					.ToList();
-				//.Where(d => d.Miles >= 0).ToList();
-
-			if (!list.Any())
-				return null;
-
-			// Sort the List using the custom IComparable implementation to sort by Distance.Miles
-			list.Sort();
-
-			return list;
 		}
 	}
 
