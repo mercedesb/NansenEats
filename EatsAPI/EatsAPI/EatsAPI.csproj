@@ -183,7 +183,6 @@
     <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
     <Compile Include="Providers\TwitterAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Utility\DistanceHelper.cs" />
     <Compile Include="Utility\GeoUtility.cs" />
   </ItemGroup>
   <ItemGroup>

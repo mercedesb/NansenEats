@@ -1,11 +1,11 @@
 ﻿<div class="navbar-wrapper">
 	<div class="navbar navbar-default navbar-static-top" role="navigation">
-		<div class="navbar-header col-xs-9 col-sm-3">
+		<div class="navbar-header col-xs-12 col-sm-3">
 			<button type="button" class="btn btn-default navbar-btn navbar-left pull-left visible-xs" ng-show="shell.showOffcanvasButton" ng-click="shell.toggleCanvas()"><span class="icon-filter"></span></button>
 			<a class="navbar-brand" href="/#/">
 				<img alt="Brand" src="http://nansen.com/Global/Css/images/logoNansen.png" /> NansenEats
 			</a>
-			<button type="button" class="navbar-toggle col-xs-push-4" data-toggle="collapse" data-target=".navbar-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="sr-only">Toggle navigation</span>
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
@@ -19,7 +19,7 @@
 			<ul class="nav navbar-nav navbar-left">
 				<li class="" ng-hide="!shell.authentication.isAuth"><a href="/#/restaurant/new-restaurant">Add Restaurant</a></li>
 				<li class="" ng-hide="shell.authentication.isAuth"><a href="#/login"><span class="icon-lock"></span><span> Log in</span></a></li>
-				<li class="" ng-hide="!shell.authentication.isAuth"><p class="navbar-text"><span>{{shell.authentication.userDisplayName}} </span><span class="icon-user"></span></p></li>
+				<li class="" ng-hide="!shell.authentication.isAuth"><a><span>{{shell.authentication.userDisplayName}} </span><span class="icon-user"></span></a></li>
 				<li class="" ng-hide="!shell.authentication.isAuth"><a href="" ng-click="shell.logOut()"><span> Log out</span></a></li>
 			</ul>
 			<div class="navbar-right">

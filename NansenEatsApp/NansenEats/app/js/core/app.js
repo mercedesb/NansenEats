@@ -61,7 +61,7 @@
 		$httpProvider.interceptors.push('authInterceptorService');
 	});
 
-	var serviceBase = 'http://eatsapi.azurewebsites.net';//'http://eatsapi';
+	var serviceBase = 'http://eatsapi'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,
 		clientId: 'angJsAzureApp' //'angJsApp'

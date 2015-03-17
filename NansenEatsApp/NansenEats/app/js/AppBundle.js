@@ -18,48 +18,38 @@
 	app.config(function($routeProvider) {
 		$routeProvider
 			.when("/", {
-				templateUrl: "app/templates/restaurantlist.html",
-				controller: "RestaurantListController as vm"
+				templateUrl: "app/templates/restaurantlist.html"
 			})
 			.when("/login", {
-				templateUrl: "app/templates/login.html",
-				controller: "LoginController as vm"
+				templateUrl: "app/templates/login.html"
 			})
 			.when("/associate", {
 				templateUrl: "app/templates/associate.html",
 				controller: "AssociateController as vm"
 			})
 			.when("/signup", {
-				templateUrl: "app/templates/signup.html",
-				controller: "SignupController as vm"
+				templateUrl: "app/templates/signup.html"
 			})
 			.when("/restaurant/new-restaurant", {
-				templateUrl: "app/templates/restaurantform.html",
-				controller: "AddRestaurantController as vm"
+				templateUrl: "app/templates/addrestaurant.html"
 			})
 			.when("/restaurant/:restaurantid", {
-				templateUrl: "app/templates/restaurantdetails.html",
-				controller: "RestaurantDetailsController as vm"
+				templateUrl: "app/templates/restaurantdetails.html"
 			})
 			.when("/restaurant/:restaurantid/edit", {
-				templateUrl: "app/templates/restaurantform.html",
-				controller: "EditRestaurantController as vm"
+				templateUrl: "app/templates/editrestaurant.html"
 			})
 			.when("/restaurant/:restaurantid/new-review", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "AddReviewController as vm"
+				templateUrl: "app/templates/addreview.html"
 			})
 			.when("/rating/:ratingid/edit", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "EditRatingController as vm"
+				templateUrl: "app/templates/editrating.html"
 			})
 			.when("/comment/:commentid/edit", {
-				templateUrl: "app/templates/reviewForm.html",
-				controller: "EditCommentController as vm"
+				templateUrl: "app/templates/editcomment.html"
 			})
 			.when("/search/:searchTerm", {
-				templateUrl: "app/templates/search.html",
-				controller: "SearchController as vm"
+				templateUrl: "app/templates/search.html"
 			})
 			.otherwise({ redirectTo: "/" });
 	});
@@ -72,7 +62,7 @@
 		$httpProvider.interceptors.push('authInterceptorService');
 	});
 
-	var serviceBase = 'http://eatsapi.azurewebsites.net';//'http://eatsapi';
+	var serviceBase = 'http://eatsapi'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,
 		clientId: 'angJsAzureApp' //'angJsApp'
@@ -666,6 +656,77 @@
 
 	}
 })();
+///#source 1 1 /app/js//services/googleMapsService.js
+(function () {
+	'use strict';
+
+	angular
+		.module('app')
+		.factory('googleMapsService', googleMapsService);
+
+	googleMapsService.$inject = ['$http', '$location', 'exception'];
+
+	function googleMapsService($http, $location, exception) {
+		var office = {
+			name: 'Office',
+			lat: 41.8894833,
+			lng: -87.6517529
+		}
+
+		var service = {};
+
+		function _load(markers) {
+			_loadScript();
+
+			function _loadScript() {
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&callback=initializeMap';
+
+				//so google maps can find the callback
+				window.initializeMap = _initializeMap;
+
+				document.body.appendChild(script);
+			}
+
+			function _initializeMap() {
+				var officeMarker = [office.name, office.lat, office.lng];
+				markers.unshift(officeMarker);
+
+				var map;
+				var mapOptions = {
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					mapTypeControl: false
+				};
+
+				// Display a map on the page
+				map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+				// Display multiple markers on a map
+				var infoWindow = new google.maps.InfoWindow(), marker, i;
+				var bounds = new google.maps.LatLngBounds();
+
+
+				// Loop through our array of markers & place each one on the map  
+				for (i = 0; i < markers.length; i++) {
+					var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+					bounds.extend(position);
+					marker = new google.maps.Marker({
+						position: position,
+						map: map,
+						title: markers[i][0]
+					});
+					// Automatically center the map fitting all markers on the screen
+					map.fitBounds(bounds);
+				}
+			}
+		}
+
+		service.load = _load;
+		return service;
+
+	}
+})();
 ///#source 1 1 /app/js/login/loginController.js
 (function() {
 	'use strict';
@@ -944,9 +1005,9 @@
 		.module('app')
 		.controller('RestaurantDetailsController', RestaurantDetailsController);
 
-	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'googleMapsService', 'logger', '$routeParams'];
 
-	function RestaurantDetailsController($location, dataservice, logger, $routeParams) {
+	function RestaurantDetailsController($location, dataservice, googleMapsService, logger, $routeParams) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'RestaurantDetailsController';
@@ -967,6 +1028,24 @@
 			vm.restaurantId = $routeParams.restaurantid;
 			return dataservice.getRestaurant(vm.restaurantId).then(function (data) {
 				vm.restaurant = data;
+				if (!!vm.restaurant.Ratings && !!vm.restaurant.Ratings.length) {
+					angular.forEach(vm.restaurant.Ratings, function (value, key) {
+
+						if (!!value.Tags && !!value.Tags.length) {
+							var tagNames = value.Tags.map(function (item) {
+								return item.Name;
+							});
+							value.TagNames = tagNames.join(', ');
+						}
+					});
+				}
+				if (!!vm.restaurant.Lat && !!vm.restaurant.Lng) {
+					var markers = [
+						[vm.restaurant.Name, vm.restaurant.Lat, vm.restaurant.Lng]
+					];
+
+					googleMapsService.load(markers);
+				}
 				return vm.restaurant;
 			});
 		}
@@ -1100,13 +1179,16 @@
 			vm.comment.RestaurantId = $routeParams.restaurantid;
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
 
-					//vm.tags = new kendo.data.DataSource({
-					//	data: data
-					//});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", ",
+						select: _autocompleteChange
+					}
 				}
 				
 			});
@@ -1117,7 +1199,7 @@
 				return;
 			}
 			dataservice.addRating(vm.rating).then(function (data) {
-				if (data && vm.comment.value) {
+				if (data && vm.comment.Value) {
 					dataservice.addComment(vm.comment).then(function (data) {
 						if (data) {
 							$location.url('/restaurant/' + $routeParams.restaurantid);
@@ -1133,6 +1215,15 @@
 					}
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();
@@ -1170,9 +1261,15 @@
 
 			dataservice.getTags().then(function (data) {
 				if (data) {
-					vm.availableTags = data.map(function (item) {
-						return item.Name;
-					});
+					vm.availableTags = data;
+
+					vm.options = {
+						dataTextField: 'Name',
+						dataSource: vm.availableTags,
+						template: '<span title="#: Description#">#: Name#</span>',
+						separator: ", ",
+						select: _autocompleteChange
+					}
 				}
 			});
 		}
@@ -1188,6 +1285,15 @@
 					//handle exception (show error or something)
 				}
 			});
+		}
+
+		function _autocompleteChange(e) {
+			// get data item
+			var dataItem = this.dataItem(e.item.index());
+			if (!vm.rating.Tags) {
+				vm.rating.Tags = [];
+			}
+			vm.rating.Tags.push(dataItem);
 		}
 	}
 })();
