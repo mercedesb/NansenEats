@@ -5,14 +5,14 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$location', 'util', 'logger', '$routeParams'];
+    SearchController.$inject = ['$location', 'util', 'logger', '$routeParams', '$scope'];
 
-    function SearchController($location, util, logger, $routeParams) {
+    function SearchController($location, util, logger, $routeParams, $scope) {
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'SearchController';
         vm.search = doSearch;
-        //vm.$parent.showshowOffcanvasButton = false;
+        $scope.shell.showOffcanvasButton = false;
 
         activate();
 

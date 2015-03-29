@@ -5,14 +5,14 @@
 		 .module('app')
 		 .controller('RestaurantListController', RestaurantListController);
 
-	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams', '$scope'];
 
-	function RestaurantListController($location, dataservice, logger, $routeParams) {
+	function RestaurantListController($location, dataservice, logger, $routeParams, $scope) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'RestaurantListController';
 		vm.restaurants = [];
-		//vm.$parent.showshowOffcanvasButton = true;
+		$scope.shell.showOffcanvasButton = true;
 
 		activate();
 

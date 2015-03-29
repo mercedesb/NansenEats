@@ -4,9 +4,9 @@
 		.module('app')
 		.controller('LoginController', LoginController);
 
-	LoginController.$inject = ['$location', 'authService','ngAuthSettings'];
+	LoginController.$inject = ['$location', 'authService','ngAuthSettings', '$scope'];
 
-	function LoginController($location, authService, ngAuthSettings) {
+	function LoginController($location, authService, ngAuthSettings, $scope) {
 
 		var vm = this;
 		vm.loginData = {
@@ -16,7 +16,7 @@
 		};
 
 		vm.message = "";
-		//vm.$parent.showshowOffcanvasButton = false;
+		$scope.shell.showOffcanvasButton = false;
 
 		vm.login = function() {
 

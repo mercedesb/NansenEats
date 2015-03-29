@@ -62,7 +62,7 @@
 		$httpProvider.interceptors.push('authInterceptorService');
 	});
 
-	var serviceBase = 'http://eatsapi.azurewebsites.net'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
+	var serviceBase = 'http://eatsapi.local'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,
 		clientId: 'angJsAzureApp' //'angJsApp'
@@ -734,9 +734,9 @@
 		.module('app')
 		.controller('LoginController', LoginController);
 
-	LoginController.$inject = ['$location', 'authService','ngAuthSettings'];
+	LoginController.$inject = ['$location', 'authService','ngAuthSettings', '$scope'];
 
-	function LoginController($location, authService, ngAuthSettings) {
+	function LoginController($location, authService, ngAuthSettings, $scope) {
 
 		var vm = this;
 		vm.loginData = {
@@ -746,7 +746,7 @@
 		};
 
 		vm.message = "";
-		//vm.$parent.showshowOffcanvasButton = false;
+		$scope.shell.showOffcanvasButton = false;
 
 		vm.login = function() {
 
@@ -902,14 +902,14 @@
         .module('app')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$location', 'util', 'logger', '$routeParams'];
+    SearchController.$inject = ['$location', 'util', 'logger', '$routeParams', '$scope'];
 
-    function SearchController($location, util, logger, $routeParams) {
+    function SearchController($location, util, logger, $routeParams, $scope) {
         /* jshint validthis:true */
         var vm = this;
         vm.title = 'SearchController';
         vm.search = doSearch;
-        //vm.$parent.showshowOffcanvasButton = false;
+        $scope.shell.showOffcanvasButton = false;
 
         activate();
 
@@ -935,14 +935,14 @@
 		 .module('app')
 		 .controller('RestaurantListController', RestaurantListController);
 
-	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams'];
+	RestaurantListController.$inject = ['$location', 'dataservice', 'logger', '$routeParams', '$scope'];
 
-	function RestaurantListController($location, dataservice, logger, $routeParams) {
+	function RestaurantListController($location, dataservice, logger, $routeParams, $scope) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'RestaurantListController';
 		vm.restaurants = [];
-		//vm.$parent.showshowOffcanvasButton = true;
+		$scope.shell.showOffcanvasButton = true;
 
 		activate();
 
@@ -1008,14 +1008,14 @@
 		.module('app')
 		.controller('RestaurantDetailsController', RestaurantDetailsController);
 
-	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'googleMapsService', 'logger', '$routeParams'];
+	RestaurantDetailsController.$inject = ['$location', 'dataservice', 'googleMapsService', 'logger', '$routeParams', '$scope'];
 
-	function RestaurantDetailsController($location, dataservice, googleMapsService, logger, $routeParams) {
+	function RestaurantDetailsController($location, dataservice, googleMapsService, logger, $routeParams, $scope) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'RestaurantDetailsController';
 		vm.restaurant = {};
-		//vm.$parent.showshowOffcanvasButton = false;
+		$scope.shell.showOffcanvasButton = false;
 
 		activate();
 
@@ -1072,7 +1072,7 @@
 		vm.title = 'AddRestaurantController';
 		vm.restaurant = {};
 		vm.handleRestaurant = addRestaurant;
-		//vm.$parent.showshowOffcanvasButton = false;
+		$scope.shell.showOffcanvasButton = false;
 
 		activate();
 
