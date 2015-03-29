@@ -16,6 +16,7 @@
 		};
 
 		vm.message = "";
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		vm.login = function() {
 

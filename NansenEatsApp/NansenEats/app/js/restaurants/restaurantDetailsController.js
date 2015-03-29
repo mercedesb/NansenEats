@@ -12,6 +12,7 @@
 		var vm = this;
 		vm.title = 'RestaurantDetailsController';
 		vm.restaurant = {};
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		activate();
 

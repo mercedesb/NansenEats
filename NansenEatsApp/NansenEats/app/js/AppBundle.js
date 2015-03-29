@@ -62,7 +62,7 @@
 		$httpProvider.interceptors.push('authInterceptorService');
 	});
 
-	var serviceBase = 'http://eatsapi'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
+	var serviceBase = 'http://eatsapi.azurewebsites.net'; //'http://eatsapi.azurewebsites.net';//'http://eatsapi';
 	app.constant('ngAuthSettings', {
 		apiServiceBaseUri: serviceBase,
 		clientId: 'angJsAzureApp' //'angJsApp'
@@ -746,6 +746,7 @@
 		};
 
 		vm.message = "";
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		vm.login = function() {
 
@@ -908,6 +909,7 @@
         var vm = this;
         vm.title = 'SearchController';
         vm.search = doSearch;
+        //vm.$parent.showshowOffcanvasButton = false;
 
         activate();
 
@@ -940,6 +942,7 @@
 		var vm = this;
 		vm.title = 'RestaurantListController';
 		vm.restaurants = [];
+		//vm.$parent.showshowOffcanvasButton = true;
 
 		activate();
 
@@ -1012,6 +1015,7 @@
 		var vm = this;
 		vm.title = 'RestaurantDetailsController';
 		vm.restaurant = {};
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		activate();
 
@@ -1068,6 +1072,7 @@
 		vm.title = 'AddRestaurantController';
 		vm.restaurant = {};
 		vm.handleRestaurant = addRestaurant;
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		activate();
 

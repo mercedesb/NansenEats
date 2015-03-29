@@ -12,6 +12,7 @@
         var vm = this;
         vm.title = 'SearchController';
         vm.search = doSearch;
+        //vm.$parent.showshowOffcanvasButton = false;
 
         activate();
 

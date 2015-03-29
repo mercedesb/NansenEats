@@ -13,6 +13,7 @@
 		vm.title = 'AddRestaurantController';
 		vm.restaurant = {};
 		vm.handleRestaurant = addRestaurant;
+		//vm.$parent.showshowOffcanvasButton = false;
 
 		activate();
 

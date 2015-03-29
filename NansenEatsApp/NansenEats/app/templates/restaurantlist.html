@@ -1,11 +1,11 @@
-﻿<div ng-controller="RestaurantListController as vm" class="row row-offcanvas row-offcanvas-left" ng-class="{'active':shell.offcanvasActive}" ng-show="shell.showOffcanvasButton">
+﻿<div ng-controller="RestaurantListController as vm" class="row row-offcanvas row-offcanvas-right" ng-class="{'active':shell.offcanvasActive}" ng-show="shell.showOffcanvasButton">
 	<!--<div class="col-xs-12 col-sm-9">
 	</div>-->
 	<div class="col-xs-12 col-sm-9">
 		<div class="row">
 			<loader loadedproperty="vm.restaurants.length"></loader>
 			<ul class="restaurants">
-				<li class="col-xs-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:vm.sort:vm.reverse">
+				<li class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="restaurant in vm.restaurants | orderBy:vm.sort:vm.reverse">
 					<div>
 						<a href="#/restaurant/{{restaurant.Id}}"><h4>{{restaurant.Name}}</h4></a>
 						<p>{{restaurant.Address}}</p>
@@ -17,14 +17,8 @@
 						</div>
 						<!--<div class="pull-right">{{restaurant.AverageRating}}/10</div>-->
 					</div>
-					</
-					>
 				</li>
-				</
-				>
 			</ul>
-			</
-			>
 		</div>
 	</div>
 	<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">

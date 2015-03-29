@@ -156,7 +156,9 @@
     <Content Include="Content\images\kendoui.ttf" />
     <Content Include="Content\images\kendoui.woff" />
     <None Include="Properties\PublishProfiles\nanseneats - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\nanseneats - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\nanseneats - Web Deploy.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -244,6 +246,16 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\underscore-min.map" />
+    <None Include="web.Azure.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
