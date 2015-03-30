@@ -1064,9 +1064,9 @@
 		 .module('app')
 		 .controller('AddRestaurantController', AddRestaurantController);
 
-	AddRestaurantController.$inject = ['$location', 'dataservice', 'logger'];
+	AddRestaurantController.$inject = ['$location', 'dataservice', 'logger', '$scope'];
 
-	function AddRestaurantController($location, dataservice, logger) {
+	function AddRestaurantController($location, dataservice, logger, $scope) {
 		/* jshint validthis:true */
 		var vm = this;
 		vm.title = 'AddRestaurantController';
