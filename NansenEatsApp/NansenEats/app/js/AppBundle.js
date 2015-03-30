@@ -774,7 +774,7 @@
 
 		vm.authCompletedCB = function(fragment) {
 
-			vm.$apply(function() {
+			$scope.$apply(function () {
 
 				if (fragment.haslocalaccount == 'False') {
 

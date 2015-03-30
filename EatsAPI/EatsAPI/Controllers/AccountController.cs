@@ -9,7 +9,9 @@ using EatsAPI.Models.DtoModels;
 using EatsAPI.Models.Repository;
 using EatsAPI.Results;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 
 namespace EatsAPI.Controllers
@@ -44,6 +46,58 @@ namespace EatsAPI.Controllers
 			}
 
 			return Ok();
+		}
+
+		// POST api/Account/RegisterExternal
+		[AllowAnonymous]
+		[Route("RegisterExternal")]
+		public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
+		{
+
+			if (!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+			if (verifiedAccessToken == null)
+			{
+				return BadRequest("Invalid Provider or External Access Token");
+			}
+
+			UserProfile user = await _repo.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+
+			bool hasRegistered = user != null;
+
+			if (hasRegistered)
+			{
+				return BadRequest("External user is already registered");
+			}
+
+			user = new UserProfile { UserName = model.UserName };
+
+			IdentityResult result = await _repo.CreateAsync(user);
+			if (!result.Succeeded)
+			{
+				return GetErrorResult(result);
+			}
+
+			var info = new ExternalLoginInfo()
+			{
+				DefaultUserName = model.UserName,
+				Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
+			};
+
+			result = await _repo.AddLoginAsync(user.Id, info.Login);
+			if (!result.Succeeded)
+			{
+				return GetErrorResult(result);
+			}
+
+			//generate access token response
+			var accessTokenResponse = GenerateLocalAccessTokenResponse(model.UserName);
+
+			return Ok(accessTokenResponse);
 		}
 
 		private IAuthenticationManager Authentication
@@ -199,6 +253,38 @@ namespace EatsAPI.Controllers
 			if (string.IsNullOrEmpty(match.Value)) return null;
 
 			return match.Value;
+		}
+
+		private JObject GenerateLocalAccessTokenResponse(string userName)
+		{
+
+			var tokenExpiration = TimeSpan.FromDays(1);
+
+			ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
+
+			identity.AddClaim(new Claim(ClaimTypes.Name, userName));
+			identity.AddClaim(new Claim("role", "user"));
+
+			var props = new AuthenticationProperties()
+			{
+				IssuedUtc = DateTime.UtcNow,
+				ExpiresUtc = DateTime.UtcNow.Add(tokenExpiration),
+			};
+
+			var ticket = new AuthenticationTicket(identity, props);
+
+			var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+
+			JObject tokenResponse = new JObject(
+												 new JProperty("userName", userName),
+												 new JProperty("access_token", accessToken),
+												 new JProperty("token_type", "bearer"),
+												 new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
+												 new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
+												 new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
+	  );
+
+			return tokenResponse;
 		}
 
 		private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
