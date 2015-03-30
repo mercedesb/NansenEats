@@ -8,7 +8,7 @@ using EatsAPI.Models.Helpers;
 
 namespace EatsAPI.Models.Initialization
 {
-	public class EatsDbInitializer : DropCreateDatabaseAlways<EatsContext>
+	public class EatsDbInitializer : DropCreateDatabaseIfModelChanges<EatsContext>
 	{
 		protected IList<Category> _defaultCategories;
 		protected IList<Restaurant> _defaultRestaurants;
@@ -183,6 +183,7 @@ namespace EatsAPI.Models.Initialization
 				Value = "Blech, don't waste your time",
 				CreatedDate = DateTime.Now,
 				Restaurant = _defaultRestaurants.ElementAt(1)
+
 			});
 			_defaultRatings.Add(new Rating
 			{
